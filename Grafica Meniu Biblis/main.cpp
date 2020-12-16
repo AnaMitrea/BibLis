@@ -68,17 +68,13 @@ void meniuInserare()
     butonUNDO();
 
     // BUTON 1
-    readimagefile("inserare inceput.jpg",440,230,800, 290);
+    readimagefile("inserare inceput.jpg",440,210,800, 290);
 
     // BUTON 2
-    rectangle(440,330,800, 390);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(450, 370, " Inserare la sfarsitul listei ");
+    readimagefile("inserare sfarsit.jpg",440,330,800, 410);
 
     // BUTON 3
-    rectangle(440,430,800, 490);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(450, 470, " Inserare dupa un nod dat ");
+    readimagefile("inserare dupa nod.jpg",440,450,800, 530);
 
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false;
