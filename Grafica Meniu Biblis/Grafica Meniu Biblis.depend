@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1608142235 source:c:\users\ana maria mitrea\desktop\grafica meniu biblis\main.cpp
-	<iostream>
-	<graphics.h>
-	<winbgim.h>
-
