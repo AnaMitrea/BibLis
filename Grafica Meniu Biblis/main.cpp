@@ -86,19 +86,19 @@ void meniuInserare()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 800 && y >= 250 && y <= 310) //buton 1
+            if(x >= 440 && x <= 800 && y >= 210 && y <= 290) //buton 1
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 800 && y >= 350 && y <= 410)  //buton 2
+                if(x >= 440 && x <= 800 && y >= 330 && y <= 410)  //buton 2
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 800 && y >= 450 && y <= 510) //buton 3
+                    if(x >= 440 && x <= 800 && y >= 450 && y <= 530) //buton 3
                     {
                         gata = true;
                         buton3 = true;
