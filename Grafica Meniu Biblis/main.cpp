@@ -217,16 +217,16 @@ void butoaneMeniuPrincipal()
     backgroundColor();
 
     // BUTON 1
-    readimagefile("liste s i.jpg",440,250,750,310);
+    readimagefile("stive.jpg",440,210,750,280);
 
     // BUTON 2
-    readimagefile("liste d i.jpg",440,350,750, 410);
+    readimagefile("liste d i.jpg",440,310,750, 380);
 
     // BUTON 3
-    readimagefile("stive.jpg",440,450,750, 510);
+    readimagefile("stive.jpg",440,410,750, 480);
 
     // BUTON 4
-    readimagefile("cozi.jpg",440,550,750, 610);
+    readimagefile("cozi.jpg",440,510,750, 580);
 
 
     bool gata = false;
@@ -239,25 +239,25 @@ void butoaneMeniuPrincipal()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 250 && y <= 310)
+            if(x >= 440 && x <= 750 && y >= 210 && y <= 280)
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 350 && y <= 410)
+                if(x >= 440 && x <= 750 && y >= 310 && y <= 380)
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 450 && y <= 510)
+                    if(x >= 440 && x <= 750 && y >= 410 && y <= 480)
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 550 && y <= 610)
+                        if(x >= 440 && x <= 750 && y >= 510 && y <= 580)
                         {
                             gata = true;
                             buton4 = true;
@@ -305,9 +305,10 @@ int main()
     fereastra();
     meniu();
 
+
+
     // CLEANUP
     getch();
     closegraph();
     return 0;
 }
-
