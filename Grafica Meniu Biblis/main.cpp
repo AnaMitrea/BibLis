@@ -217,7 +217,7 @@ void butoaneMeniuPrincipal()
     backgroundColor();
 
     // BUTON 1
-    readimagefile("stive.jpg",440,210,750,280);
+    readimagefile("liste s i.jpg",440,210,750,280);
 
     // BUTON 2
     readimagefile("liste d i.jpg",440,310,750, 380);
