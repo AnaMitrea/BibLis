@@ -4,19 +4,22 @@
 
 using namespace std;
 
+void backgroundColor()
+{
+    //setbkcolor(WHITE);
+}
+
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
     initwindow(1200, 700, " Meniu Biblioteca cu Liste ");
-    floodfill(100, 100, BLACK);
+    backgroundColor();
 }
 
 // ---------- BUTON UNDO ----------
 void butonUNDO()
 {
-    rectangle(20,620,250, 680);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(30, 640, " Inapoi la meniu ");
+    readimagefile("undo.jpg",20,620,250,680);
 
     /*
     bool gata = false;
@@ -40,22 +43,26 @@ void butonUNDO()
 
 void inserareInceput()
 {
+    backgroundColor();
     butonUNDO();
 }
 
 void inserareSfarsit()
 {
+    backgroundColor();
     butonUNDO();
 }
 
 void inserareDupaNod()
 {
+    backgroundColor();
     butonUNDO();
 }
 
 // ---------- MENIU FUNCTII INSERARE ----------
 void meniuInserare()
 {
+    backgroundColor();
     butonUNDO();
 
     // BUTON 1
@@ -125,27 +132,20 @@ void meniuInserare()
 // ---------- MENIU PENTRU LISTE SIMPLU-INLANTUITE ----------
 void meniuListeSimpluInlantuite()
 {
+    backgroundColor();
     butonUNDO();
 
     // BUTON 1
-    rectangle(440,250,750, 310);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(530, 270, " Lista vida ");
+    readimagefile("vida.jpg",440,230,750,290);
 
     // BUTON 2
-    rectangle(440,350,750, 410);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(540, 370, " Inserare ");
+    readimagefile("inserare.jpg",440,330,750,390);
 
     // BUTON 3
-    rectangle(440,450,750, 510);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(530, 470, " Stergere ");
+    readimagefile("stergere.jpg",440,430,750, 490);
 
     // BUTON 4
-    rectangle(440,550,750, 610);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(540, 570, " Afisare ");
+    readimagefile("afisare.jpg",440,530,750, 590);
 
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false, buton4 = false;
@@ -157,25 +157,25 @@ void meniuListeSimpluInlantuite()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 250 && y <= 310) //buton 1
+            if(x >= 440 && x <= 750 && y >= 230 && y <= 290) //buton 1
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 350 && y <= 410)  //buton 2
+                if(x >= 440 && x <= 750 && y >= 330 && y <= 390)  //buton 2
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 450 && y <= 510) //buton 3
+                    if(x >= 440 && x <= 750 && y >= 430 && y <= 490) //buton 3
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 550 && y <= 610)  //buton 4
+                        if(x >= 440 && x <= 750 && y >= 530 && y <= 590)  //buton 4
                         {
                             gata = true;
                             buton4 = true;
@@ -212,34 +212,19 @@ void meniuListeSimpluInlantuite()
 // ---------- MENIU PRINCIPAL ----------
 void butoaneMeniuPrincipal()
 {
-    setcolor(RED);
-    setlinestyle(2,1,2);
+    backgroundColor();
+
     // BUTON 1
-    rectangle(440,250,750, 310);
-    settextstyle(4, HORIZ_DIR, 1);
-    setcolor(WHITE);
-    outtextxy(450, 270, " Liste simplu-inlantuite ");
+    readimagefile("liste s i.jpg",440,250,750,310);
 
     // BUTON 2
-    setcolor(RED);
-    rectangle(440,350,750, 410);
-    settextstyle(4, HORIZ_DIR, 1);
-    setcolor(WHITE);
-    outtextxy(450, 370, " Liste dublu-inlantuite ");
+    readimagefile("liste d i.jpg",440,350,750, 410);
 
     // BUTON 3
-    setcolor(RED);
-    rectangle(440,450,750, 510);
-    settextstyle(4, HORIZ_DIR, 1);
-    setcolor(WHITE);
-    outtextxy(550, 470, " Stive ");
+    readimagefile("stive.jpg",440,450,750, 510);
 
     // BUTON 4
-    setcolor(RED);
-    rectangle(440,550,750, 610);
-    settextstyle(4, HORIZ_DIR, 1);
-    setcolor(WHITE);
-    outtextxy(550, 570, " Cozi ");
+    readimagefile("cozi.jpg",440,550,750, 610);
 
 
     bool gata = false;
@@ -302,6 +287,8 @@ void butoaneMeniuPrincipal()
 
 void meniu()
 {
+    backgroundColor();
+
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(400, 100, " Alege structura de date ");
