@@ -10,3 +10,5 @@ Mod de punctare a proiectului:
 * Animatia: 3p
 * Elemente suplimentare (alte functii, meniu, setari, culori, sunete, etc): 1p
 * Elemente de creativitate și competitivitate: 1p
+
+Proiect realizat de Mitrea Ana Maria si Tablan Andrei
