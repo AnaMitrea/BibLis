@@ -68,17 +68,15 @@ void meniuInserare()
     butonUNDO();
 
     // BUTON 1
-    rectangle(440,250,800, 310);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(450, 270, " Inserare la inceputul listei ");
+    readimagefile("inserare inceput.jpg",440,230,800, 290);
 
     // BUTON 2
-    rectangle(440,350,800, 410);
+    rectangle(440,330,800, 390);
     settextstyle(4, HORIZ_DIR, 1);
     outtextxy(450, 370, " Inserare la sfarsitul listei ");
 
     // BUTON 3
-    rectangle(440,450,800, 510);
+    rectangle(440,430,800, 490);
     settextstyle(4, HORIZ_DIR, 1);
     outtextxy(450, 470, " Inserare dupa un nod dat ");
 
@@ -217,7 +215,7 @@ void butoaneMeniuPrincipal()
     backgroundColor();
 
     // BUTON 1
-    readimagefile("stive.jpg",440,210,750,280);
+    readimagefile("liste s i.jpg",440,210,750,280);
 
     // BUTON 2
     readimagefile("liste d i.jpg",440,310,750, 380);
