@@ -7,6 +7,8 @@ using namespace std;
 void backgroundColor()
 {
     //setbkcolor(WHITE);
+
+
 }
 
 // ---------- INITIALIZARE FEREASTRA ----------
@@ -303,10 +305,9 @@ int main()
     fereastra();
     meniu();
 
-
-
     // CLEANUP
     getch();
     closegraph();
     return 0;
 }
+
