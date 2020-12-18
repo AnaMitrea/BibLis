@@ -4,18 +4,12 @@
 
 using namespace std;
 
-void backgroundColor()
-{
-    //setbkcolor(WHITE);
-
-
-}
 
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
     initwindow(1200, 700, " Meniu Biblioteca cu Liste ");
-    backgroundColor();
+
 }
 
 // ---------- BUTON UNDO ----------
@@ -42,38 +36,37 @@ void butonUNDO()
     */
 }
 
+//------------- FUNCTII PENTRU INSERARE --------------
 
 void inserareInceput()
 {
-    backgroundColor();
     butonUNDO();
 }
 
 void inserareSfarsit()
 {
-    backgroundColor();
     butonUNDO();
 }
 
 void inserareDupaNod()
 {
-    backgroundColor();
     butonUNDO();
 }
 
 // ---------- MENIU FUNCTII INSERARE ----------
 void meniuInserare()
 {
-    backgroundColor();
     butonUNDO();
 
     // BUTON 1
     readimagefile("inserare inceput.jpg",440,210,800, 290);
 
     // BUTON 2
+    delay(100);
     readimagefile("inserare sfarsit.jpg",440,330,800, 410);
 
     // BUTON 3
+    delay(200);
     readimagefile("inserare dupa nod.jpg",440,450,800, 530);
 
     bool gata = false;
@@ -125,10 +118,91 @@ void meniuInserare()
             }
 }
 
+//------------- FUNCTII PENTRU STERGERE --------------
+
+void stergerePrimul()
+{
+    butonUNDO();
+}
+
+void stergerePrimaAparitie()
+{
+    butonUNDO();
+}
+
+void stergereToateAparitiile()
+{
+    butonUNDO();
+}
+
+// ---------- MENIU FUNCTII STERGERE ----------
+void meniuStergere()
+{
+    butonUNDO();
+
+    // BUTON 1
+    readimagefile("stergere primul.jpg",440,210,800, 290);
+
+    // BUTON 2
+    delay(100);
+    readimagefile("stergere aparitie.jpg",440,330,800, 410);
+
+    // BUTON 3
+    delay(150);
+    readimagefile("stergere toate aparitiile.jpg",440,450,800, 530);
+
+    bool gata = false;
+    bool buton1 = false, buton2 = false, buton3 = false;
+    int x,y;
+    do
+    {
+        if(ismouseclick(WM_LBUTTONDOWN))
+        {
+            clearmouseclick(WM_LBUTTONDOWN);
+            x = mousex();
+            y = mousey();
+            if(x >= 440 && x <= 800 && y >= 210 && y <= 290) //buton 1
+            {
+                gata = true;
+                buton1 = true;
+            }
+            else
+                if(x >= 440 && x <= 800 && y >= 330 && y <= 410)  //buton 2
+                {
+                    gata = true;
+                    buton2 = true;
+                }
+                else
+                    if(x >= 440 && x <= 800 && y >= 450 && y <= 530) //buton 3
+                    {
+                        gata = true;
+                        buton3 = true;
+                    }
+        }
+    } while (!gata);
+    cleardevice();
+    if(buton1 == true)
+    {
+        outtextxy(320, 100, " Stergere primul nod al listei");
+        stergerePrimul();
+    }
+    else
+        if(buton2 == true)
+        {
+            outtextxy(320, 100, " Stergere prima aparitie a unui nod dat ");
+            stergerePrimaAparitie();
+        }
+        else
+            if(buton3 == true)
+            {
+                outtextxy(400, 100, " Stergere toate aparitiile unui nod dat ");
+                stergereToateAparitiile();
+            }
+}
+
 // ---------- MENIU PENTRU LISTE SIMPLU-INLANTUITE ----------
 void meniuListeSimpluInlantuite()
 {
-    backgroundColor();
     butonUNDO();
 
     // BUTON 1
@@ -194,7 +268,7 @@ void meniuListeSimpluInlantuite()
             if(buton3 == true)
             {
                 outtextxy(450, 100, " Alege functia de stergere ");
-                //meniuStergere();
+                meniuStergere();
             }
             else
                 if(buton4 == true)
@@ -208,7 +282,6 @@ void meniuListeSimpluInlantuite()
 // ---------- MENIU PRINCIPAL ----------
 void butoaneMeniuPrincipal()
 {
-    backgroundColor();
 
     // BUTON 1
     readimagefile("liste s i.jpg",440,210,750,280);
@@ -283,7 +356,6 @@ void butoaneMeniuPrincipal()
 
 void meniu()
 {
-    backgroundColor();
 
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
