@@ -1,9 +1,26 @@
 #include <iostream>
+#include <fstream>
 #include <graphics.h>
 #include <winbgim.h>
-
 using namespace std;
 
+ifstream fin("citire.in");
+ofstream fout("afisare.out");
+
+// ---------- INITIALIZARE STRUCTURI DE DATE ----------
+struct nod
+{
+    int valoare;
+    struct nod* urm;
+};
+
+struct stiva
+{
+    struct nod* varf;
+    unsigned int lungime;
+};
+
+nod *prim, *ultim;
 
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
@@ -36,6 +53,60 @@ void butonUNDO()
     */
 }
 
+//------------- FUNCTIE CREARE LISTA --------------
+void creareListaSimpluInlantuita(nod*& prim, nod*& ultim)
+{
+    nod* p;
+    int x;
+    prim = ultim = NULL;
+    while (fin >> x)
+    {
+        p = new nod;
+        p->valoare = x;
+        p->urm = NULL;
+        if (prim == NULL)
+            prim = p;
+        else
+            ultim->urm = p;
+        ultim = p;
+    }
+}
+
+//------------- FUNCTIE VERIFICARE DACA ESTE LISTA VIDA --------------
+void listaVida(nod*& prim)
+{
+    butonUNDO();
+    settextstyle(4, HORIZ_DIR, 4);
+    outtextxy(380, 100, " Verificare daca lista este vida");
+
+    nod *p = prim;
+    settextstyle(4, HORIZ_DIR, 3);
+    if(p == NULL)
+        outtextxy(600, 100, " Lista introdusa este vida.");
+    else
+        outtextxy(600, 100, " Lista introdusa nu este vida.");
+}
+
+//------------- FUNCTIE PENTRU AFLAREA LUNGIMII LISTEI --------------
+void lungimeLista(nod *prim, nod *ultim)
+{
+    butonUNDO();
+    unsigned int lungime = 0;
+    nod *p = prim;
+    while(p != ultim)
+    {
+        lungime++;
+        p = p->urm;
+    }
+    if(p == ultim)
+        lungime++;
+
+    // AFISARE IN FEREASTRA GRAFICA
+    outtextxy(370, 280, "Lungimea listei este: ");
+    bgiout << lungime << endl;
+    outstreamxy(720, 280);
+}
+
 //------------- FUNCTII PENTRU INSERARE --------------
 
 void inserareInceput()
@@ -53,20 +124,20 @@ void inserareDupaNod()
     butonUNDO();
 }
 
-// ---------- MENIU FUNCTII INSERARE ----------
+// ---------- MENIU FUNCTII INSERARE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuInserare()
 {
     butonUNDO();
+
+    outtextxy(410, 100, " Alege functia de inserare ");
 
     // BUTON 1
     readimagefile("inserare inceput.jpg",440,210,800, 290);
 
     // BUTON 2
-    delay(100);
     readimagefile("inserare sfarsit.jpg",440,330,800, 410);
 
     // BUTON 3
-    delay(200);
     readimagefile("inserare dupa nod.jpg",440,450,800, 530);
 
     bool gata = false;
@@ -135,10 +206,11 @@ void stergereToateAparitiile()
     butonUNDO();
 }
 
-// ---------- MENIU FUNCTII STERGERE ----------
+// ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
 {
     butonUNDO();
+    outtextxy(450, 100, " Alege functia de stergere ");
 
     // BUTON 1
     readimagefile("stergere primul.jpg",440,210,800, 290);
@@ -200,25 +272,78 @@ void meniuStergere()
             }
 }
 
+// ---------- AFISAREA UNEI LISTE SIMPLU-INLANTUITE ----------
+void afisareListaSimpluInlantuita(nod *prim)
+{
+    butonUNDO();
+    outtextxy(350, 100, " Afisarea unei liste simplu-inlantuite");
+    nod* p = prim;
+    int x = 100;
+    while (p != NULL)
+    {
+        fout << p->valoare << ' ';
+        bgiout << p->valoare;
+        outstreamxy(x, 280);
+        p = p->urm;
+        x += 20;
+    }
+}
+
+// ---------- POZA CU LISTA SI DESCRIEREA EI (inainte de functii) ----------
+void descriereListaSimplu()
+{
+    cleardevice();
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(300,50, "Informatii despre liste simplu-inlantuite");
+    settextstyle(4, HORIZ_DIR, 1);
+    outtextxy(120, 150, "       Lista liniara este o structura de date logica, cu  date  omogene,  in care");
+    outtextxy(120, 180, "fiecare  element  are  exact  un  element  predecesor si  exact  un  element");
+    outtextxy(120, 210, "succesor, cu exceptia primului si al ultimului element.");
+    outtextxy(120, 240, "       Lungimea unei liste reprezinta numarul de noduri din lista. O lista care");
+    outtextxy(120, 270, "nu are niciun element se numeste lista vida.");
+    outtextxy(120, 300, "       O modalitate  de implementare a  listelor este sub forma listelor liniare");
+    outtextxy(120, 330, "alocate  dinamic. In  acest caz,  fiecare  element  al listei  este  o  variabila");
+    outtextxy(120, 360, "dinamica;  aceasta  va  contine, pe langa informatia  utila si  informatia  de");
+    outtextxy(120, 390, "legatura, adica adresa elementului succesor si, eventual, adresa elementului");
+    outtextxy(120, 420, "precedent. Aceste adrese vor fi memorate prin intermediul pointerilor.");
+
+    readimagefile("Poza Lista.jpg",400,450,800,650);
+
+    // CLEANUP
+    delay(2000);   // 1 sec =  1000 ms
+    cleardevice();
+}
+
 // ---------- MENIU PENTRU LISTE SIMPLU-INLANTUITE ----------
 void meniuListeSimpluInlantuite()
 {
     butonUNDO();
 
-    // BUTON 1
-    readimagefile("vida.jpg",440,230,750,290);
+    // POZA CU LISTA SI DESCRIEREA EI
+    descriereListaSimplu();
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(250, 50, " Alege functia pentru liste simplu-inlantuite ");
 
-    // BUTON 2
-    readimagefile("inserare.jpg",440,330,750,390);
+    // BUTON 1 - CREARE LISTA
+    readimagefile("creare lista.jpg",440,100,750,150);
 
-    // BUTON 3
-    readimagefile("stergere.jpg",440,430,750, 490);
+    // BUTON 2 - VERIF LISTA VIDA
+    readimagefile("vida.jpg",440,200,750,250);
 
-    // BUTON 4
-    readimagefile("afisare.jpg",440,530,750, 590);
+    // BUTON 3 - LUNGIME LISTA
+    readimagefile("lungime lista.jpg", 440, 300, 750, 350);
+
+    // BUTON 4 - FUNCTII INSERARE
+    readimagefile("inserare.jpg",440,400,750,450);
+
+    // BUTON 5 - FUNCTII STERGERE
+    readimagefile("stergere.jpg",440,500,750, 550);
+
+    // BUTON 6 - AFISAREA LISTEI
+    readimagefile("afisare.jpg",440, 600,750, 650);
 
     bool gata = false;
-    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false;
+    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false, buton5 = false;
     int x,y;
     do
     {
@@ -227,72 +352,78 @@ void meniuListeSimpluInlantuite()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 230 && y <= 290) //buton 1
+            if(x >= 440 && x <= 750 && y >= 130 && y <= 190) //buton 1 - vida
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 330 && y <= 390)  //buton 2
+                if(x >= 440 && x <= 750 && y >= 230 && y <= 290)  //buton 2 - lungime lista
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 430 && y <= 490) //buton 3
+                    if(x >= 440 && x <= 750 && y >= 330 && y <= 390) //buton 3 - inserare
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 530 && y <= 590)  //buton 4
+                        if(x >= 440 && x <= 750 && y >= 430 && y <= 490)  //buton 4 - stergere
                         {
                             gata = true;
                             buton4 = true;
                         }
+                        else
+                            if(x >= 440 && x <= 750 && y >= 530 && y <= 590)  //buton 4 - afisare
+                            {
+                                gata = true;
+                                buton5 = true;
+                            }
         }
     } while (!gata);
     cleardevice();
-    if(buton1 == true)
+    if(buton1 == true)  // Verificare daca lista este vida
     {
-        outtextxy(380, 100, " Lista simplu-inlantuita este Vida");
-        //listaVida();
+        listaVida(prim);
     }
     else
-        if(buton2 == true)
+        if(buton2 == true)  // Functie pt aflarea lungimii listei
         {
-            outtextxy(450, 100, " Alege functia de inserare ");
-            meniuInserare();
+            lungimeLista(prim, ultim);
         }
         else
-            if(buton3 == true)
+            if(buton3 == true)  // Functii la INSERARE element in liste
             {
-                outtextxy(450, 100, " Alege functia de stergere ");
-                meniuStergere();
+                meniuInserare();
             }
             else
-                if(buton4 == true)
+                if(buton4 == true)  // Functii la STERGERE element din liste
                 {
-                    outtextxy(440, 100, " Afisarea unei liste simplu-inlantuite");
-                    //afisare();
+                    meniuStergere();
                 }
-
+                else
+                    if(buton5 == true)   // Afisarea unei liste
+                    {
+                        afisareListaSimpluInlantuita(prim);
+                    }
 }
 
 // ---------- MENIU PRINCIPAL ----------
 void butoaneMeniuPrincipal()
 {
 
-    // BUTON 1
+    // BUTON 1 - Liste simplu inlantuite
     readimagefile("liste s i.jpg",440,210,750,280);
 
-    // BUTON 2
+    // BUTON 2 -  Liste dublu inlantuite
     readimagefile("liste d i.jpg",440,310,750, 380);
 
-    // BUTON 3
+    // BUTON 3 - Stive
     readimagefile("stive.jpg",440,410,750, 480);
 
-    // BUTON 4
+    // BUTON 4 - Cozi
     readimagefile("cozi.jpg",440,510,750, 580);
 
 
@@ -306,25 +437,25 @@ void butoaneMeniuPrincipal()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 210 && y <= 280)
+            if(x >= 440 && x <= 750 && y >= 210 && y <= 280)  // Liste simplu-inlantuite
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 310 && y <= 380)
+                if(x >= 440 && x <= 750 && y >= 310 && y <= 380)  // Liste dublu-inalntuite
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 410 && y <= 480)
+                    if(x >= 440 && x <= 750 && y >= 410 && y <= 480)  // Stive
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 510 && y <= 580)
+                        if(x >= 440 && x <= 750 && y >= 510 && y <= 580)  // Cozi
                         {
                             gata = true;
                             buton4 = true;
@@ -334,47 +465,59 @@ void butoaneMeniuPrincipal()
     cleardevice();
     if(buton1 == true)
     {
-        outtextxy(320, 100, " Alege functia pentru liste simplu-inlantuite ");
         meniuListeSimpluInlantuite();
     }
     else
         if(buton2 == true)
         {
-            outtextxy(320, 100, " Alege functia pentru liste dublu-inlantuite ");
+            outtextxy(260, 100, " Alege functia pentru liste dublu-inlantuite ");
+            // meniuListeDubluInlantuite();
         }
         else
             if(buton3 == true)
             {
                 outtextxy(400, 100, " Alege functia pentru stive ");
+                // meniuStive();
             }
             else
                 if(buton4 == true)
                 {
                     outtextxy(400, 100, " Alege functia pentru cozi");
+                    // meniuCozi();
+
                 }
 }
 
 void meniu()
 {
-
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(400, 100, " Alege structura de date ");
 
-
+    // ---------- MENIU PRINCIPAL CU STRUCTURI DE DATE ----------
     butoaneMeniuPrincipal();
+}
 
+// ---------- INTERFATA ----------
+void interfataGrafica()
+{
+    fereastra();
+    meniu();
+}
+
+// ---------- CLEANUP ----------
+void cleanup()
+{
+    getch();
+    closegraph();
 }
 
 int main()
 {
-    fereastra();
-    meniu();
+    nod *prim, *ultim;
 
+    interfataGrafica();
+    cleanup();
 
-
-    // CLEANUP
-    getch();
-    closegraph();
     return 0;
 }
