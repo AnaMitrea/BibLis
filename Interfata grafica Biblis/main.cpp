@@ -324,7 +324,7 @@ void meniuListeSimpluInlantuite()
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(250, 50, " Alege functia pentru liste simplu-inlantuite ");
 
-    // BUTON 1 - CREARE LISTA
+    // BUTON 1 - CREARE LISTA    nefacut inca
     readimagefile("creare lista.jpg",440,100,750,150);
 
     // BUTON 2 - VERIF LISTA VIDA
@@ -343,7 +343,7 @@ void meniuListeSimpluInlantuite()
     readimagefile("afisare.jpg",440, 600,750, 650);
 
     bool gata = false;
-    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false, buton5 = false;
+    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false, buton5 = false, buton6 = false;
     int x,y;
     do
     {
@@ -352,31 +352,31 @@ void meniuListeSimpluInlantuite()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 130 && y <= 190) //buton 1 - vida
+            if(x >= 440 && x <= 750 && y >= 100 && y <= 150) //buton 1 - vida
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 230 && y <= 290)  //buton 2 - lungime lista
+                if(x >= 440 && x <= 750 && y >= 200 && y <= 250)  //buton 2 - lungime lista
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 330 && y <= 390) //buton 3 - inserare
+                    if(x >= 440 && x <= 750 && y >= 300 && y <= 350) //buton 3 - inserare
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 430 && y <= 490)  //buton 4 - stergere
+                        if(x >= 440 && x <= 750 && y >= 400 && y <= 450)  //buton 4 - stergere
                         {
                             gata = true;
                             buton4 = true;
                         }
                         else
-                            if(x >= 440 && x <= 750 && y >= 530 && y <= 590)  //buton 4 - afisare
+                            if(x >= 440 && x <= 750 && y >= 500 && y <= 550)  //buton 4 - afisare
                             {
                                 gata = true;
                                 buton5 = true;
@@ -384,30 +384,36 @@ void meniuListeSimpluInlantuite()
         }
     } while (!gata);
     cleardevice();
-    if(buton1 == true)  // Verificare daca lista este vida
+
+    if (buton2 == true)  // Creare lista
     {
-        listaVida(prim);
+        //creareLista();
     }
     else
-        if(buton2 == true)  // Functie pt aflarea lungimii listei
+        if (buton2 == true)  // Verificare daca lista este vida
         {
-            lungimeLista(prim, ultim);
+            listaVida(prim);
         }
         else
-            if(buton3 == true)  // Functii la INSERARE element in liste
+            if (buton3 == true)  // Functie pt aflarea lungimii listei
             {
-                meniuInserare();
+                lungimeLista(prim, ultim);
             }
             else
-                if(buton4 == true)  // Functii la STERGERE element din liste
+                if (buton4 == true)  // Functii la INSERARE element in liste
                 {
-                    meniuStergere();
+                    meniuInserare();
                 }
                 else
-                    if(buton5 == true)   // Afisarea unei liste
+                    if (buton5 == true)  // Functii la STERGERE element din liste
                     {
-                        afisareListaSimpluInlantuita(prim);
+                        meniuStergere();
                     }
+                    else
+                        if (buton6 == true)   // Afisarea unei liste
+                        {
+                            afisareListaSimpluInlantuita(prim);
+                        }
 }
 
 // ---------- MENIU PRINCIPAL ----------
