@@ -21,9 +21,7 @@ struct stiva
     unsigned int lungime;
 };
 */
-
 //nod *prim, *ultim;
-
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
