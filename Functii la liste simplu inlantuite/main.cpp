@@ -414,9 +414,7 @@ void afisareListaSimpluInlantuita(nod *prim)
 int main()
 {
     nod *prim, *ultim;
-
     fereastra();
-
     creareListaSimpluInlantuita(prim,ultim);
 
     inserareInceput(prim, 500);
