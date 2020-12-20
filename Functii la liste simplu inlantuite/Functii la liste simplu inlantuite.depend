@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1608487470 source:c:\users\ana maria mitrea\desktop\functii la liste simplu inlantuite\main.cpp
+	<iostream>
+	<fstream>
+	<graphics.h>
+	<winbgim.h>
+
+1608489424 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\functii la liste simplu inlantuite\main.cpp
+	<iostream>
+	<fstream>
+	<graphics.h>
+	<winbgim.h>
+
