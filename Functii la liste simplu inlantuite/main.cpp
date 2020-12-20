@@ -419,9 +419,9 @@ int main()
 
     creareListaSimpluInlantuita(prim,ultim);
 
-    //inserareInceput(prim, 500);
-    //inserareSfarsit(prim, 500);
-    inserareDupaNod(prim,9999,69);
+    inserareInceput(prim, 500);
+    inserareSfarsit(prim, 500);
+    //inserareDupaNod(prim,9999,69);
 
     afisarelungimeLista(prim);
 
