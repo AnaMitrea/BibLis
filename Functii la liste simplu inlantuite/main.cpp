@@ -144,16 +144,19 @@ void inserareInceput(nod*& prim, int val)
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(170, 100, " Inserarea unui nod la inceputul unei liste simplu-inlantuite");
 
+    unsigned int x = 20, y = 250;
+    unsigned int xtext = 25, ytext = 265;
+
     // INSERARE
     nod *p = new nod;
     p->valoare = val;
     p->urm = prim;
+    if (prim == NULL)
+        readimagefile("nod inserat lista cu null.jpg", x, y - 10, x + 200, y + 50);
+    else
+        readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
     prim = p;
     p = prim;
-
-    unsigned int x = 20, y = 250;
-    unsigned int xtext = 25, ytext = 265;
-    readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
 
     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
     dimensiuneText(p->valoare);
@@ -311,7 +314,7 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
             {
                 p->urm = q->urm;
                 q->urm = p;
-                readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
+                readimagefile("nod lista.jpg", x, y - 10, x + 200, y + 50);
                 inserat = 1;
             }
             else
@@ -461,9 +464,9 @@ int main()
 
     //inserareInceput(prim, 500);
     //inserareSfarsit(prim, 900);
-    //inserareDupaNod(prim, 400, 59);
+    inserareDupaNod(prim, 400, 59);
 
-    afisarelungimeLista(prim);
+    //afisarelungimeLista(prim);
 
     //afisareListaSimpluInlantuita(prim);
 

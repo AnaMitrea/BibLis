@@ -61,20 +61,6 @@ void butonUNDO()
                 gata = true;
             }
     }
-    } while (!gata);    bool gata = false;
-    int x,y;
-    do
-    {
-        if(ismouseclick(WM_LBUTTONDOWN))
-        {
-            clearmouseclick(WM_LBUTTONDOWN);
-            x = mousex();
-            y = mousey();
-            if(x >= 20 && x <= 250 && y >= 700 && y <= 760)
-            {
-                gata = true;
-            }
-    }
     } while (!gata);
     */
 }
@@ -183,19 +169,19 @@ void inserareInceput(nod*& prim, int val)
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(170, 100, " Inserarea unui nod la inceputul unei liste simplu-inlantuite");
 
+    unsigned int x = 20, y = 250;
+    unsigned int xtext = 25, ytext = 265;
+
     // INSERARE
     nod *p = new nod;
     p->valoare = val;
     p->urm = prim;
-    prim = p;
-    p = prim;
-
-    unsigned int x = 20, y = 250;
-    unsigned int xtext = 25, ytext = 265;
-    if(p->urm == NULL)
+    if (prim == NULL)
         readimagefile("nod inserat lista cu null.jpg", x, y - 10, x + 200, y + 50);
     else
         readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
+    prim = p;
+    p = prim;
 
     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
     dimensiuneText(p->valoare);
@@ -399,16 +385,16 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
 void meniuInserare()
 {
     butonUNDO();
-    outtextxy(410, 100, " Alege functia de inserare ");
+    outtextxy(550, 100, " Alege functia de inserare ");
 
     // BUTON 1
-    readimagefile("inserare inceput.jpg",600,210,800, 290);
+    readimagefile("inserare inceput.jpg",600,210,900, 290);
 
     // BUTON 2
-    readimagefile("inserare sfarsit.jpg",600,330,800, 410);
+    readimagefile("inserare sfarsit.jpg",600,330,900, 410);
 
     // BUTON 3
-    readimagefile("inserare dupa nod.jpg",600,450,800, 530);
+    readimagefile("inserare dupa nod.jpg",600,450,900, 530);
 
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false;
@@ -420,19 +406,19 @@ void meniuInserare()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 600 && x <= 800 && y >= 210 && y <= 290) //buton 1
+            if(x >= 600 && x <= 900 && y >= 210 && y <= 290) //buton 1
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 600 && x <= 800 && y >= 330 && y <= 410)  //buton 2
+                if(x >= 600 && x <= 900 && y >= 330 && y <= 410)  //buton 2
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 600 && x <= 800 && y >= 450 && y <= 530) //buton 3
+                    if(x >= 600 && x <= 900 && y >= 450 && y <= 530) //buton 3
                     {
                         gata = true;
                         buton3 = true;
@@ -459,7 +445,7 @@ void meniuInserare()
             }
 }
 
-///------------- FUNCTII PENTRU STERGERE --------------
+//------------- FUNCTII PENTRU STERGERE --------------
 void stergerePrimul(nod *&prim)
 {
     nod *p = prim->urm;
@@ -512,18 +498,16 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
 void meniuStergere()
 {
     butonUNDO();
-    outtextxy(450, 100, " Alege functia de stergere ");
+    outtextxy(550, 100, " Alege functia de stergere ");
 
     // BUTON 1
-    readimagefile("stergere primul.jpg",600,210,800, 290);
+    readimagefile("stergere primul.jpg",600,210,900, 290);
 
     // BUTON 2
-    delay(100);
-    readimagefile("stergere aparitie.jpg",600,330,800, 410);
+    readimagefile("stergere aparitie.jpg",600,330,900, 410);
 
     // BUTON 3
-    delay(150);
-    readimagefile("stergere toate aparitiile.jpg",600,450,800, 530);
+    readimagefile("stergere toate aparitiile.jpg",600,450,900, 530);
 
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false;
@@ -535,19 +519,19 @@ void meniuStergere()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 600 && x <= 800 && y >= 210 && y <= 290) //buton 1
+            if(x >= 600 && x <= 900 && y >= 210 && y <= 290) //buton 1
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 600 && x <= 800 && y >= 330 && y <= 410)  //buton 2
+                if(x >= 600 && x <= 900 && y >= 330 && y <= 410)  //buton 2
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 600 && x <= 800 && y >= 450 && y <= 530) //buton 3
+                    if(x >= 600 && x <= 900 && y >= 450 && y <= 530) //buton 3
                     {
                         gata = true;
                         buton3 = true;
@@ -558,37 +542,69 @@ void meniuStergere()
     if(buton1 == true)
     {
         outtextxy(320, 100, " Stergere primul nod al listei");
-        stergerePrimul();
+        stergerePrimul(prim);
     }
     else
         if(buton2 == true)
         {
             outtextxy(320, 100, " Stergere prima aparitie a unui nod dat ");
-            stergerePrimaAparitie();
+            stergerePrimaAparitie(prim,10);
         }
         else
             if(buton3 == true)
             {
                 outtextxy(400, 100, " Stergere toate aparitiile unui nod dat ");
-                stergereToateAparitiile();
+                stergereToateAparitiile(prim,10);
             }
 }
 
 // ---------- AFISAREA UNEI LISTE SIMPLU-INLANTUITE ----------
 void afisareListaSimpluInlantuita(nod *prim)
 {
-    butonUNDO();
+    settextstyle(4, HORIZ_DIR, 4);
     outtextxy(350, 100, " Afisarea unei liste simplu-inlantuite");
+
     nod* p = prim;
-    int x = 100;
+    unsigned int x = 20, y = 250;
+    unsigned int xtext = 25, ytext = 265;
+
     while (p != NULL)
     {
-        fout << p->valoare << ' ';
-        bgiout << p->valoare;
-        outstreamxy(x, 280);
-        p = p->urm;
-        x += 20;
+        if (x <= 1400)  // daca nu iese din ecran
+        {
+            fout << p->valoare << ' ';
+
+            // AFISAREA NODULUI CORESPUNZATOR
+            if (p->urm == NULL)
+                readimagefile("nod lista cu null.jpg", x, y, x + 270, y + 50);
+            else
+                readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+
+            // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+            dimensiuneText(p->valoare);
+
+            // AFISARE IN MODUL GRAFIC
+            bgiout << p->valoare;
+            outstreamxy(xtext, ytext);
+
+            // COORDONATELE URMATORULUI NOD
+            x += 200;
+            xtext += 200;
+
+            p = p->urm;
+            delay(500);
+        }
+        else
+        {
+            // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
+            x = 20;
+            y += 100;
+            xtext = 25;
+            ytext += 100;
+        }
     }
+    delay(3000);
+    cleardevice();
 }
 
 // ---------- POZA CU LISTA SI DESCRIEREA EI (inainte de functii) ----------
@@ -598,16 +614,16 @@ void descriereListaSimplu()
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(430,50, "Informatii despre liste simplu-inlantuite");
     settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(240, 150, "       Lista liniara este o structura de date logica, cu  date  omogene,  in care");
-    outtextxy(240, 180, "fiecare  element  are  exact  un  element  predecesor si  exact  un  element");
-    outtextxy(240, 210, "succesor, cu exceptia primului si al ultimului element.");
-    outtextxy(240, 240, "       Lungimea unei liste reprezinta numarul de noduri din lista. O lista care");
-    outtextxy(240, 270, "nu are niciun element se numeste lista vida.");
-    outtextxy(240, 300, "       O modalitate  de implementare a  listelor este sub forma listelor liniare");
-    outtextxy(240, 330, "alocate  dinamic. In  acest caz,  fiecare  element  al listei  este  o  variabila");
-    outtextxy(240, 360, "dinamica;  aceasta  va  contine, pe langa informatia  utila si  informatia  de");
-    outtextxy(240, 390, "legatura,  adica  adresa elementului  succesor  si,  eventual,  adresa  celui");
-    outtextxy(240, 420, "precedent. Aceste adrese vor fi memorate prin intermediul pointerilor.");
+    outtextxy(250, 150, "       Lista liniara este o structura de date logica, cu  date  omogene,  in care");
+    outtextxy(250, 180, "fiecare  element  are  exact  un  element  predecesor si  exact  un  element");
+    outtextxy(250, 210, "succesor, cu exceptia primului si al ultimului element.");
+    outtextxy(250, 240, "       Lungimea unei liste reprezinta numarul de noduri din lista. O lista care");
+    outtextxy(250, 270, "nu are niciun element se numeste lista vida.");
+    outtextxy(250, 300, "       O modalitate  de implementare a  listelor este sub forma listelor liniare");
+    outtextxy(250, 330, "alocate  dinamic. In  acest caz,  fiecare  element  al listei  este  o  variabila");
+    outtextxy(250, 360, "dinamica;  aceasta  va  contine, pe langa informatia  utila si  informatia  de");
+    outtextxy(250, 390, "legatura,  adica  adresa elementului  succesor  si,  eventual,  adresa  celui");
+    outtextxy(250, 420, "precedent. Aceste adrese vor fi memorate prin intermediul pointerilor.");
 
     readimagefile("Poza Lista.jpg",550,450,950,650);
 
