@@ -25,14 +25,14 @@ nod *prim, *ultim;
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
-    initwindow(1200, 700, " Meniu Biblioteca cu Liste ");
+    initwindow(1510, 795, " Meniu Biblioteca cu Liste ");
 
 }
 
 // ---------- BUTON UNDO ----------
 void butonUNDO()
 {
-    readimagefile("undo.jpg",20,620,250,680);
+    readimagefile("undo.jpg",20,700,250,760);
 
     /*
     bool gata = false;
@@ -352,35 +352,41 @@ void meniuListeSimpluInlantuite()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 440 && x <= 750 && y >= 100 && y <= 150) //buton 1 - vida
+            if(x >= 440 && x <= 750 && y >= 100 && y <= 150) //buton 1 - creare
             {
                 gata = true;
                 buton1 = true;
             }
             else
-                if(x >= 440 && x <= 750 && y >= 200 && y <= 250)  //buton 2 - lungime lista
+                if(x >= 440 && x <= 750 && y >= 200 && y <= 250)  //buton 2 - vida
                 {
                     gata = true;
                     buton2 = true;
                 }
                 else
-                    if(x >= 440 && x <= 750 && y >= 300 && y <= 350) //buton 3 - inserare
+                    if(x >= 440 && x <= 750 && y >= 300 && y <= 350) //buton 3 - Lungime lista
                     {
                         gata = true;
                         buton3 = true;
                     }
                     else
-                        if(x >= 440 && x <= 750 && y >= 400 && y <= 450)  //buton 4 - stergere
+                        if(x >= 440 && x <= 750 && y >= 400 && y <= 450)  //buton 4 - inserari
                         {
                             gata = true;
                             buton4 = true;
                         }
                         else
-                            if(x >= 440 && x <= 750 && y >= 500 && y <= 550)  //buton 4 - afisare
+                            if(x >= 440 && x <= 750 && y >= 500 && y <= 550)  //buton 4 - stergeri
                             {
                                 gata = true;
                                 buton5 = true;
                             }
+                            else
+                                if(x >= 440 && x <= 750 && y >= 600 && y <= 650)  //buton 4 - stergeri
+                                {
+                                    gata = true;
+                                    buton6 = true;
+                                }
         }
     } while (!gata);
     cleardevice();
