@@ -1,0 +1,104 @@
+#include <winbgim.h>
+#define MAX 20
+#define FUNDAL BLACK
+
+int latura,numar;
+int width=400;
+int height=400;
+int stanga=100;
+int sus=100;
+
+bool gata;
+
+int TablaDeJoc[MAX][MAX];
+
+int culoare[8]={BLACK, RED,BLUE,GREEN, YELLOW, LIGHTCYAN, LIGHTBLUE, MAGENTA};
+int culo=0;
+
+void desenarePiesa(int linia, int coloana, int v)
+{
+    int c;
+    if (v<0) c=-v; else c=v;
+    int x1, y1, x2, y2, xmijloc, ymijloc;
+    // stergere
+    setcolor(FUNDAL); setfillstyle(SOLID_FILL,FUNDAL);
+    x1=stanga+latura*(coloana-1); y1=sus+latura*(linia-1);
+    x2=x1+latura; y2=y1+latura;
+    xmijloc=(x1+x2)/2; ymijloc=(y1+y2)/2;
+    bar(xmijloc-20,ymijloc-20,xmijloc+20,ymijloc+20);
+    // afisez cerc de culoarea culoare[culo]
+    setcolor(culoare[c]); setfillstyle(SOLID_FILL,culoare[c]);
+    if (v<0) setcolor(WHITE);
+    fillellipse(xmijloc,ymijloc,18,18);
+}
+
+void punerePiesa()
+{
+    int linia,coloana,x,y;
+    if(ismouseclick(WM_LBUTTONDOWN))
+    {
+       clearmouseclick(WM_LBUTTONDOWN);
+       x=mousex(); y=mousey();
+       if (!(x>=stanga && x<=stanga+width && y>=sus && y<=sus+height))
+          gata=true;
+       else
+       {
+          linia=(y-sus)/latura+1; coloana=(x-stanga)/latura+1;
+          if (TablaDeJoc[linia][coloana]>=0)
+            // ==0 inseamna spatiu liber, >0 inseamna ca am o piesa de o culoare,
+            // eventual de alta culoare decat cea selectata acum
+             {
+                TablaDeJoc[linia][coloana]=culo;
+                desenarePiesa(linia,coloana,culo);
+            }
+         else
+         if (TablaDeJoc[linia][coloana]<0)
+            { // preiau culoarea de la o piesa amplasata initial
+                culo=-TablaDeJoc[linia][coloana];
+            }
+       }
+     }
+ }
+
+void initializareTabla()
+{
+    numar=8;
+    TablaDeJoc[3][3]=-1;
+    TablaDeJoc[4][3]=-2;
+    TablaDeJoc[5][1]=-3;
+    TablaDeJoc[1][3]=-4;
+    TablaDeJoc[3][8]=-5;
+    TablaDeJoc[6][8]=-6;
+    TablaDeJoc[2][7]=-7;
+    TablaDeJoc[7][5]=-8;
+}
+
+void desenareTabla()
+{
+   int i,j;
+   latura=width/numar;
+   sus=(getmaxy()-width)/2; stanga=(getmaxx()-height)/2;
+   setbkcolor(FUNDAL); clearviewport(); setcolor(BLUE);
+   for (i=1; i<=numar; i++)
+       for (j=1; j<=numar; j++)
+       {
+           setcolor(WHITE);
+           rectangle(stanga+latura*(i-1),sus+latura*(j-1),stanga+latura*i,sus+latura*j);
+           desenarePiesa(i,j,TablaDeJoc[i][j]);
+       }
+}
+
+int main()
+{
+   initwindow(800,600);
+   initializareTabla();
+   desenareTabla();
+   gata=false;
+   do
+   {
+      punerePiesa();
+   }
+   while (!gata);
+   getch(); closegraph();
+   return 0;
+}
