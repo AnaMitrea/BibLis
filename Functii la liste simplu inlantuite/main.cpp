@@ -21,7 +21,9 @@ struct stiva
     unsigned int lungime;
 };
 */
+
 //nod *prim, *ultim;
+
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
@@ -113,7 +115,7 @@ void afisarelungimeLista(nod *prim)
 
             p = p->urm;
             pozitie++;
-            delay(400);
+            delay(500);
         }
         else
         {
@@ -142,7 +144,7 @@ void inserareInceput(nod*& prim, int val)
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(170, 100, " Inserarea unui nod la inceputul unei liste simplu-inlantuite");
 
-    // INSERAREA
+    // INSERARE
     nod *p = new nod;
     p->valoare = val;
     p->urm = prim;
@@ -190,7 +192,7 @@ void inserareInceput(nod*& prim, int val)
             xtext += 200;
 
             p = p->urm;
-            delay(400);
+            delay(500);
         }
         else
         {
@@ -256,7 +258,7 @@ void inserareSfarsit(nod*& prim, int val)
             xtext += 200;
 
             p = p->urm;
-            delay(400);
+            delay(500);
         }
         else
         {
@@ -272,43 +274,83 @@ void inserareSfarsit(nod*& prim, int val)
     cleardevice();
 }
 
-// NU ESTE COMPLETA FUNCTIA!!!
 void inserareDupaNod(nod*& prim, int element_dat, int val)
 {
+    settextstyle(4, HORIZ_DIR, 4);
+    outtextxy(40, 100, " Inserarea unui nod dupa un element dat intr-o lista simplu-inlantuita");
+    delay(350);
+
     nod *p = new nod;
     p->valoare = val;
     p->urm = NULL;
 
     unsigned int x = 20, y = 250;
     unsigned int xtext = 25, ytext = 265;
+    bool inserat = false;
     nod *q = prim;
+
+    if (prim == NULL) // daca e vida, primul element = elementul inserat
+    {
+        prim = p;
+        readimagefile("nod inserat lista cu null.jpg", 450, 250, 1000, 400);
+        settextstyle(4, HORIZ_DIR, 4);
+
+        // AFISARE IN MODUL GRAFIC
+        bgiout << p->valoare;
+        outstreamxy(470, 320);
+        fout << "Nodul inserat dupa "<< element_dat << " este " << p->valoare << endl;
+        return;
+    }
     while (q != NULL)
     {
-        if (prim == NULL) // daca e vida, primul element = elementul inserat
-        {
-            prim = p;
-            readimagefile("nod inserat lista cu null.jpg", 450, 250, 700, 300);
-            return;
-        }
         if (x <= 1400)  // daca nu iese din ecran
         {
+            fout << q->valoare << ' ';
+
             if (q->valoare == element_dat)
             {
                 p->urm = q->urm;
                 q->urm = p;
+                readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
+                inserat = 1;
             }
-            readimagefile("nod lista cu null.jpg", x, y, x + 250, y + 50);
+            else
+            {
+                if (q->urm == NULL)
+                    readimagefile("nod lista cu null.jpg", x, y, x + 250, y + 50);
+                else
+                    readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+            }
+            // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+            dimensiuneText(q->valoare);
+
+            // AFISARE IN MODUL GRAFIC
+            bgiout << q->valoare;
+            outstreamxy(xtext, ytext);
+
+            // COORDONATELE URMATORULUI NOD
+            x += 200;
+            xtext += 200;
+
             q = q->urm;
+            delay(500);
         }
         else
         {
-            // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
+            // COORDONATELE URMATORULUI RAND
             x = 20;
             y += 100;
             xtext = 25;
             ytext += 100;
         }
     }
+    if (inserat == false)
+    {
+        settextstyle(4, HORIZ_DIR, 3);
+        outtextxy(360, 180, " Nu s-a inserat nodul in lista simplu-inlantuita!");
+    }
+    delay(3000);
+    cleardevice();
 }
 
 //------------- FUNCTII PENTRU STERGERE --------------
@@ -394,7 +436,7 @@ void afisareListaSimpluInlantuita(nod *prim)
             xtext += 200;
 
             p = p->urm;
-            delay(400);
+            delay(500);
         }
         else
         {
@@ -412,12 +454,14 @@ void afisareListaSimpluInlantuita(nod *prim)
 int main()
 {
     nod *prim, *ultim;
+
     fereastra();
+
     creareListaSimpluInlantuita(prim,ultim);
 
     inserareInceput(prim, 500);
-    inserareSfarsit(prim, 500);
-    //inserareDupaNod(prim,9999,69);
+    inserareSfarsit(prim, 900);
+    inserareDupaNod(prim, 400, 59);
 
     afisarelungimeLista(prim);
 
