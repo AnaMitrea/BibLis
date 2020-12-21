@@ -277,6 +277,7 @@ void inserareSfarsit(nod*& prim, int val)
     cleardevice();
 }
 
+// NU ESTE COMPLETA
 void inserareDupaNod(nod*& prim, int element_dat, int val)
 {
     settextstyle(4, HORIZ_DIR, 4);
