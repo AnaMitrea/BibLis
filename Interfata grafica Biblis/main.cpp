@@ -192,7 +192,10 @@ void inserareInceput(nod*& prim, int val)
 
     unsigned int x = 20, y = 250;
     unsigned int xtext = 25, ytext = 265;
-    readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
+    if(p->urm == NULL)
+        readimagefile("nod inserat lista cu null.jpg", x, y - 10, x + 200, y + 50);
+    else
+        readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
 
     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
     dimensiuneText(p->valoare);
@@ -456,22 +459,54 @@ void meniuInserare()
             }
 }
 
-//------------- FUNCTII PENTRU STERGERE --------------
-
-void stergerePrimul()
+///------------- FUNCTII PENTRU STERGERE --------------
+void stergerePrimul(nod *&prim)
 {
-    butonUNDO();
+    nod *p = prim->urm;
+    delete prim;
+    prim = p;
 }
 
-void stergerePrimaAparitie()
+void stergerePrimaAparitie(nod *&prim, int element_dat)
 {
-    butonUNDO();
+    nod *p = prim;
+    while(p != NULL)
+    {
+        if(p->valoare == element_dat)
+        {
+            nod *q = (p->urm)->urm;
+            delete p->urm;
+            p->urm = q;
+            return;
+        }
+        p = p->urm;
+    }
 }
 
-void stergereToateAparitiile()
+void stergereToateAparitiile(nod *&prim, int element_dat)
 {
-    butonUNDO();
+    nod *p = prim;
+    while(p->urm != NULL)
+    {
+        if((p->urm)->valoare == element_dat)
+        {
+            nod *q = p->urm;
+            p->urm = (p->urm)->urm;
+            delete q;
+        }
+        else
+            p = p->urm;
+    }
+    if(prim->valoare == element_dat)
+    {
+        nod *q = prim;
+        prim = prim->urm;
+        delete q;
+    }
+    if(prim == NULL)
+        fout << "LISTA VIDA";
 }
+
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
