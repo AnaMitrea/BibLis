@@ -82,9 +82,9 @@ void listaVida(nod*& prim)
     delay(1000);
     settextstyle(4, HORIZ_DIR, 4);
     if(prim == NULL)
-        outtextxy(450, 300, " Lista introdusa este vida! ");
+        outtextxy(430, 300, " Lista introdusa este vida! ");
     else
-        outtextxy(450, 300, " Lista introdusa nu este vida! ");
+        outtextxy(410, 300, " Lista introdusa nu este vida! ");
     delay(4000);
     cleardevice();
 }

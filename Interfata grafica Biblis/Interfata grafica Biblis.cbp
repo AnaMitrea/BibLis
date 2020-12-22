@@ -34,7 +34,7 @@
 		</Compiler>
 		<Unit filename="afisare.out" />
 		<Unit filename="citire.in" />
-		<Unit filename="main.cpp" />
+		<Unit filename="interfata.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
