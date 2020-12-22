@@ -71,14 +71,13 @@ void creareListaSimpluInlantuita(nod*& prim, nod*& ultim)
 void listaVida(nod*& prim)
 {
     settextstyle(4, HORIZ_DIR, 4);
-    outtextxy(380, 100, " Verificare daca lista este vida");
+    outtextxy(400, 100, " Verificare daca lista este vida");
 
-    nod *p = prim;
     settextstyle(4, HORIZ_DIR, 3);
-    if(p == NULL)
-        outtextxy(600, 100, " Lista introdusa este vida.");
+    if(prim == NULL)
+        outtextxy(450, 100, " Lista introdusa este vida.");
     else
-        outtextxy(600, 100, " Lista introdusa nu este vida.");
+        outtextxy(450, 100, " Lista introdusa nu este vida.");
 }
 
 //------------- FUNCTIE PENTRU AFLAREA LUNGIMII LISTEI --------------
@@ -611,7 +610,7 @@ void descriereListaSimplu()
     readimagefile("Poza Lista.jpg",550,450,950,650);
 
     // CLEANUP
-    delay(5000);   // 1 sec =  1000 ms
+    delay(2000);   // 1 sec =  1000 ms
     cleardevice();
 }
 
@@ -698,11 +697,13 @@ void meniuListeSimpluInlantuite()
     else
         if (buton2 == true)  // Verificare daca lista este vida
         {
+            creareListaSimpluInlantuita(prim, ultim);
             listaVida(prim);
         }
         else
             if (buton3 == true)  // Functie pt aflarea lungimii listei
             {
+                creareListaSimpluInlantuita(prim, ultim);
                 lungimeLista(prim);
             }
             else

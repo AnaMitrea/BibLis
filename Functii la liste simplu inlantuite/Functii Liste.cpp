@@ -73,6 +73,23 @@ int lungimeaListeiSimpluInlantuite(nod *prim)
     return lungime;
 }
 
+// ------------ LISTA VIDA -------------
+void listaVida(nod*& prim)
+{
+    settextstyle(4, HORIZ_DIR, 4);
+    outtextxy(400, 100, " Verificare daca lista este vida");
+
+    delay(1000);
+    settextstyle(4, HORIZ_DIR, 4);
+    if(prim == NULL)
+        outtextxy(450, 300, " Lista introdusa este vida! ");
+    else
+        outtextxy(450, 300, " Lista introdusa nu este vida! ");
+    delay(4000);
+    cleardevice();
+}
+
+
 void afisarelungimeLista(nod *prim)
 {
     settextstyle(4, HORIZ_DIR, 4);
@@ -406,7 +423,6 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
         fout << "LISTA VIDA";
 }
 
-
 // ---------- AFISAREA UNEI LISTE SIMPLU-INLANTUITE ----------
 void afisareListaSimpluInlantuita(nod *prim)
 {
@@ -463,6 +479,8 @@ int main()
     fereastra();
 
     creareListaSimpluInlantuita(prim,ultim);
+
+    listaVida(prim);
 
     inserareInceput(prim, 500);
     inserareSfarsit(prim, 900);
