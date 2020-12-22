@@ -46,23 +46,6 @@ void butonUNDO()
 {
     readimagefile("undo.jpg",20,700,250,760);
 
-    /*
-    bool gata = false;
-    int x,y;
-    do
-    {
-        if(ismouseclick(WM_LBUTTONDOWN))
-        {
-            clearmouseclick(WM_LBUTTONDOWN);
-            x = mousex();
-            y = mousey();
-            if(x >= 20 && x <= 250 && y >= 700 && y <= 760)
-            {
-                gata = true;
-            }
-    }
-    } while (!gata);
-    */
 }
 
 //------------- FUNCTIE CREARE LISTA --------------
@@ -232,7 +215,7 @@ void inserareInceput(nod*& prim, int val)
         }
     }
     fout << '\n';
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -298,7 +281,7 @@ void inserareSfarsit(nod*& prim, int val)
         }
     }
     fout << '\n';
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -378,7 +361,7 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         settextstyle(4, HORIZ_DIR, 3);
         outtextxy(360, 180, " Nu s-a inserat nodul in lista simplu-inlantuita!");
     }
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -493,7 +476,6 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
     if(prim == NULL)
         fout << "LISTA VIDA";
 }
-
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
@@ -629,17 +611,16 @@ void descriereListaSimplu()
     readimagefile("Poza Lista.jpg",550,450,950,650);
 
     // CLEANUP
-    delay(2000);   // 1 sec =  1000 ms
+    delay(5000);   // 1 sec =  1000 ms
     cleardevice();
 }
 
 // ---------- MENIU PENTRU LISTE SIMPLU-INLANTUITE ----------
 void meniuListeSimpluInlantuite()
 {
-    cleardevice();
-    butonUNDO();
     // POZA CU LISTA SI DESCRIEREA EI
     descriereListaSimplu();
+    butonUNDO();
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(400, 50, " Alege functia pentru liste simplu-inlantuite ");
 

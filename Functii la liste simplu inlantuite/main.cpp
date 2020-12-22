@@ -4,8 +4,8 @@
 #include <winbgim.h>
 using namespace std;
 
-ifstream fin("citire.in");
-ofstream fout("afisare.out");
+ifstream fin("citire1.in");
+ofstream fout("afisare1.out");
 
 // ---------- INITIALIZARE STRUCTURI DE DATE ----------
 struct nod
