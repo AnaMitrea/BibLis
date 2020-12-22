@@ -89,7 +89,6 @@ void listaVida(nod*& prim)
     cleardevice();
 }
 
-
 void afisarelungimeLista(nod *prim)
 {
     settextstyle(4, HORIZ_DIR, 4);
@@ -154,7 +153,6 @@ void afisarelungimeLista(nod *prim)
     delay(4000);
     cleardevice();
 }
-
 
 //------------- FUNCTII PENTRU INSERARE --------------
 void inserareInceput(nod*& prim, int val)

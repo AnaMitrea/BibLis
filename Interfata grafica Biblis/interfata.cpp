@@ -475,6 +475,27 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
     if(prim == NULL)
         fout << "LISTA VIDA";
 }
+    nod *p = prim;
+    while(p->urm != NULL)
+    {
+        if((p->urm)->valoare == element_dat)
+        {
+            nod *q = p->urm;
+            p->urm = (p->urm)->urm;
+            delete q;
+        }
+        else
+            p = p->urm;
+    }
+    if(prim->valoare == element_dat)
+    {
+        nod *q = prim;
+        prim = prim->urm;
+        delete q;
+    }
+    if(prim == NULL)
+        fout << "LISTA VIDA";
+}
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
@@ -623,7 +644,7 @@ void meniuListeSimpluInlantuite()
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(400, 50, " Alege functia pentru liste simplu-inlantuite ");
 
-    // BUTON 1 - CREARE LISTA    nefacut inca
+    // BUTON 1 - CREARE LISTA
     readimagefile("creare lista.jpg",600,100,910,150);
 
     // BUTON 2 - VERIF LISTA VIDA
@@ -726,7 +747,6 @@ void meniuListeSimpluInlantuite()
 // ---------- MENIU PRINCIPAL ----------
 void butoaneMeniuPrincipal()
 {
-
     // BUTON 1 - Liste simplu inlantuite
     readimagefile("liste s i.jpg",600,210,910,280);
 
@@ -738,7 +758,6 @@ void butoaneMeniuPrincipal()
 
     // BUTON 4 - Cozi
     readimagefile("cozi.jpg",600,510,910, 580);
-
 
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false, buton4 = false;
@@ -806,7 +825,6 @@ void meniu()
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(560, 100, " Alege structura de date ");
-
     // ---------- MENIU PRINCIPAL CU STRUCTURI DE DATE ----------
     butoaneMeniuPrincipal();
 }
@@ -828,9 +846,7 @@ void cleanup()
 int main()
 {
     nod *prim, *ultim;
-
     interfataGrafica();
     cleanup();
-
     return 0;
 }
