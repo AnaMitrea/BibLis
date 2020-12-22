@@ -133,7 +133,8 @@ void afisarelungimeLista(nod *prim)
     bgiout << lungime << endl;
     outstreamxy(850, 145);
     fout << "Lungimea listei este: " << lungime << '\n';
-    delay(3000);
+
+    delay(4000);
     cleardevice();
 }
 
@@ -207,7 +208,7 @@ void inserareInceput(nod*& prim, int val)
         }
     }
     fout << '\n';
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -273,7 +274,7 @@ void inserareSfarsit(nod*& prim, int val)
         }
     }
     fout << '\n';
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -353,7 +354,7 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         settextstyle(4, HORIZ_DIR, 3);
         outtextxy(360, 180, " Nu s-a inserat nodul in lista simplu-inlantuita!");
     }
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -451,7 +452,7 @@ void afisareListaSimpluInlantuita(nod *prim)
             ytext += 100;
         }
     }
-    delay(3000);
+    delay(4000);
     cleardevice();
 }
 
@@ -463,11 +464,11 @@ int main()
 
     creareListaSimpluInlantuita(prim,ultim);
 
-    //inserareInceput(prim, 500);
-    //inserareSfarsit(prim, 900);
+    inserareInceput(prim, 500);
+    inserareSfarsit(prim, 900);
     inserareDupaNod(prim, 400, 59);
 
-    //afisarelungimeLista(prim);
+    afisarelungimeLista(prim);
 
     //afisareListaSimpluInlantuita(prim);
 
