@@ -475,27 +475,7 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
     if(prim == NULL)
         fout << "LISTA VIDA";
 }
-    nod *p = prim;
-    while(p->urm != NULL)
-    {
-        if((p->urm)->valoare == element_dat)
-        {
-            nod *q = p->urm;
-            p->urm = (p->urm)->urm;
-            delete q;
-        }
-        else
-            p = p->urm;
-    }
-    if(prim->valoare == element_dat)
-    {
-        nod *q = prim;
-        prim = prim->urm;
-        delete q;
-    }
-    if(prim == NULL)
-        fout << "LISTA VIDA";
-}
+
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
@@ -545,19 +525,19 @@ void meniuStergere()
     if(buton1 == true)
     {
         outtextxy(320, 100, " Stergere primul nod al listei");
-        stergerePrimul(prim);
+        //stergerePrimul(prim);
     }
     else
         if(buton2 == true)
         {
             outtextxy(320, 100, " Stergere prima aparitie a unui nod dat ");
-            stergerePrimaAparitie(prim,10);
+            //stergerePrimaAparitie(prim,10);
         }
         else
             if(buton3 == true)
             {
                 outtextxy(400, 100, " Stergere toate aparitiile unui nod dat ");
-                stergereToateAparitiile(prim,10);
+                //stergereToateAparitiile(prim,10);
             }
 }
 
@@ -825,6 +805,7 @@ void meniu()
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(560, 100, " Alege structura de date ");
+
     // ---------- MENIU PRINCIPAL CU STRUCTURI DE DATE ----------
     butoaneMeniuPrincipal();
 }
@@ -846,7 +827,9 @@ void cleanup()
 int main()
 {
     nod *prim, *ultim;
+
     interfataGrafica();
     cleanup();
+
     return 0;
 }
