@@ -482,7 +482,7 @@ int main()
 
     inserareInceput(prim, 500);
     inserareSfarsit(prim, 900);
-    inserareDupaNod(prim, 400, 59);
+    inserareDupaNod(prim, 200, 59);
 
     afisarelungimeLista(prim);
 
