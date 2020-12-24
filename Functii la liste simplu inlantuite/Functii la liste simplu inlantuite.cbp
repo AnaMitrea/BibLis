@@ -32,9 +32,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Afisare Functii Liste.out" />
 		<Unit filename="Functii Liste.cpp" />
-		<Unit filename="afisare1.out" />
-		<Unit filename="citire1.in" />
+		<Unit filename="citire Functii Liste.in" />
 		<Extensions>
 			<code_completion />
 			<envvars />

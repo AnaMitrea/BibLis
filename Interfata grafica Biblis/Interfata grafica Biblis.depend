@@ -10,7 +10,13 @@
 	<graphics.h>
 	<winbgim.h>
 
-1608651933 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\interfata.cpp
+1608826277 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\interfata.cpp
+	<iostream>
+	<fstream>
+	<graphics.h>
+	<winbgim.h>
+
+1608823397 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\functii la liste simplu inlantuite\functii liste.cpp
 	<iostream>
 	<fstream>
 	<graphics.h>

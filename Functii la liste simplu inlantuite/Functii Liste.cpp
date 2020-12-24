@@ -4,8 +4,8 @@
 #include <winbgim.h>
 using namespace std;
 
-ifstream fin("citire1.in");
-ofstream fout("afisare1.out");
+ifstream fin("citire Functii Liste.in");
+ofstream fout("Afisare Functii Liste.out");
 
 // ---------- INITIALIZARE STRUCTURI DE DATE ----------
 struct nod
@@ -77,15 +77,36 @@ int lungimeaListeiSimpluInlantuite(nod *prim)
 void listaVida(nod*& prim)
 {
     settextstyle(4, HORIZ_DIR, 4);
-    outtextxy(400, 100, " Verificare daca lista este vida");
-
-    delay(1000);
-    settextstyle(4, HORIZ_DIR, 4);
+    outtextxy(410, 100, " Verificare daca lista este vida");
     if(prim == NULL)
-        outtextxy(430, 300, " Lista introdusa este vida! ");
+    {
+        delay(1000);
+        readimagefile("nod lista cu null.jpg",520,400,920,480);
+
+        // AFISARE IN MODUL GRAFIC
+        bgiout << "NULL";
+        outstreamxy(535, 430);
+        delay(1000);
+
+        settextstyle(4, HORIZ_DIR, 3);
+        outtextxy(500, 300, " Lista introdusa este vida! ");
+    }
     else
-        outtextxy(410, 300, " Lista introdusa nu este vida! ");
-    delay(4000);
+    {
+        delay(1000);
+        readimagefile("nod lista cu null.jpg",520,400,920,480);
+        // DIMENSIUNEA TEXTULUI
+        dimensiuneText(prim->valoare);
+
+        // AFISARE IN MODUL GRAFIC
+        bgiout << prim->valoare;
+        outstreamxy(535, 430);
+        delay(1000);
+
+        settextstyle(4, HORIZ_DIR, 3);
+        outtextxy(480, 300, " Lista introdusa nu este vida! ");
+    }
+    delay(5000);
     cleardevice();
 }
 
@@ -478,13 +499,13 @@ int main()
 
     creareListaSimpluInlantuita(prim,ultim);
 
-    listaVida(prim);
+    //listaVida(prim);
 
     inserareInceput(prim, 500);
-    inserareSfarsit(prim, 900);
-    inserareDupaNod(prim, 200, 59);
+    //inserareSfarsit(prim, 900);
+    //inserareDupaNod(prim, 200, 59);
 
-    afisarelungimeLista(prim);
+    //afisarelungimeLista(prim);
 
     //afisareListaSimpluInlantuita(prim);
 
