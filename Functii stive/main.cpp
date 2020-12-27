@@ -133,7 +133,13 @@ int main()
     for(int i = 1; i <= nrelemente; i++)
     {
         delay(300);
-        readimagefile("etaj1.jpg",100,y,300,y - 70);
+        if(i == 1)
+            readimagefile("parter.jpg",88,y,315,y - 70);
+        else
+            if(i == nrelemente)
+                readimagefile("acoperis.jpg",88,y,315,y - 70);
+            else
+                readimagefile("etaj.jpg",100,y,300,y - 70);
         y -= 70;
     }
 
