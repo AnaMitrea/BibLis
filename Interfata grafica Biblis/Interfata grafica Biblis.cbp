@@ -32,7 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="afisare.out" />
 		<Unit filename="citire.in" />
 		<Unit filename="interfata.cpp" />
 		<Extensions>
