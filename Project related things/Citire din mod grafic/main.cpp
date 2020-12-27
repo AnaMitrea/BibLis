@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <winbgim.h>
-
 #define MAX 50
 
 using namespace std;
