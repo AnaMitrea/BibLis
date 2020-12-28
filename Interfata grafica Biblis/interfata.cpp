@@ -18,7 +18,6 @@ struct stiva
     struct nod* varf;
     unsigned int lungime;
 };
-
 nod *prim, *ultim;
 
 // ------------- DECLARARE FUNCTII ------------

@@ -13,16 +13,15 @@ struct nod
     int valoare;
     struct nod* urm;
 };
+nod *prim, *ultim;
 
-/*
-struct stiva
-{
-    struct nod* varf;
-    unsigned int lungime;
-};
-*/
-
-//nod *prim, *ultim;
+void dimensiuneText(int element);
+void creareListaSimpluInlantuita(nod*& prim, nod*& ultim);
+void inserareInceput(nod*& prim, int val);
+void inserareSfarsit(nod*& prim, int val);
+void inserareDupaNod(nod*& prim, int element_dat, int val);
+void meniuInserare();
+void
 
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
