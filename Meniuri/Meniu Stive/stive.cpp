@@ -24,13 +24,15 @@ void fereastra();
 void dimensiuneText(int element);
 void descriereStiva();
 void deseneazaOutline(int y);
-void initializeaza(stiva& S);
+void deseneazaElemente(stiva S);
+void initializeaza(stiva &S);
 void esteVidaStiva(stiva S);
 void goleste(stiva &S);
 void pop(stiva &S);
+void eliminare();
 void push(stiva &S, int element);
+void adaugare();
 void afiseaza(stiva S);
-
 
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
@@ -54,14 +56,57 @@ void deseneazaOutline(int y)
 {
     setcolor(YELLOW);
     setfillstyle(SOLID_FILL, YELLOW);
-    rectangle(700,600,1000,610); // baza - ramane aceeasi la toate stivele
-    floodfill(750, 605, YELLOW);
-    rectangle(700,y,710,600); // stanga - coordonata y se schimba in functie de cate elemente sunt in stiva.
-    floodfill(705, 401, YELLOW);
-    rectangle(990,y,1000,600); // dreapta - coordonata y se schimba in functie de cate elemente sunt in stiva.
-    floodfill(991, 401, YELLOW);
+    rectangle(700,750,1000,760); // baza - ramane aceeasi la toate stivele
+    floodfill(701,755, YELLOW);
+    rectangle(700,y,710,750); // stanga - coordonata y se schimba in functie de cate elemente sunt in stiva.
+    floodfill(701,y + 1, YELLOW);
+    rectangle(990,y,1000,750); // dreapta - coordonata y se schimba in functie de cate elemente sunt in stiva.
+    floodfill(991,y + 1, YELLOW);
     setcolor(WHITE);
 }
+
+// Grafica desenare elementele din stiva
+void deseneazaElemente(stiva S)
+{
+    nod* top = S.varf;
+    /*
+    inaltimea fiecarei pozei = 40px
+    distanta dintre poze = 5px
+    */
+    // ADAUGARE POZE
+    if (S.nrElemente <= 11)
+    {
+        // MARGINILE STIVEI
+        deseneazaOutline(700 - (S.nrElemente * 45));
+        int h = 0;
+        for (int i = 1; i <= S.nrElemente; i++)
+        {
+            readimagefile("stiva.jpg",730,700 - h,970,740 - h);
+            h += 45;
+            S.varf = S.varf->urm;
+            delay(200);
+        }
+        int hmax = 700 - h + 55;
+        for (int i = 1; i <= S.nrElemente; i++)
+        {
+            settextstyle(4, HORIZ_DIR, 3);
+            bgiout << top->valoare;
+            outstreamxy(800,hmax);
+            delay(300);
+            hmax += 45;
+            top = top->urm;
+        }
+    }
+    else
+    {
+        deseneazaOutline(500);
+        settextstyle(4, HORIZ_DIR, 3);
+        delay(500);
+        setcolor(WHITE);
+        outtextxy(377,130,"Eroare! S-a depasit numarul maxim de elemente. Imposibil de afisat.");
+    }
+}
+
 
 // ---------- INITIALIZARE STIVA ----------
 void initializeaza(stiva& S)
@@ -81,6 +126,8 @@ void initializeaza(stiva& S)
     deseneazaOutline(200);
 
     S.varf = NULL;
+    S.nrElemente = 0;
+
     delay(1000);
     setcolor(LIGHTMAGENTA);
     settextstyle(4, HORIZ_DIR, 2);
@@ -88,7 +135,6 @@ void initializeaza(stiva& S)
     outstreamxy(10, 470);
     bgiout << "S.varf = NULL;";
     outstreamxy(10, 490);
-    S.nrElemente = 0;
     delay(500);
     bgiout << "S.nrElemente = 0;";
     outstreamxy(10, 510);
@@ -114,22 +160,28 @@ void esteVidaStiva(stiva S)
     outtextxy(1040, 20, ".");
     delay(400);
     outtextxy(1060, 20, ".");
+    rectangle(370,100,1470,200);
     setcolor(WHITE);
     if (S.nrElemente == 0)
     {
         delay(500);
+        deseneazaOutline(400);
+        delay(500);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "Stiva are 0 elemente.";
-        outstreamxy(680, 300);
+        outstreamxy(680, 110);
         delay(800);
         setcolor(LIGHTRED);
-        outtextxy(635, 350, " Stiva introdusa este vida! ");
+        outtextxy(635, 150, " Stiva introdusa este vida! ");
         setcolor(WHITE);
     }
     else
     {
-        settextstyle(4, HORIZ_DIR, 5);
-        outtextxy(320, 300, " Stiva nu este vida! ");
+        delay(500);
+        deseneazaElemente(S);
+        delay(500);
+        settextstyle(4, HORIZ_DIR, 3);
+        outtextxy(680, 140, " Stiva nu este vida! ");
     }
 
     // STERGERE CE AM SCRIS
@@ -146,29 +198,73 @@ bool esteVida(stiva S)
     return (S.nrElemente == 0);
 }
 
-// --------- Functia Pop (eliminare din varful stivei) ----------
+//--------- ALGORITM ELIMINARE ELEMENT DIN MEMORIE ---------
 void pop(stiva &S)
 {
-    settextstyle(4, HORIZ_DIR, 4);
-    setcolor(LIGHTCYAN);
-    outtextxy(600, 20, "Eliminare element din stiva");
-    rectangle(370,100,1470,200);
-    setcolor(WHITE);
-    delay(1000);
-
-    // ALGORITMUL de eliminare
-    int element, y;
+    int element;
     if (!esteVida(S))
     {
-        deseneazaOutline(400);
         nod* varf_nou;
         element = S.varf->valoare;
         varf_nou = S.varf->urm;
         delete S.varf;
         S.varf = varf_nou;
         S.nrElemente--;
-        bgiout << "S-a eliminat " << element << " din varful stivei.";
-        outstreamxy(600, 400);
+        cout << "S-a eliminat " << element << endl;
+        return;
+    }
+    else
+    {
+        cout << "Eroare! Nu se poate elimina niciun element. Stiva este goala." << endl;
+        return;
+    }
+}
+
+// --------- Functia eliminare in mod grafic----------
+void eliminare()
+{
+    // TITLU + DREPTUNGHIUL UNDE SE VA SCRIE INFORMATIA - DACA S-A ELIMINAT SAU NU
+    settextstyle(4, HORIZ_DIR, 4);
+    setcolor(LIGHTCYAN);
+    outtextxy(600, 20, "Eliminare element din stiva");
+    rectangle(370,100,1470,200);
+    setcolor(WHITE);
+    delay(1000);
+    // ALGORITMUL DE ELIMINARE
+    if (!esteVida(S))
+    {
+        int top = S.varf->valoare;
+        // DESENARE STIVA
+        deseneazaElemente(S);
+        delay(500);
+        pop(S);
+        // AFISAREA GRAFICA
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "nod* vf_nou;";
+        outstreamxy(10, 470);
+        delay(500);
+        bgiout << "el = S.varf->valoare;";
+        outstreamxy(10, 500);
+        delay(500);
+        bgiout << "vf_nou = S.varf->urm;";
+        outstreamxy(10, 530);
+        delay(500);
+        bgiout << "delete S.varf;";
+        outstreamxy(10, 560);
+        delay(500);
+        readimagefile("black.jpg", 730, 700 - (S.nrElemente * 45), 970, 740 - (S.nrElemente * 45));
+        delay(500);
+        bgiout << "S.varf = vf_nou;";
+        outstreamxy(10, 590);
+        delay(500);
+        bgiout << "S.nrElemente--;";
+        outstreamxy(10, 620);
+        delay(500);
+        setcolor(WHITE);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << "S-a eliminat " << top << " din varful stivei.";
+        outstreamxy(640, 130);
     }
     else
     {
@@ -192,25 +288,53 @@ void pop(stiva &S)
     bar(0,465,295,725);
 }
 
-// ------- Functie de inserare in varful stivei -------
-void push(stiva &S, int element)
+//--------- ALGORITM ADAUGARE ELEMENT IN MEMORIE ---------
+void push(stiva &S, int el)
 {
-    nod * nod_nou;
+    nod* nod_nou;
     if (esteVida(S))
     {
         S.nrElemente = 1;
         S.varf = new nod;
-        S.varf->valoare = element;
+        S.varf->valoare = el;
         S.varf->urm = NULL;
     }
     else
     {
         S.nrElemente++;
         nod_nou = new nod;
-        nod_nou->valoare = element;
+        nod_nou->valoare = el;
         nod_nou->urm = S.varf;
         S.varf = nod_nou;
     }
+}
+
+// ------- Functie de inserare in grafica -------
+void adaugare()
+{
+    // TITLU + DREPTUNGHIUL UNDE SE VA SCRIE INFORMATIA - DACA S-A ADAUGAT SAU NU
+    settextstyle(4, HORIZ_DIR, 4);
+    setcolor(LIGHTCYAN);
+    outtextxy(600, 20, "Adaugare element in stiva");
+    rectangle(370,100,1470,200);
+    setcolor(WHITE);
+    delay(1000);
+    // ALGORITMUL
+    if (!esteVida(S))
+    {
+        deseneazaOutline(700 - (S.nrElemente * 45));
+    }
+    else
+    {
+        deseneazaOutline(500);
+    }
+
+    // STERGERE CE AM SCRIS
+    delay(10000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(305,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,465,295,725);
 }
 
 // ------- Functie de golire a stivei -------
@@ -223,14 +347,7 @@ void goleste(stiva &S)
 // ------- Functie de afisare a stivei -------
 void afiseaza(stiva S)
 {
-    nod* nod_curent;
-    nod_curent = S.varf;
-    while (nod_curent != NULL)
-    {
-        cout << nod_curent->valoare << ",";
-        nod_curent = nod_curent->urm;
-    }
-    cout << endl;
+    deseneazaElemente(S);
 }
 
 // ---------- POZA CU LISTA SI DESCRIEREA EI (inainte de functii) ----------
@@ -378,13 +495,13 @@ void meniuStive()
             else
                 if (buton4 == true)
                 {
-                    pop(S);
+                    eliminare();
                     goto jump;
                 }
                 else
                     if (buton5 == true)
                     {
-                        push(S, 6);
+                        adaugare();
                         goto jump;
                     }
                     else
@@ -403,15 +520,36 @@ void meniuStive()
 
 int main()
 {
-
     fereastra();
+
+    S.nrElemente = 0;
+    S.varf = NULL;
+    push(S,5);
+    push(S,100);
+    push(S,20);
+    push(S,50);
+    push(S,4);
+
+
+
+    // LINII DE DELIMTARE
+    //line(300,795,300,0);  // linie verticala
+    // line(0,460,300,460); // linie orizontala
+
     meniuStive();
 
-    /* LINII DE DELIMTARE
-    line(300,795,300,0);  // linie verticala
-    line(0,460,300,460); // linie orizontala
-    initializeaza(S);
+    /*
+    int nrelemente = 3,h = 0, i;
+    deseneazaOutline(700 - (nrelemente * 45));
+    for(i = 1; i <= nrelemente; i++)
+    {
+        readimagefile("stiva.jpg",730,700 - h,970,740 - h);
+        cout << h << endl;
+        h += 45;
+        delay(1000);
+    }
     */
+
 
     getch();
     closegraph();
