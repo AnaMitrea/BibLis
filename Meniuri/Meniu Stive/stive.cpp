@@ -20,19 +20,21 @@ struct stiva
 stiva S;
 
 // ------- DECLARARI FUNCTII ---------
+void meniuStive();
 void fereastra();
 void dimensiuneText(int element);
 void descriereStiva();
 void deseneazaOutline(int y);
 void deseneazaElemente(stiva S);
-void initializeaza(stiva &S);
+void initializareStiva(stiva &S);
 void esteVidaStiva(stiva S);
-void goleste(stiva &S);
+void golesteStiva(stiva &S);
 void pop(stiva &S);
-void eliminare();
+void eliminareStiva();
 void push(stiva &S, int element);
-void adaugare();
-void afiseaza(stiva S);
+void adaugareStiva();
+void afisareStiva(stiva S);
+
 
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
@@ -107,9 +109,8 @@ void deseneazaElemente(stiva S)
     }
 }
 
-
 // ---------- INITIALIZARE STIVA ----------
-void initializeaza(stiva& S)
+void initializareStiva(stiva& S)
 {
     settextstyle(4, HORIZ_DIR, 4);
     setcolor(LIGHTCYAN);
@@ -221,7 +222,7 @@ void pop(stiva &S)
 }
 
 // --------- Functia eliminare in mod grafic----------
-void eliminare()
+void eliminareStiva()
 {
     // TITLU + DREPTUNGHIUL UNDE SE VA SCRIE INFORMATIA - DACA S-A ELIMINAT SAU NU
     settextstyle(4, HORIZ_DIR, 4);
@@ -310,7 +311,7 @@ void push(stiva &S, int el)
 }
 
 // ------- Functie de inserare in grafica -------
-void adaugare()
+void adaugareStiva()
 {
     // TITLU + DREPTUNGHIUL UNDE SE VA SCRIE INFORMATIA - DACA S-A ADAUGAT SAU NU
     settextstyle(4, HORIZ_DIR, 4);
@@ -338,14 +339,14 @@ void adaugare()
 }
 
 // ------- Functie de golire a stivei -------
-void goleste(stiva &S)
+void golesteStiva(stiva &S)
 {
     while (!esteVida(S))
         pop(S);
 }
 
 // ------- Functie de afisare a stivei -------
-void afiseaza(stiva S)
+void afisareStiva(stiva S)
 {
     deseneazaElemente(S);
 }
@@ -477,7 +478,7 @@ void meniuStive()
 
     if (buton1 == true)
     {
-        initializeaza(S);
+        initializareStiva(S);
         goto jump;  // RESET LA BUTON
     }
     else
@@ -489,25 +490,25 @@ void meniuStive()
         else
             if (buton3 == true)
             {
-                goleste(S);
+                golesteStiva(S);
                 goto jump;
             }
             else
                 if (buton4 == true)
                 {
-                    eliminare();
+                    eliminareStiva();
                     goto jump;
                 }
                 else
                     if (buton5 == true)
                     {
-                        adaugare();
+                        adaugareStiva();
                         goto jump;
                     }
                     else
                         if (buton6 == true)
                         {
-                            afiseaza(S);
+                            afisareStiva(S);
                             goto jump;
                         }
                         else
@@ -530,26 +531,7 @@ int main()
     push(S,50);
     push(S,4);
 
-
-
-    // LINII DE DELIMTARE
-    //line(300,795,300,0);  // linie verticala
-    // line(0,460,300,460); // linie orizontala
-
     meniuStive();
-
-    /*
-    int nrelemente = 3,h = 0, i;
-    deseneazaOutline(700 - (nrelemente * 45));
-    for(i = 1; i <= nrelemente; i++)
-    {
-        readimagefile("stiva.jpg",730,700 - h,970,740 - h);
-        cout << h << endl;
-        h += 45;
-        delay(1000);
-    }
-    */
-
 
     getch();
     closegraph();

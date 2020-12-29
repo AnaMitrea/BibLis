@@ -527,7 +527,7 @@ void meniuInserare()
             else
                 if (buton4 == true)
                 {
-                    meniuListeSimpluInlantuite();
+                    //meniuListeSimpluInlantuite();
                 }
 }
 
