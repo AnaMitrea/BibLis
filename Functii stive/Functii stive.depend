@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1608470149 source:c:\users\ana maria mitrea\desktop\functii stive\main.cpp
-	<iostream>
-	<graphics.h>
-	<winbgim.h>
-	<fstream>
-

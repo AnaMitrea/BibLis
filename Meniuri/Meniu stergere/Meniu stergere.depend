@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1609170070 source:c:\users\ana maria mitrea\desktop\meniu stergere\meniu stergere.cpp
+	<iostream>
+	<fstream>
+	<graphics.h>
+	<winbgim.h>
+
