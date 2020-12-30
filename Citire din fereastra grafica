@@ -1,0 +1,117 @@
+#include <iostream>
+#include <stdio.h>
+#include <winbgim.h>
+using namespace std;
+int nrElemente;
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere)
+{
+    strcpy(afisare, "");
+    char aux[100];
+    char key[2];  // sirul in care se pastreaza tasta pe care o apasam la citire
+    char tasta;   // tasta pe care se apasa
+    char text2[100];
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    setcolor(WHITE);
+    strcpy(text2, text);
+    strcat(text2, aux);
+    outtextxy(x, y, text2);
+    do
+    {
+        tasta = getch();
+        if (tasta == 8) // backspace
+            if (strlen(afisare) > 0)
+            {
+                setcolor(BLACK);
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                afisare[strlen(afisare) - 1] = '\0';
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                setcolor(WHITE);
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+            }
+            else
+                Beep(1000,100);
+        else
+        {
+            key[0] = tasta;
+            key[1] = '\0';
+            strcat(afisare, key);
+            strcpy(aux, afisare);
+            strcat(aux, "_");
+            setcolor(WHITE);
+            strcpy(text2, text);
+            strcat(text2, aux);
+            outtextxy(x, y, text2);
+        }
+    } while (tasta!=13);
+
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    strcpy(text2, text);
+    strcat(text2, aux);
+
+    setcolor(BLACK);
+    outtextxy(x,y,text2);
+
+    if (!stergere)
+    {
+        strcpy(text2,text);
+        strcat(text2,afisare);
+        setcolor(WHITE);
+        outtextxy(x,y,text2);
+    }
+}
+
+int main()
+{
+    int Valoarea[20], n, i;
+    char afisare[100], vectText[100], numar[100];
+
+    // Initializare fereastra
+    initwindow(1000,800,"BibMat");
+
+    // Colorare text
+    setcolor(YELLOW);
+    setbkcolor(BLACK);
+    outtextxy(100,30,"Citesc numerele yay");
+
+    //Functia de citire a textului in mod grafic in sirul afisare
+    citesteSir("Cate numere doriti sa contina lista? ", afisare, 100, 70, false);
+
+
+    nrElemente = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    n = nrElemente;
+    for (i=0; i<n; i++)
+    {
+        itoa(i,numar,10); // conversie int -> ascii in sirul "numar"
+        strcpy(vectText,"Nodul ");
+        strcat(vectText,numar);
+        strcat(vectText," are valoarea egala cu: ");
+
+        citesteSir(vectText,afisare, 100, 120 + 30 * i, false); // citire valoare corespunzatoare in vector pe poz i.
+
+        Valoarea[i] = atoi(afisare); // valoarea lui Valoarea[i] in vector
+
+       // evidentiaza(Valoarea[i], i, 1, LIGHTGREEN);
+    }
+    int x=10;
+    for(int i=0;i<n;i++)
+     cout<<Valoarea[i]<<" ";
+    return 0;
+}
