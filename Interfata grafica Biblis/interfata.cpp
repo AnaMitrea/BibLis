@@ -162,49 +162,16 @@ void listaVida(nod* prim)
 //------------- FUNCTIE PENTRU AFLAREA LUNGIMII LISTEI --------------
 void lungimeLista(nod *prim)
 {
+    readimagefile("undo.jpg",30,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(275, 80, " Aflarea lungimii unei liste simplu-inlantuite");
-    unsigned int lungime = 0;
     nod *p = prim;
-    while (p != NULL)
-    {
-        lungime++;
-        p = p->urm;
-    }
-
-    p = prim;
     unsigned int x = 20, y = 250;
     unsigned int xtext = 25, ytext = 265;
-    int pozitie = 1;
+    unsigned int lungime = 0;
     while (p != NULL)
     {
-        if (x <= 1400)  // daca nu iese din ecran
-        {
-            // AFISAREA NODULUI CORESPUNZATOR
-            if (p->urm == NULL)
-                readimagefile("nod lista cu null.jpg", x, y, x + 270, y + 50);
-            else
-                readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
-
-            // DIMENSIUNEA TEXTULUI IN FIECARE NOD
-            dimensiuneText(p->valoare);
-
-            // AFISARE IN MODUL GRAFIC
-            bgiout << p->valoare;
-            outstreamxy(xtext, ytext);
-            bgiout << pozitie;
-            outstreamxy(xtext + 50, ytext - 40);
-
-
-            // COORDONATELE URMATORULUI NOD
-            x += 200;
-            xtext += 200;
-
-            p = p->urm;
-            pozitie++;
-            delay(500);
-        }
-        else
+        if (x > 1400) // daca ies din ecran
         {
             // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
             x = 20;
@@ -212,15 +179,75 @@ void lungimeLista(nod *prim)
             xtext = 25;
             ytext += 100;
         }
+        else
+            if (y > 725) // daca ies din ecran
+            {
+                delay(2000);
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(0,120,1520,728);
+                delay(500);
+                settextstyle(4, HORIZ_DIR, 4);
+                setcolor(LIGHTRED);
+                bgiout << "Eroare: Imposibil de afisat!";
+                outstreamxy(460, 300);
+                bgiout << "Prea multe valori in lista.";
+                outstreamxy(480, 340);
+                setcolor(WHITE);
+                delay(1000);
+                break;
+            }
+            else
+                if (x <= 1400)  // daca nu ies din ecran
+                {
+                    lungime++;
+                    // AFISAREA NODULUI CORESPUNZATOR
+                    if (p->urm == NULL)
+                        readimagefile("nod lista cu null.jpg", x, y, x + 270, y + 50);
+                    else
+                        readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+                    // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+                    dimensiuneText(p->valoare);
+                    // AFISARE IN MODUL GRAFIC
+                    bgiout << p->valoare;
+                    outstreamxy(xtext, ytext);
+                    bgiout << lungime;
+                    outstreamxy(xtext + 50, ytext - 40);
+                    // COORDONATELE URMATORULUI NOD
+                    x += 200;
+                    xtext += 200;
+                    p = p->urm;
+                    delay(500);
+                }
     }
     // AFISARE IN FEREASTRA GRAFICA
     settextstyle(4, HORIZ_DIR, 3);
+    setcolor(LIGHTCYAN);
     outtextxy(500, 150, "Lungimea listei este: ");
     settextstyle(4, HORIZ_DIR, 4);
     bgiout << lungime << endl;
     outstreamxy(850, 145);
-    delay(3000);
-    cleardevice();
+    setcolor(WHITE);
+    bool gata = false, buton = false;
+    int xx,yy;
+    do
+    {
+        if(ismouseclick(WM_LBUTTONDOWN))
+        {
+            clearmouseclick(WM_LBUTTONDOWN);
+            xx = mousex();
+            yy = mousey();
+            if(xx >= 30 && xx <= 250 && yy >= 730 && yy <= 780) //buton
+            {
+                gata = true;
+                buton = true;
+            }
+        }
+    } while (!gata);
+    if (buton == true)
+    {
+        cleardevice();
+        meniuListeSimpluInlantuite();
+    }
 }
 
 //------------- FUNCTII PENTRU INSERARE --------------
@@ -522,7 +549,6 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         outstreamxy(560, 70);
         setcolor(LIGHTMAGENTA);
         delay(600);
-
         // STERGERE CE AM SCRIS INAINTE DE IF
         setfillstyle(SOLID_FILL,BLACK);
         bar(5,470,250,490);
@@ -532,16 +558,13 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         bgiout << "*prim";
         outstreamxy(360,120);
         setcolor(WHITE);
-
         // AFISARE IMAGINE NOD
         readimagefile("nod inserat lista cu null.jpg", x, y + 50, x + 300, y + 110);
         settextstyle(4, HORIZ_DIR, 4);
-
         // AFISARE VAL NOD
         dimensiuneText(p->valoare);
         bgiout << p->valoare;
         outstreamxy(xtext, ytext + 60);
-
         // STERGERE ECRAN
         delay(6000);
         setfillstyle(SOLID_FILL,BLACK);
@@ -593,15 +616,11 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
                         readimagefile("nod lista cu null.jpg", x, y, x + 250, y + 50);
                     else
                         readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
-                    if (q->valoare == val)
-                        readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
                     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
                     dimensiuneText(q->valoare);
-
                     // AFISARE IN MODUL GRAFIC
                     bgiout << q->valoare;
                     outstreamxy(xtext, ytext);
-
                     // COORDONATELE URMATORULUI NOD
                     x += 200;
                     xtext += 200;
@@ -1209,14 +1228,9 @@ void pop(stiva &S)
         delete S.varf;
         S.varf = varf_nou;
         S.nrElemente--;
-        cout << "S-a eliminat " << element << endl;
         return;
     }
-    else
-    {
-        cout << "Eroare! Nu se poate elimina niciun element. Stiva este goala." << endl;
-        return;
-    }
+    else return;
 }
 
 // --------- Functia eliminare in mod grafic----------
@@ -1365,9 +1379,7 @@ void descriereStiva()
     outtextxy(250, 190, "       In  timpul  operatiilor cu  stiva avem  acces numai  la  elementul din varful");
     outtextxy(250, 220, "stivei. Deoarece operatiile cu elementele stivei se fac la acelasi capat, spunem");
     outtextxy(250, 250, "ca stiva este o structura de date de tip LIFO - Last In First Out.");
-
     readimagefile("stiva descriere.jpg",480,300,890,650);
-
     bool gata = false, buton = false;
     int x,y;
     do
@@ -1400,19 +1412,12 @@ void meniuStive()
     readimagefile("undo.jpg",30,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(0, 10, " Alege functia ");
-    //outtextxy(1230, 10, " Alege functia ");
-    // BUTON 1
-    readimagefile("init stiva.jpg",30, 50, 270, 100);
-    // BUTON 2
-    readimagefile("stiva vida.jpg",30, 120, 270, 170);
-    // BUTON 3
-    readimagefile("golire.jpg",30, 190, 270, 240);
-    // BUTON 4
-    readimagefile("pop.jpg",30, 260, 270, 310);
-    // BUTON 5
-    readimagefile("push.jpg",30, 330, 270, 380);
-    // BUTON 6
-    readimagefile("afis stiva.jpg",30, 400, 270, 450);
+    readimagefile("init stiva.jpg",30, 50, 270, 100); // BUTON 1
+    readimagefile("stiva vida.jpg",30, 120, 270, 170); // BUTON 2
+    readimagefile("golire.jpg",30, 190, 270, 240); // BUTON 3
+    readimagefile("pop.jpg",30, 260, 270, 310); // BUTON 4
+    readimagefile("push.jpg",30, 330, 270, 380); // BUTON 5
+    readimagefile("afis stiva.jpg",30, 400, 270, 450); // BUTON 6
 
     // LINII DE DELIMTARE
     line(300,795,300,0);
@@ -1473,7 +1478,6 @@ void meniuStive()
                                     }
         }
     } while (!gata);
-
     if (buton1 == true)
     {
         initializareStiva(S);
