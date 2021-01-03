@@ -154,7 +154,7 @@ void stergerePrimul(nod *&prim)
     setcolor(WHITE);
 
     // STERGERE PARTE DE ECRAN
-    delay(10000);
+    delay(6000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -179,6 +179,7 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
             p->urm = (p->urm)->urm;
             delete q;
             sters = true;
+            break;
         }
         p = p->urm;
     }
@@ -272,7 +273,7 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(10000);
+    delay(6000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -386,7 +387,6 @@ void meniuStergere()
                     //meniuListeSimpluInlantuite();
                 }
 }
-
 
 int main()
 {

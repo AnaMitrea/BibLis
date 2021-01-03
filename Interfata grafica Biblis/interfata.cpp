@@ -6,6 +6,13 @@ using namespace std;
 
 ifstream fin("citire.in");
 
+/// CE MAI TREBUIE FACUT
+/*
+- implementare functie stergere toate aparitiile
+- finalizare functie inserare dupa un nod dat
+- adaugare conditie de depasire a inaltimii la push(x) in stiva
+*/
+
 // ---------- INITIALIZARE STRUCTURI DE DATE ----------
 struct nod
 {
@@ -725,25 +732,230 @@ void meniuInserare()
 //------------- FUNCTII PENTRU STERGERE --------------
 void stergerePrimul(nod *&prim)
 {
-    nod *p = prim->urm;
+        // ----------- AFISARE ------------
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(LIGHTCYAN);
+    outtextxy(470, 20, " Stergerea primului nod din lista simplu-inlantuita");
+    setcolor(WHITE);
+    delay(800);
+        // AFISAREA INSTRUCTIUNILOR
+    settextstyle(4, HORIZ_DIR, 1);
+    setcolor(LIGHTMAGENTA);
+    bgiout << "nod* p = prim;";
+    outstreamxy(5,410);
+    setcolor(WHITE);
+        // Afisare "*prim"
+    setcolor(LIGHTMAGENTA);
+    bgiout << "*prim      *p";
+    outstreamxy(320,60);
+    setcolor(WHITE);
+        // COORDONATELE PRIMULUI NOD
+    unsigned int x = 320, y = 100;
+    unsigned int xtext = 325, ytext = 115;
+    nod* p = prim;
+    while (p != NULL)
+    {
+        if (x > 1400)
+        {
+            // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
+            x = 320;
+            y += 100;
+            xtext = 325;
+            ytext += 100;
+        }
+        else
+            if (y > 795)
+            {
+                delay(2000);
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(315,45,1520,795);
+                delay(500);
+                settextstyle(4, HORIZ_DIR, 4);
+                setcolor(LIGHTRED);
+                bgiout << "Eroare: Imposibil de afisat!";
+                outstreamxy(590, 300);
+                bgiout << "Prea multe valori in lista.";
+                outstreamxy(600, 340);
+                break;
+            }
+            else
+                if (x <= 1400)  // daca nu iese din ecran
+                {
+                    // AFISAREA NODULUI CORESPUNZATOR
+                    if (p->urm == NULL)
+                        readimagefile("nod lista cu null.jpg", x, y, x + 200, y + 50);
+                    else
+                        readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+                    // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+                    dimensiuneText(p->valoare);
+                    // AFISARE IN MODUL GRAFIC
+                    bgiout << p->valoare;
+                    outstreamxy(xtext, ytext);
+                    // COORDONATELE URMATORULUI NOD
+                    x += 200;
+                    xtext += 200;
+                    p = p->urm;
+                    delay(500);
+                }
+        // STERGERE CE AM SCRIS INAINTE
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(5,430,250,450);
+        delay(500);
+        // RESCRIERE
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "p = p->urm;";
+        outstreamxy(5,430);
+        setcolor(WHITE);
+    }
+
+    // ALGORITM STERGERE PRIMUL NOD
+    p = prim->urm;
     delete prim;
     prim = p;
+    delay(500);
+    setcolor(LIGHTMAGENTA);
+    settextstyle(4, HORIZ_DIR, 1);
+    bgiout << "p = prim->urm;";
+    outstreamxy(5,450);
+    bgiout << "*p";
+    outstreamxy(530,60);
+    delay(500);
+    bgiout << "delete prim;";
+    outstreamxy(5,470);
+    readimagefile("black.jpg",320, 59, 518, 150);
+    delay(500);
+    bgiout << "prim = p;";
+    outstreamxy(5,490);
+    bgiout << "*prim";
+    outstreamxy(600,60);
+    setcolor(WHITE);
+
+    // STERGERE PARTE DE ECRAN
+    delay(6000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(311,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,403,308,795);
 }
 
 void stergerePrimaAparitie(nod *&prim, int element_dat)
 {
+        // ----------- AFISARE ------------
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(LIGHTCYAN);
+    outtextxy(400, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
+    rectangle(370,70,1470,130);
+    delay(300);
     nod *p = prim;
-    while(p != NULL)
+    bool sters = false;
+    while (p->urm != NULL)
     {
-        if(p->valoare == element_dat)
+        if ((p->urm)->valoare == element_dat)
         {
-            nod *q = (p->urm)->urm;
-            delete p->urm;
-            p->urm = q;
-            return;
+            nod *q = p->urm;
+            p->urm = (p->urm)->urm;
+            delete q;
+            sters = true;
+            break;
         }
         p = p->urm;
     }
+     if (prim->valoare == element_dat)
+    {
+        nod *q = prim;
+        prim = prim->urm;
+        delete q;
+        sters = true;
+    }
+    if (sters == true)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "S-au sters valorile de " << element_dat << " din lista.";
+        outstreamxy(640, 90);
+        setcolor(WHITE);
+    }
+    else
+        {
+            setcolor(LIGHTRED);
+            bgiout << "Nu s-a sters niciun element din lista.";
+            outstreamxy(620, 90);
+            setcolor(WHITE);
+        }
+    delay(800);
+        // COORDONATELE PRIMULUI NOD
+    unsigned int x = 320, y = 170;
+    unsigned int xtext = 325, ytext = 185;
+    p = prim;
+    setcolor(LIGHTMAGENTA);
+    settextstyle(4, HORIZ_DIR, 1);
+    bgiout << "nod* p = prim;";
+    outstreamxy(5,410);
+    bgiout << "*prim     *p";
+    outstreamxy(320,145);
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(WHITE);
+    while (p != NULL)
+    {
+        if (x > 1400)
+        {
+            // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
+            x = 320;
+            y += 100;
+            xtext = 325;
+            ytext += 100;
+        }
+        else
+            if (y > 795)
+            {
+                delay(2000);
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(315,45,1520,795);
+                delay(500);
+                settextstyle(4, HORIZ_DIR, 4);
+                setcolor(LIGHTRED);
+                bgiout << "Eroare: Imposibil de afisat!";
+                outstreamxy(590, 300);
+                bgiout << "Prea multe valori in lista.";
+                outstreamxy(600, 340);
+                break;
+            }
+            else
+                if (x <= 1400)  // daca nu iese din ecran
+                {
+                    // AFISAREA NODULUI CORESPUNZATOR
+                    if (p->urm == NULL)
+                        readimagefile("nod lista cu null.jpg", x, y, x + 200, y + 50);
+                    else
+                        readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+                    // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+                    dimensiuneText(p->valoare);
+                    // AFISARE IN MODUL GRAFIC
+                    bgiout << p->valoare;
+                    outstreamxy(xtext, ytext);
+                    // COORDONATELE URMATORULUI NOD
+                    x += 200;
+                    xtext += 200;
+                    p = p->urm;
+                    delay(500);
+                }
+        // STERGERE CE AM SCRIS INAINTE
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(5,430,250,450);
+        delay(500);
+        // RESCRIERE
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "p = p->urm;";
+        outstreamxy(5,430);
+        setcolor(WHITE);
+    }
+    // STERGERE PARTE DE ECRAN
+    delay(6000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(311,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,403,308,795);
 }
 
 void stergereToateAparitiile(nod *&prim, int element_dat)
@@ -773,6 +985,7 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
 {
+    readimagefile("undo.jpg",50,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(10, 10, " Alege functia ");
     outtextxy(30, 50, " de stergere ");
@@ -784,7 +997,6 @@ void meniuStergere()
     readimagefile("stergere toate aparitiile.jpg",10, 300, 300, 380);
     // BUTON 4 - UNDO
     readimagefile("undo.jpg",30,730,250,780);
-
     // LINII DE DELIMTARE
     line(310,795,310,0);
     line(0,400,310,400);
@@ -829,25 +1041,28 @@ void meniuStergere()
 
     if (buton1 == true)
     {
+        creareListaSimpluInlantuita(prim,ultim);
         stergerePrimul(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
+            creareListaSimpluInlantuita(prim,ultim);
             stergerePrimaAparitie(prim, 1);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
+                creareListaSimpluInlantuita(prim,ultim);
                 stergereToateAparitiile(prim, 2);
                 goto jump;  // RESET LA BUTON
             }
             else
                 if (buton4 == true)
                 {
-                    meniuListeSimpluInlantuite();
+                    //meniuListeSimpluInlantuite();
                 }
 }
 
@@ -1322,6 +1537,7 @@ void push(stiva &S, int el)
     }
 }
 
+// CONDITIE DE DEPASIRE A Y-ULUI!!!
 // ------- Functie de inserare in grafica -------
 void adaugareStiva()
 {
@@ -1335,15 +1551,80 @@ void adaugareStiva()
     // ALGORITMUL
     if (!esteVida(S))
     {
-        deseneazaOutline(700 - (S.nrElemente * 45));
+        // DESENARE STIVA
+        deseneazaElemente(S);
+        delay(500);
+        push(S,5);
+        int top = S.varf->valoare;
+        // AFISAREA GRAFICA
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "S.nrElemente++;";
+        outstreamxy(10, 470);
+        delay(500);
+        bgiout << "vf_nou = new nod;";
+        outstreamxy(10, 500);
+        delay(500);
+        deseneazaOutline(700 - S.nrElemente * 45);
+        delay(500);
+        readimagefile("stiva.jpg",730,700 - (S.nrElemente - 1) * 45,970,740 - (S.nrElemente - 1) * 45);
+        delay(500);
+        setcolor(LIGHTMAGENTA);
+        bgiout << "vf_nou->valoare = el;";
+        outstreamxy(10, 530);
+        delay(500);
+        setcolor(WHITE);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << top;
+        outstreamxy(800, 710 - (S.nrElemente - 1) * 45);
+        delay(500);
+        settextstyle(4, HORIZ_DIR, 1);
+        setcolor(LIGHTMAGENTA);
+        bgiout << "vf_nou->urm = S.varf;";
+        outstreamxy(10, 560);
+        delay(500);
+        bgiout << "S.varf = vf_nou;";
+        outstreamxy(10, 590);
+        delay(500);
+        setcolor(WHITE);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << "S-a adaugat " << top << " in varful stivei.";
+        outstreamxy(640, 130);
     }
     else
     {
-        deseneazaOutline(500);
-    }
+        delay(500);
+        deseneazaOutline(400);
+        delay(500);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << "Stiva are 0 elemente.";
+        outstreamxy(390, 110);
+        delay(800);
+        push(S,7);
+        int top = S.varf->valoare;
+        // AFISAREA GRAFICA
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "S.nrElemente = 1;";
+        outstreamxy(10, 470);
+        delay(500);
+        bgiout << "S.varf = new nod;";
+        outstreamxy(10, 500);
+        delay(500);
+        bgiout << "S.varf->valoare = el;";
+        outstreamxy(10, 530);
+        delay(500);
+        bgiout << "S.varf->urm = NULL;";
+        outstreamxy(10, 560);
+        delay(500);
+        setcolor(WHITE);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << "S-a adaugat " << top << " in varful stivei.";
+        outstreamxy(640, 130);
 
+    }
     // STERGERE CE AM SCRIS
-    delay(10000);
+    delay(6000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1353,14 +1634,90 @@ void adaugareStiva()
 // ------- Functie de golire a stivei -------
 void golesteStiva(stiva &S)
 {
+    // TITLU + DREPTUNGHIUL UNDE SE VA SCRIE INFORMATIA - DACA S-A ELIMINAT SAU NU
+    settextstyle(4, HORIZ_DIR, 4);
+    setcolor(LIGHTCYAN);
+    rectangle(370,100,1470,200);
+    outtextxy(720, 20, "Golire stiva");
+    delay(400);
+    outtextxy(960, 20, ".");
+    delay(400);
+    outtextxy(980, 20, ".");
+    delay(400);
+    outtextxy(1000, 20, ".");
+    setcolor(WHITE);
+    delay(1000);
+    // ALGORITMUL DE GOLIRE
+    if(esteVida(S))
+    {
+        delay(500);
+        deseneazaOutline(400);
+        delay(1000);
+        settextstyle(4, HORIZ_DIR, 3);
+        bgiout << "Stiva are 0 elemente.";
+        outstreamxy(390, 110);
+        delay(800);
+        setcolor(LIGHTRED);
+        outtextxy(390, 140, "Eroare! Nu se poate goli stiva.");
+        setcolor(WHITE);
+
+        // STERGERE CE AM SCRIS
+        delay(4000);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(305,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,465,295,725);
+        return;
+    }
+    deseneazaElemente(S);
     while (!esteVida(S))
+    {
+        int top = S.varf->valoare;
+        // DESENARE STIVA
+        delay(500);
         pop(S);
+        delay(500);
+        // AFISARE GRAFICA
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "pop(S);";
+        outstreamxy(10, 470);
+        delay(500);
+        readimagefile("black.jpg", 730, 700 - (S.nrElemente * 45), 970, 740 - (S.nrElemente * 45));
+        delay(500);
+        readimagefile("black.jpg", 10,470,110,495); // stergere "pop(s)"
+        setcolor(WHITE);
+        settextstyle(4, HORIZ_DIR, 3);
+        readimagefile("black.jpg", 371,101,1469,199); // stergere din chenar
+        bgiout << "S-a eliminat " << top << " din varful stivei.";
+        outstreamxy(640, 130);
+        delay(2000);
+    }
+    // STERGERE CE AM SCRIS
+    delay(6000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(305,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,465,295,725);
 }
 
 // ------- Functie de afisare a stivei -------
 void afisareStiva(stiva S)
 {
+    settextstyle(4, HORIZ_DIR, 4);
+    setcolor(LIGHTCYAN);
+    outtextxy(580, 20, "Afisarea elementelor din stiva");
+    setcolor(WHITE);
+    delay(500);
+
     deseneazaElemente(S);
+
+    // STERGERE CE AM SCRIS
+    delay(6000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(305,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,465,295,725);
 }
 
 // ---------- POZA CU LISTA SI DESCRIEREA EI (inainte de functii) ----------
