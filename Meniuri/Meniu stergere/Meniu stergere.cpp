@@ -282,26 +282,122 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
 
 void stergereToateAparitiile(nod *&prim, int element_dat)
 {
+    // ----------- AFISARE ------------
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(LIGHTCYAN);
+    outtextxy(370, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
+    rectangle(370,70,1470,130);
+    delay(300);
+
     nod *p = prim;
-    while(p->urm != NULL)
+    bool sters = false;
+    while (p->urm != NULL)
     {
-        if((p->urm)->valoare == element_dat)
+        if ((p->urm)->valoare == element_dat)
         {
             nod *q = p->urm;
             p->urm = (p->urm)->urm;
             delete q;
+            sters = true;
         }
         else
             p = p->urm;
     }
-    if(prim->valoare == element_dat)
+    if (prim->valoare == element_dat)
     {
         nod *q = prim;
         prim = prim->urm;
         delete q;
+        sters = true;
     }
-    //if(prim == NULL)
-        //fout << "LISTA VIDA";
+    if (sters == true)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "S-au sters valorile de " << element_dat << " din lista.";
+        outstreamxy(640, 90);
+        setcolor(WHITE);
+    }
+    else
+        {
+            setcolor(LIGHTRED);
+            bgiout << "Nu s-a sters niciun element din lista.";
+            outstreamxy(620, 90);
+            setcolor(WHITE);
+        }
+    delay(800);
+        // COORDONATELE PRIMULUI NOD
+    unsigned int x = 320, y = 170;
+    unsigned int xtext = 325, ytext = 185;
+    p = prim;
+    setcolor(LIGHTMAGENTA);
+    settextstyle(4, HORIZ_DIR, 1);
+    bgiout << "nod* p = prim;";
+    outstreamxy(5,410);
+    bgiout << "*prim     *p";
+    outstreamxy(320,145);
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(WHITE);
+    while (p != NULL)
+    {
+        if (x > 1400)
+        {
+            // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
+            x = 320;
+            y += 100;
+            xtext = 325;
+            ytext += 100;
+        }
+        else
+            if (y > 795)
+            {
+                delay(2000);
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(315,45,1520,795);
+                delay(500);
+                settextstyle(4, HORIZ_DIR, 4);
+                setcolor(LIGHTRED);
+                bgiout << "Eroare: Imposibil de afisat!";
+                outstreamxy(590, 300);
+                bgiout << "Prea multe valori in lista.";
+                outstreamxy(600, 340);
+                break;
+            }
+            else
+                if (x <= 1400)  // daca nu iese din ecran
+                {
+                    // AFISAREA NODULUI CORESPUNZATOR
+                    if (p->urm == NULL)
+                        readimagefile("nod lista cu null.jpg", x, y, x + 200, y + 50);
+                    else
+                        readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+                    // DIMENSIUNEA TEXTULUI IN FIECARE NOD
+                    dimensiuneText(p->valoare);
+                    // AFISARE IN MODUL GRAFIC
+                    bgiout << p->valoare;
+                    outstreamxy(xtext, ytext);
+                    // COORDONATELE URMATORULUI NOD
+                    x += 200;
+                    xtext += 200;
+                    p = p->urm;
+                    delay(500);
+                }
+        // STERGERE CE AM SCRIS INAINTE
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(5,430,250,450);
+        delay(500);
+        // RESCRIERE
+        setcolor(LIGHTMAGENTA);
+        settextstyle(4, HORIZ_DIR, 1);
+        bgiout << "p = p->urm;";
+        outstreamxy(5,430);
+        setcolor(WHITE);
+    }
+    // STERGERE PARTE DE ECRAN
+    delay(6000);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(311,0,1520,795);
+    setfillstyle(SOLID_FILL,BLACK);
+    bar(0,403,308,795);
 }
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
