@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<windows.h>
 #include<MMsystem.h>
@@ -5,7 +6,7 @@
 #include <graphics.h>
 #include <queue>
 using namespace std;
-//------------FUNCTII LA COADA-------
+//------------FUNCTII LA COADA-------------
 struct nod_coada
 {
     int element_coada;
@@ -68,9 +69,11 @@ nod_lista_dublu_inlantuita* prim = NULL;    //Declararea listei vida
 //------------FUNCTII UTILIZATE-----------------
 //void meniuPrincipal();
 void fereastra();
+void sunet();
 void dimensiuneText(int element);
 void meniuListeDubluInlantuite();
 void meniuCoada();
+void meniuLD();
 void descriereCoada();
 void meniuCoadaAdevarat();
 void meniuInserareLD();
@@ -109,7 +112,7 @@ void dimensiuneText(int element)
                 settextstyle(3, HORIZ_DIR, 1);
 }
 
-//--------------------------------Crearea listei dublu Inlantuite
+//--------------------------------Crearea listei dublu Inlantuite-----------------------
 void creareListaDubluInlantuita(nod_lista_dublu_inlantuita*& prim,int n,int Valoarea[20])
 {
     for(int i=0;i<n;i++)
@@ -274,8 +277,9 @@ void descriereListaDubluInlantuita()
 
     readimagefile("Exemplu lista dublu inlantuita.jpg",150,300,1250,650);
     //---------BUTON PENTRU PAGINA URMATOARE-----------------
-    readimagefile("pagina urmatoare.jpg",600,650,800,700);
-    bool gata = false, buton = false;
+    readimagefile("pagina urmatoare.jpg",720,650,920,700);
+    readimagefile("inapoi.jpg",480,650,680,700);
+    bool gata = false, inainte = false, inapoi=false;
     int x,y;
     do
     {
@@ -284,19 +288,27 @@ void descriereListaDubluInlantuita()
             clearmouseclick(WM_LBUTTONDOWN);
             x = mousex();
             y = mousey();
-            if(x >= 600 && x <= 800 && y >=650  && y <= 700)
+            if(x >= 720 && x <= 920 && y >=650  && y <= 700)
             {
                 gata = true;
-                buton = true;
+                inainte=true;
             }
+            else if(x >= 480 && x <= 680 && y >=650  && y <= 700)
+                { gata=true;
+                  inapoi = true;
+
+                }
         }
     } while (!gata);
-    if (buton == true)
-    {
-        delay(0);
+      if (inainte == true)
+      {
         cleardevice();
-        return;
-    }
+        meniuListeDubluInlantuite();
+      }
+      else if(inapoi==true)
+      {//cleardevice();
+       //meniuPrincipal();
+      }
     delay(15000);   // 1 sec =  1000 ms
     cleardevice();
 }
@@ -310,45 +322,57 @@ void stergereElementLD(nod_lista_dublu_inlantuita* elem)
     elem->urmator->anterior = elem->anterior;
     delete elem;
 }
+
+// 1 2 3 4 5
+
+
 //stergerea unui element de pe o pozitite data Liste Dublu Inlantuite
 void stergereElementPozitie(nod_lista_dublu_inlantuita* &prim, int pozitie)
-{
+{   nod_lista_dublu_inlantuita *p=prim;
+    //Pozitia introdusa este cea de inceput
     if (pozitie == 0)
     {
         nod_lista_dublu_inlantuita* sters = prim;
         prim = prim->urmator;
         prim->anterior = NULL;
         delete sters;
+
     }
-    else
-    {
-        nod_lista_dublu_inlantuita* predecesor = cautarePozitieLD(prim, pozitie);
-        stergereElementLD(predecesor);
-    }
+    //else if(prim->urmator == NULL ){nod_lista_dublu_inlantuita* nodu=prim;
+       //                             stergereElementLD(nodu);
+          //                         }
+        else {
+                nod_lista_dublu_inlantuita* predecesor = cautarePozitieLD(prim, pozitie);
+                stergereElementLD(predecesor);
+             }
+
+
 }
 //Stergere element dupa o valoare
 void stergereElementValoare(nod_lista_dublu_inlantuita* &prim, int valoare)
-{
+{   nod_lista_dublu_inlantuita *p=prim;
     //In cazul in care elementul vizat este capul listei noastre
-    if(prim->element == valoare)
+    if(p->element == valoare)
     {
-        nod_lista_dublu_inlantuita* sters = prim;
-        prim = prim->urmator;
-        prim->anterior = NULL;
+        nod_lista_dublu_inlantuita* sters = p;
+        p = p->urmator;
+        p->anterior = NULL;
         delete sters;
         return;
     }
     //Parcurgem lista si cautam elementul cerut
-    nod_lista_dublu_inlantuita* elem = prim;
+    nod_lista_dublu_inlantuita* elem = p;
     while (elem->urmator != NULL && elem->urmator->element != valoare)
         elem = elem->urmator;
     //Daca am gasit nodul, il stergem
+    if (elem->urmator != NULL)
+        stergereElementLD(elem->urmator);
+    if(elem->urmator==NULL&&elem->element==valoare)
         stergereElementLD(elem);
-
 
 }
 
-//-----------------MENIU PENTRU STERGEREA IN LISTE DUBLU INLANTUITE-----
+//-----------------MENIU PENTRU STERGEREA IN LISTE DUBLU INLANTUITE--------
 void meniuStergereLD()
 {    int Valoarea[20], n, i;
     char afisare[100], vectText[100], numar[100];
@@ -382,8 +406,6 @@ void meniuStergereLD()
     jump:
     cleardevice();
     afisareListaDubluInlantuita(prim);
-
-
     readimagefile("inapoi.jpg",1100,310,1350,390);
     settextstyle(3, HORIZ_DIR, 4);
     outtextxy(1100, 10, " Alege functia ");
@@ -436,10 +458,11 @@ void meniuStergereLD()
 
         //Functia de citire a textului in mod grafic in sirul afisare
         citesteSir("numarul: ", afisare, 1110, 470, false);
-
         int valoare= atoi(afisare);  // conversie ascii -> int din sirul afisare
         if(cautareValoareLD(prim,valoare)->element==valoare)
-        {  stergereElementValoare(prim,valoare);
+        {  // nod_lista_dublu_inlantuita *nodulet=cautareValoareLD(prim,valoare);
+           //stergereElementLD(nodulet);
+            stergereElementValoare(prim,valoare);
            goto jump;  // RESET LA BUTON
         }
           else {Beep(1000,100);
@@ -448,7 +471,6 @@ void meniuStergereLD()
                 delay(5000);
                 goto jump;
                }
-
     }
     else
         if (buton2 == true)
@@ -461,14 +483,16 @@ void meniuStergereLD()
 
             int pozitie= atoi(afisare);  // conversie ascii -> int din sirul afisare
             if(cautarePozitieLD(prim,pozitie)!=NULL)
-              { stergereElementPozitie(prim, pozitie);
+              { //  nod_lista_dublu_inlantuita *nodulet=cautarePozitieLD(prim,pozitie);
+                 // stergereElementLD(nodulet);
+                  stergereElementPozitie(prim, pozitie);
                 goto jump;  // RESET LA BUTON
               }
               else {Beep(1000,100);
-                  outtextxy(1100,500,"Nodul introdus");
-                  outtextxy(1100,530,"  nu exista");
-                  delay(5000);
-                  goto jump; // RESET LA BUTON
+                    outtextxy(1100,500,"Nodul introdus");
+                    outtextxy(1100,530,"  nu exista");
+                    delay(5000);
+                    goto jump; // RESET LA BUTON
                    }
         }
             else
@@ -482,26 +506,27 @@ void meniuStergereLD()
 
 //Cautarea unui element dupa o valoare data LD
 nod_lista_dublu_inlantuita* cautareValoareLD(nod_lista_dublu_inlantuita* prim, int valoare)
-{
-    while (prim != NULL && prim->element != valoare)
-        prim = prim->urmator;
-    return prim;
+{   nod_lista_dublu_inlantuita *p=prim;
+    while (p != NULL && p->element != valoare)
+        p = p->urmator;
+    return p;
+
 }
 //Cautarea unui element dupa o pozitie data LD
 
 nod_lista_dublu_inlantuita* cautarePozitieLD(nod_lista_dublu_inlantuita* prim, int pozitie)
-{
+{   nod_lista_dublu_inlantuita *p=prim;
     int i = 0;  //Pozitia curenta
     //Parcurgem lista pana la pozitia curenta, sau
     //pana ajungem la ultimul element al listei
-    while (prim != NULL && i < pozitie)
+    while (p != NULL && i < pozitie)
     {
-        prim = prim->urmator;
+        p = p->urmator;
         i++;
     }
     //In cazul in care am gasit pozitia ceruta, o returnam
     if (i == pozitie)
-        return prim;
+        return p;
     else
         return NULL;
 }
@@ -524,10 +549,10 @@ void afisareListaDubluInlantuita_poz_val(nod_lista_dublu_inlantuita* prim,nod_li
         {
             // AFISAREA NODULUI CORESPUNZATOR
             if (p->urmator == NULL&&p->anterior == NULL)
-                 {if(p==q)readimagefile("Element cautat singur.jpg", x, y-10, x + 150, y + 60);
+                 {if(p->element==q->element)readimagefile("Element cautat singur.jpg", x, y-10, x + 150, y + 60);
                       else readimagefile("nod singur lista dublu inlantuita.jpg", x, y, x + 150, y + 60);
                  }
-                 else { if(p->anterior == NULL) {if(p==q)
+                 else { if(p->anterior == NULL) {if(p->element==q->element)
                                                   {readimagefile("Element cautat primul.jpg", x, y-10, x + 150, y + 60);
                                                    readimagefile("sageti.jpg", x+150, y, x + 200, y + 60);
                                                   }
@@ -536,9 +561,9 @@ void afisareListaDubluInlantuita_poz_val(nod_lista_dublu_inlantuita* prim,nod_li
                                                       }
                                                 }
                         else {if(p->urmator == NULL)
-                                {if(p==q)readimagefile("Element cautat ultimul.jpg", x, y-10, x + 150, y + 60);
+                                {if(p->element==q->element)readimagefile("Element cautat ultimul.jpg", x, y-10, x + 150, y + 60);
                                   else readimagefile("nod sfarsit lista dublu inlantuita.jpg", x, y, x + 150, y + 60);}
-                              else {if(p==q){readimagefile("Element cautat interior.jpg", x, y-10, x + 150, y + 60);
+                              else {if(p->element==q->element){readimagefile("Element cautat interior.jpg", x, y-10, x + 150, y + 60);
                                                  readimagefile("sageti.jpg", x+150, y, x + 200, y + 60);}
                                     else {readimagefile("nod mijloc lista dublu inlantuita.jpg", x, y, x + 150, y + 60);
                                           readimagefile("sageti.jpg", x+150, y, x + 200, y + 60);}
@@ -661,7 +686,8 @@ void meniuCautareLD()
               afisareListaDubluInlantuita_poz_val(prim,cautarePozitieLD(prim,valoare));
               goto here;  // RESET LA BUTON
            }
-          else {Beep(1000,100);
+          else
+              {Beep(1000,100);
                 outtextxy(1100,500,"Nodul introdus");
                 outtextxy(1100,530,"  nu exista");
                 delay(5000);
@@ -846,9 +872,13 @@ void meniuInserareLD()
                 }
 }
 //-----------------MENIU PENTRU LISTE DUBLU INLANTUITE--------------------
+void meniuLD()
+{ descriereListaDubluInlantuita();
+  PlaySound(TEXT("song.wav"),NULL,SND_SYNC);
+  meniuListeDubluInlantuite();
+}
 void meniuListeDubluInlantuite()
 {
-    descriereListaDubluInlantuita();
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(400, 50, " Alege functia pentru listele dublu inlantuite ");
 
@@ -919,7 +949,7 @@ void meniuListeDubluInlantuite()
                     if (inapoi == true)
                             {
                                 cleardevice();
-                               // meniuPrincipal();
+                                descriereListaDubluInlantuita();
                             }
 }
 //------------Meniu principal------------
@@ -1024,11 +1054,11 @@ void afisareCoada(nod_coada* fata_cozii)
 
             // AFISARE IN MODUL GRAFIC
             bgiout << p->element_coada;
-            outstreamxy(xtext+20, ytext+30);
+            outstreamxy(xtext+25, ytext+40);
 
             // COORDONATELE URMATORULUI NOD
-            x += 200;
-            xtext += 200;
+            x += 102;
+            xtext += 102;
 
             p = p->urmatorul_din_coada;
             delay(500);
@@ -1179,7 +1209,7 @@ void meniuCoadaAdevarat()
          outtextxy(600,620," sa adaugati? " );
 
          //Functia de citire a textului in mod grafic in sirul afisare
-         citesteSir(" catel ", afisare, 600, 640 , false);
+         citesteSir(" catel nr. ", afisare, 600, 640 , false);
 
          int valoare= atoi(afisare);  // conversie ascii -> int din sirul afisare
          push(fata_cozii, spatele_cozii, valoare);
@@ -1222,17 +1252,15 @@ void cleanup()
 void interfataGrafica()
 {
     fereastra();
-    meniuCoada();
-    //meniuListeDubluInlantuite();
+
+    //meniuCoada();
+    meniuLD();
     cleanup();
 }
- void sunet()
-{
-        PlaySound(TEXT("song.wav"),NULL,SND_SYNC);
-}
+
+
 int main()
 {
     interfataGrafica();
-    sunet();
     return 0;
 }
