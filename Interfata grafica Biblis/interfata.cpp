@@ -498,7 +498,7 @@ void inserareInceput(nod*& prim)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -646,7 +646,7 @@ void inserareSfarsit(nod*& prim)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -803,8 +803,9 @@ void inserareDupaNod(nod*& prim)
         settextstyle(4, HORIZ_DIR, 3);
         setcolor(LIGHTRED);
         outtextxy(545, 55, " Nu s-a inserat nodul in lista simplu-inlantuita!");
+        setcolor(WHITE);
     }
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -998,7 +999,7 @@ void stergerePrimul(nod *&prim)
     setcolor(WHITE);
 
     // STERGERE PARTE DE ECRAN
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1117,7 +1118,7 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1237,7 +1238,7 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1392,7 +1393,7 @@ void afisareListaSimpluInlantuita(nod *prim)
         meniuListeSimpluInlantuite();
         goto jump;
     }
-    delay(10000);
+    delay(2500);
     cleardevice();
 }
 
