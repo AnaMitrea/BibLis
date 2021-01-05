@@ -1,15 +1,17 @@
-#include <iostream>
-#include <fstream>
+#include<iostream>
+#include<windows.h>
+#include<MMsystem.h>
 #include <graphics.h>
-#include <winbgim.h>
+#include <queue>
+#include <fstream>
 using namespace std;
 
 ifstream fin("citire.in");
 
 /// CE MAI TREBUIE FACUT
 /*
-- implementare citire din fereastra grafica
-- adaugare conditie de depasire a inaltimii la push(x) in stiva
+- implementare citire din fereastra grafica la meniu stergere
+- adaugare sunete PlaySound(TEXT("yourMusicFile.wav"), NULL, SND_SYNC);
 */
 
 // ---------- INITIALIZARE STRUCTURI DE DATE ----------
@@ -24,7 +26,7 @@ struct stiva
     struct nod* varf;
     unsigned int nrElemente;
 };
-nod *prim, *ultim;
+nod *prim;
 stiva S;
 
 // ------------- DECLARARE FUNCTII INTERFATA------------
@@ -34,15 +36,19 @@ void meniuPrincipal();
 void cleanup();
 void interfataGrafica();
 
-// ------------- DECLARARE FUNCTII LA LISTE SIMPLU INL ------------
+// ------------- DECLARARE FUNCTII LA LISTE SIMPLU INLANTUITE ------------
 void meniuListeSimpluInlantuite();
-void creareListaSimpluInlantuita(nod*& prim, nod*& ultim);
+void graficaCitireListeSimplu();
+void creareListaSimpluInlantuita(nod*& prim, int n, int Valoarea[20]);
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere);
+void citireListeSimpluInlantuite();
 void descriereListaSimplu();
 void listaVida(nod* prim);
 void lungimeLista(nod* prim);
-void inserareInceput(nod*& prim, int val);
-void inserareSfarsit(nod*& prim, int val);
-void inserareDupaNod(nod*& prim, int element_dat, int val);
+void inserareInceput(nod*& prim);
+void adaugareSfarsit(nod*& prim, int val);
+void inserareSfarsit(nod*& prim);
+void inserareDupaNod(nod*& prim, int element_dat);
 void meniuInserare();
 void stergerePrimul(nod*& prim);
 void stergerePrimaAparitie(nod*& prim, int element_dat);
@@ -52,6 +58,7 @@ void afisareListaSimpluInlantuita(nod *prim);
 
 // ------------- DECLARARE FUNCTII LA STIVE ------------
 void meniuStive();
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere);
 void descriereStiva();
 void deseneazaOutline(int y);
 void deseneazaElemente(stiva S);
@@ -85,22 +92,121 @@ void dimensiuneText(int element)
 }
 
 //------------- FUNCTIE CREARE LISTA --------------
-void creareListaSimpluInlantuita(nod*& prim, nod*& ultim)
+void creareListaSimpluInlantuita(nod*& prim,int n,int Valoarea[20])
 {
-    nod* p;
-    int x;
-    prim = ultim = NULL;
-    while (fin >> x)
+    for(int i = 0; i < n; i++)
+        adaugareSfarsit(prim,Valoarea[i]);
+}
+
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere)
+{
+    strcpy(afisare, "");
+    char aux[100];
+    char key[2];  // sirul in care se pastreaza tasta pe care o apasam la citire
+    char tasta;   // tasta pe care se apasa
+    char text2[100];
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    setcolor(WHITE);
+    strcpy(text2, text);
+    strcat(text2, aux);
+    outtextxy(x, y, text2);
+    do
     {
-        p = new nod;
-        p->valoare = x;
-        p->urm = NULL;
-        if (prim == NULL)
-            prim = p;
+        tasta = getch();
+        if (tasta == 8) // backspace
+            if (strlen(afisare) > 0)
+            {
+                setcolor(BLACK);
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                afisare[strlen(afisare) - 1] = '\0';
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                setcolor(WHITE);
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+            }
+            else
+                Beep(1000,100);
         else
-            ultim->urm = p;
-        ultim = p;
+        {
+            key[0] = tasta;
+            key[1] = '\0';
+            strcat(afisare, key);
+            strcpy(aux, afisare);
+            strcat(aux, "_");
+            setcolor(WHITE);
+            strcpy(text2, text);
+            strcat(text2, aux);
+            outtextxy(x, y, text2);
+        }
+    } while (tasta!=13);
+
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    strcpy(text2, text);
+    strcat(text2, aux);
+
+    setcolor(BLACK);
+    outtextxy(x,y,text2);
+
+    if (!stergere)
+    {
+        strcpy(text2,text);
+        strcat(text2,afisare);
+        setcolor(WHITE);
+        outtextxy(x,y,text2);
     }
+}
+
+void citireListeSimpluInlantuite()
+{
+    int Valoarea[20], n, i;
+    char afisare[100], vectText[100], numar[100];
+    // Colorare text
+    setcolor(YELLOW);
+    setbkcolor(BLACK);
+    settextstyle(3, HORIZ_DIR, 3);
+    outtextxy(20,10,"Va rugam introduceti numerele din lista");
+    //Functia de citire a textului in mod grafic in sirul afisare
+    citesteSir("Cate numere doriti sa contina lista? ", afisare, 20, 40, false);
+    int nrElemente = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    n = nrElemente;
+    for (i = 0; i < n; i++)
+    {
+        itoa(i,numar,10); // conversie int -> ascii in sirul "numar"
+        strcpy(vectText,"Nodul ");
+        strcat(vectText,numar);
+        strcat(vectText," are valoarea egala cu: ");
+
+        citesteSir(vectText,afisare, 30, 70 + 30 * i, false); // citire valoare corespunzatoare in vector pe poz i.
+
+        Valoarea[i] = atoi(afisare); // valoarea lui Valoarea[i] in vector
+
+       // evidentiaza(Valoarea[i], i, 1, LIGHTGREEN);
+    }
+    creareListaSimpluInlantuita(prim,n,Valoarea);
+    cleardevice();
+}
+
+void graficaCitireListeSimplu()
+{
+    citireListeSimpluInlantuite();
+    afisareListaSimpluInlantuita(prim);
 }
 
 //------------- FUNCTIE VERIFICARE DACA ESTE LISTA VIDA --------------
@@ -257,13 +363,21 @@ void lungimeLista(nod *prim)
 }
 
 //------------- FUNCTII PENTRU INSERARE --------------
-void inserareInceput(nod*& prim, int val)
+void inserareInceput(nod*& prim)
 {
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(440, 20, " Inserarea unui nod la inceputul unei liste simplu-inlantuite");
     setcolor(WHITE);
     delay(800);
+
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,630,"    sa adaugati? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int val = atoi(afisare);  // conversie ascii -> int din sirul afisare
 
     // INSERARE
     nod *p = new nod;
@@ -273,10 +387,10 @@ void inserareInceput(nod*& prim, int val)
     // AFISAREA INSERARII
     setcolor(LIGHTMAGENTA);
     settextstyle(4, HORIZ_DIR, 1);
-    bgiout << "nod *p = new nod;";
+    bgiout << "nod *p = new nod";
     outstreamxy(5,410);
     delay(500);
-    bgiout << "p->info = val. dorita;";
+    bgiout << "p->info = val. dorita";
     outstreamxy(5,430);
     delay(500);
     bgiout << "p->urm = prim;";
@@ -306,6 +420,7 @@ void inserareInceput(nod*& prim, int val)
     outstreamxy(xtext, ytext);
     // AFISAREA INSTRUCTIUNILOR
     setcolor(LIGHTMAGENTA);
+    settextstyle(4, HORIZ_DIR, 1);
     delay(500);
     bgiout << "prim = p;";
     outstreamxy(5,470);
@@ -383,20 +498,49 @@ void inserareInceput(nod*& prim, int val)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,727);
+    bar(0,403,308,589);
+    bar(0,592,308,729);
 }
 
-void inserareSfarsit(nod*& prim, int val)
+// functie in memorie
+void adaugareSfarsit(nod*& prim, int val)
+{
+    nod *p = new nod;
+    p->valoare = val;
+    p->urm = NULL;
+    if (prim == NULL)
+        prim = p;
+    else
+    {
+        nod *p_nou = prim;
+        while (p_nou->urm != NULL)
+        {
+            p_nou = p_nou->urm;
+        }
+        p_nou->urm = p;
+    }
+}
+
+void inserareSfarsit(nod*& prim)
 {
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(440, 20, " Inserarea unui nod la sfarsitul unei liste simplu-inlantuite");
     setcolor(WHITE);
     delay(800);
+
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,630,"    sa adaugati? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int val = atoi(afisare);  // conversie ascii -> int din sirul afisare
+
     // NOD NOU
     nod *p = new nod;
     p->valoare = val;
@@ -502,21 +646,32 @@ void inserareSfarsit(nod*& prim, int val)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,727);
+    bar(0,403,308,589);
+    bar(0,592,308,729);
 }
 
-// NU ESTE COMPLETA
-void inserareDupaNod(nod*& prim, int element_dat, int val)
+void inserareDupaNod(nod*& prim)
 {
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(580, 20, " Inserarea unui nod dupa un element dat");
     setcolor(WHITE);
     delay(800);
+
+    // CITIREA ELEMENTELOR
+    settextstyle(4, HORIZ_DIR, 2);
+    char afisare1[100], afisare2[100];;
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,620,"    sa adaugati? " );
+    citesteSir(" Elementul: ", afisare1, 5, 640, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int val = atoi(afisare1);  // conversie ascii -> int din sirul afisare
+    outtextxy(5,660," Dupa care element?");
+    citesteSir(" Elementul: ", afisare2, 5, 680, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int el = atoi(afisare2);  // conversie ascii -> int din sirul afisare
 
     // NOD NOU
     nod *p = new nod;
@@ -555,6 +710,7 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         outstreamxy(560, 70);
         setcolor(LIGHTMAGENTA);
         delay(600);
+
         // STERGERE CE AM SCRIS INAINTE DE IF
         setfillstyle(SOLID_FILL,BLACK);
         bar(5,470,250,490);
@@ -564,24 +720,27 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         bgiout << "*prim";
         outstreamxy(360,120);
         setcolor(WHITE);
+
         // AFISARE IMAGINE NOD
         readimagefile("nod inserat lista cu null.jpg", x, y + 50, x + 300, y + 110);
         settextstyle(4, HORIZ_DIR, 4);
+
         // AFISARE VAL NOD
         dimensiuneText(p->valoare);
         bgiout << p->valoare;
         outstreamxy(xtext, ytext + 60);
+
         // STERGERE ECRAN
         delay(6000);
         setfillstyle(SOLID_FILL,BLACK);
         bar(311,0,1520,795);
         setfillstyle(SOLID_FILL,BLACK);
-        bar(0,403,308,727);
+        bar(0,403,308,795);
         return;
     }
     while (q != NULL)
     {
-        if (q->valoare == element_dat)
+        if (q->valoare == el)
         {
             p->urm = q->urm;
             q->urm = p;
@@ -622,11 +781,15 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
                         readimagefile("nod lista cu null.jpg", x, y, x + 250, y + 50);
                     else
                         readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
+                    if (q->valoare == val)
+                        readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
                     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
                     dimensiuneText(q->valoare);
+
                     // AFISARE IN MODUL GRAFIC
                     bgiout << q->valoare;
                     outstreamxy(xtext, ytext);
+
                     // COORDONATELE URMATORULUI NOD
                     x += 200;
                     xtext += 200;
@@ -640,16 +803,16 @@ void inserareDupaNod(nod*& prim, int element_dat, int val)
         settextstyle(4, HORIZ_DIR, 3);
         setcolor(LIGHTRED);
         outtextxy(545, 55, " Nu s-a inserat nodul in lista simplu-inlantuita!");
-        setcolor(WHITE);
     }
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,727);
+    bar(0,403,308,589);
+    bar(0,592,308,729);
 }
 
-// ---------- MENIU FUNCTII INSERARE LA LISTE SIMPLU-INLANTUITE ----------
+// MENIU INSERARE FUNCTII
 void meniuInserare()
 {
     readimagefile("undo.jpg",30,730,250,780);
@@ -665,6 +828,7 @@ void meniuInserare()
     // LINII DE DELIMTARE
     line(310,795,310,0);
     line(0,400,310,400);
+    line(0,590,310,590);
 
     // LABEL PENTRU A RESETA BUTONUL
     jump:
@@ -706,19 +870,19 @@ void meniuInserare()
 
     if (buton1 == true)
     {
-        inserareInceput(prim,1000);
+        inserareInceput(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
-            inserareSfarsit(prim,1);
+            inserareSfarsit(prim);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
-                inserareDupaNod(prim, 2, 3);
+                inserareDupaNod(prim);
                 goto jump;  // RESET LA BUTON
             }
             else
@@ -744,10 +908,13 @@ void stergerePrimul(nod *&prim)
     outstreamxy(5,410);
     setcolor(WHITE);
         // Afisare "*prim"
-    setcolor(LIGHTMAGENTA);
-    bgiout << "*prim      *p";
-    outstreamxy(320,60);
-    setcolor(WHITE);
+    if (prim != NULL)
+    {
+        setcolor(LIGHTMAGENTA);
+        bgiout << "*prim      *p";
+        outstreamxy(320,60);
+        setcolor(WHITE);
+    }
         // COORDONATELE PRIMULUI NOD
     unsigned int x = 320, y = 100;
     unsigned int xtext = 325, ytext = 115;
@@ -831,7 +998,7 @@ void stergerePrimul(nod *&prim)
     setcolor(WHITE);
 
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -950,7 +1117,7 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1070,7 +1237,7 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -1095,6 +1262,7 @@ void meniuStergere()
     // LINII DE DELIMTARE
     line(310,795,310,0);
     line(0,400,310,400);
+    line(0,590,310,590);
 
     // LABEL PENTRU A RESETA BUTONUL
     jump:
@@ -1136,21 +1304,18 @@ void meniuStergere()
 
     if (buton1 == true)
     {
-        creareListaSimpluInlantuita(prim,ultim);
         stergerePrimul(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
-            creareListaSimpluInlantuita(prim,ultim);
             stergerePrimaAparitie(prim, 1);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
-                creareListaSimpluInlantuita(prim,ultim);
                 stergereToateAparitiile(prim, 2);
                 goto jump;  // RESET LA BUTON
             }
@@ -1164,6 +1329,7 @@ void meniuStergere()
 // ---------- AFISAREA UNEI LISTE SIMPLU-INLANTUITE ----------
 void afisareListaSimpluInlantuita(nod *prim)
 {
+    readimagefile("undo.jpg",30,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(350, 100, " Afisarea unei liste simplu-inlantuite");
 
@@ -1204,7 +1370,29 @@ void afisareListaSimpluInlantuita(nod *prim)
             ytext += 100;
         }
     }
-    delay(3000);
+    jump:
+    bool gata = false, buton = false;
+    int xx,yy;
+    do
+    {
+        if(ismouseclick(WM_LBUTTONDOWN))
+        {
+            clearmouseclick(WM_LBUTTONDOWN);
+            xx = mousex();
+            yy = mousey();
+            if(xx >= 30 && xx <= 250 && yy >= 730 && yy <= 780)
+            {
+                gata = true;
+                buton = true;
+            }
+        }
+    } while (!gata);
+    if (buton == true)
+    {
+        meniuListeSimpluInlantuite();
+        goto jump;
+    }
+    delay(10000);
     cleardevice();
 }
 
@@ -1354,30 +1542,26 @@ void meniuListeSimpluInlantuite()
 
     if (buton1 == true)  // Creare lista
     {
-        creareListaSimpluInlantuita(prim, ultim);
+        graficaCitireListeSimplu();
     }
     else
         if (buton2 == true)  // Verificare daca lista este vida
         {
-            creareListaSimpluInlantuita(prim, ultim);
             listaVida(prim);
         }
         else
             if (buton3 == true)  // Functie pt aflarea lungimii listei
             {
-                creareListaSimpluInlantuita(prim, ultim);
                 lungimeLista(prim);
             }
             else
                 if (buton4 == true)  // Functii la INSERARE element in liste
                 {
-                    creareListaSimpluInlantuita(prim, ultim);
                     meniuInserare();
                 }
                 else
                     if (buton5 == true)  // Functii la STERGERE element din liste
                     {
-                        creareListaSimpluInlantuita(prim, ultim);
                         meniuStergere();
                     }
                     else
@@ -1393,6 +1577,7 @@ void meniuListeSimpluInlantuite()
                             }
 }
 
+// ----------------  STIVE  -------------
 void deseneazaOutline(int y)
 {
     setcolor(YELLOW);
@@ -1644,7 +1829,6 @@ void push(stiva &S, int el)
     }
 }
 
-// CONDITIE DE DEPASIRE A Y-ULUI!!!
 // ------- Functie de inserare in grafica -------
 void adaugareStiva()
 {
@@ -1653,15 +1837,23 @@ void adaugareStiva()
     setcolor(LIGHTCYAN);
     outtextxy(600, 20, "Adaugare element in stiva");
     rectangle(370,100,1470,200);
+    rectangle(1150,500,1470,700);  // partea de citire
     setcolor(WHITE);
     delay(1000);
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(1160,510," Ce element doriti");
+    outtextxy(1160,540,"    sa adaugati? " );
+    citesteSir(" Elementul: ", afisare, 1155, 600, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int val = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    push(S,val);
     // ALGORITMUL
     if (!esteVida(S))
     {
         // DESENARE STIVA
         deseneazaElemente(S);
         delay(500);
-        push(S,5);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
@@ -1707,7 +1899,6 @@ void adaugareStiva()
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(390, 110);
         delay(800);
-        push(S,7);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
@@ -1731,7 +1922,7 @@ void adaugareStiva()
 
     }
     // STERGERE CE AM SCRIS
-    delay(6000);
+    delay(5000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -2086,10 +2277,6 @@ void interfataGrafica()
 
 int main()
 {
-    push(S,4);
-    push(S,5);
-    push(S,20);
     interfataGrafica();
-
     return 0;
 }

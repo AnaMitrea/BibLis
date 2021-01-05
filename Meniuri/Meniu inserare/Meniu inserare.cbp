@@ -33,7 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Meniu Inserare.cpp" />
-		<Unit filename="liste.in" />
 		<Extensions>
 			<code_completion />
 			<envvars />

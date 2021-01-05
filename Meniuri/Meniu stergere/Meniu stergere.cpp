@@ -1,10 +1,12 @@
-#include <iostream>
-#include <fstream>
+#include<iostream>
+#include<windows.h>
+#include<MMsystem.h>
 #include <graphics.h>
-#include <winbgim.h>
+#include <queue>
+#include <fstream>
 using namespace std;
 
-ifstream fin("citire liste.in");
+ifstream fin("citire.in");
 
 struct nod
 {
@@ -15,9 +17,10 @@ nod *prim, *ultim;
 
 void dimensiuneText(int element);
 void creareListaSimpluInlantuita(nod*& prim, nod*& ultim);
+void adaugareSfarsit(nod*& prim, int val);
 void stergerePrimul(nod*& prim);
-void stergerePrimaAparitie(nod*& prim, int element_dat);
-void stergereToateAparitiile(nod*& prim, int element_dat);
+void stergerePrimaAparitie(nod*& prim);
+void stergereToateAparitiile(nod*& prim);
 void meniuStergere();
 
 void dimensiuneText(int element)
@@ -33,21 +36,133 @@ void dimensiuneText(int element)
 }
 
 //------------- FUNCTIE CREARE LISTA --------------
-void creareListaSimpluInlantuita(nod*& prim, nod*& ultim)
+void creareListaSimpluInlantuita(nod*& prim,int n,int Valoarea[20])
 {
-    nod* p;
-    int x;
-    prim = ultim = NULL;
-    while (fin >> x)
+    for(int i = 0; i < n; i++)
+        adaugareSfarsit(prim,Valoarea[i]);
+}
+
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere)
+{
+    strcpy(afisare, "");
+    char aux[100];
+    char key[2];  // sirul in care se pastreaza tasta pe care o apasam la citire
+    char tasta;   // tasta pe care se apasa
+    char text2[100];
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    setcolor(WHITE);
+    strcpy(text2, text);
+    strcat(text2, aux);
+    outtextxy(x, y, text2);
+    do
     {
-        p = new nod;
-        p->valoare = x;
-        p->urm = NULL;
-        if (prim == NULL)
-            prim = p;
+        tasta = getch();
+        if (tasta == 8) // backspace
+            if (strlen(afisare) > 0)
+            {
+                setcolor(BLACK);
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                afisare[strlen(afisare) - 1] = '\0';
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                setcolor(WHITE);
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+            }
+            else
+                Beep(1000,100);
         else
-            ultim->urm = p;
-        ultim = p;
+        {
+            key[0] = tasta;
+            key[1] = '\0';
+            strcat(afisare, key);
+            strcpy(aux, afisare);
+            strcat(aux, "_");
+            setcolor(WHITE);
+            strcpy(text2, text);
+            strcat(text2, aux);
+            outtextxy(x, y, text2);
+        }
+    } while (tasta!=13);
+
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    strcpy(text2, text);
+    strcat(text2, aux);
+
+    setcolor(BLACK);
+    outtextxy(x,y,text2);
+
+    if (!stergere)
+    {
+        strcpy(text2,text);
+        strcat(text2,afisare);
+        setcolor(WHITE);
+        outtextxy(x,y,text2);
+    }
+}
+
+void citireListeSimpluInlantuite()
+{
+    int Valoarea[20], n, i;
+    char afisare[100], vectText[100], numar[100];
+    // Colorare text
+    setcolor(YELLOW);
+    setbkcolor(BLACK);
+    settextstyle(3, HORIZ_DIR, 3);
+    outtextxy(20,10,"Va rugam introduceti numerele din lista");
+    //Functia de citire a textului in mod grafic in sirul afisare
+    citesteSir("Cate numere doriti sa contina lista? ", afisare, 20, 40, false);
+    int nrElemente = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    n = nrElemente;
+    for (i = 0; i < n; i++)
+    {
+        itoa(i,numar,10); // conversie int -> ascii in sirul "numar"
+        strcpy(vectText,"Nodul ");
+        strcat(vectText,numar);
+        strcat(vectText," are valoarea egala cu: ");
+
+        citesteSir(vectText,afisare, 30, 70 + 30 * i, false); // citire valoare corespunzatoare in vector pe poz i.
+
+        Valoarea[i] = atoi(afisare); // valoarea lui Valoarea[i] in vector
+
+       // evidentiaza(Valoarea[i], i, 1, LIGHTGREEN);
+    }
+    creareListaSimpluInlantuita(prim,n,Valoarea);
+    cleardevice();
+}
+
+// functie in memorie
+void adaugareSfarsit(nod*& prim, int val)
+{
+    nod *p = new nod;
+    p->valoare = val;
+    p->urm = NULL;
+    if (prim == NULL)
+        prim = p;
+    else
+    {
+        nod *p_nou = prim;
+        while (p_nou->urm != NULL)
+        {
+            p_nou = p_nou->urm;
+        }
+        p_nou->urm = p;
     }
 }
 
@@ -67,10 +182,13 @@ void stergerePrimul(nod *&prim)
     outstreamxy(5,410);
     setcolor(WHITE);
         // Afisare "*prim"
-    setcolor(LIGHTMAGENTA);
-    bgiout << "*prim      *p";
-    outstreamxy(320,60);
-    setcolor(WHITE);
+    if (prim != NULL)
+    {
+        setcolor(LIGHTMAGENTA);
+        bgiout << "*prim      *p";
+        outstreamxy(320,60);
+        setcolor(WHITE);
+    }
         // COORDONATELE PRIMULUI NOD
     unsigned int x = 320, y = 100;
     unsigned int xtext = 325, ytext = 115;
@@ -161,14 +279,23 @@ void stergerePrimul(nod *&prim)
     bar(0,403,308,795);
 }
 
-void stergerePrimaAparitie(nod *&prim, int element_dat)
+void stergerePrimaAparitie(nod *&prim)
 {
         // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(400, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
+
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,620,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 640, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
     delay(300);
+
     nod *p = prim;
     bool sters = false;
     while (p->urm != NULL)
@@ -280,13 +407,21 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
     bar(0,403,308,795);
 }
 
-void stergereToateAparitiile(nod *&prim, int element_dat)
+void stergereToateAparitiile(nod *&prim)
 {
     // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(370, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
+
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,620,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 640, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
     delay(300);
 
     nod *p = prim;
@@ -459,22 +594,19 @@ void meniuStergere()
 
     if (buton1 == true)
     {
-        creareListaSimpluInlantuita(prim,ultim);
         stergerePrimul(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
-            creareListaSimpluInlantuita(prim,ultim);
-            stergerePrimaAparitie(prim, 1);
+            stergerePrimaAparitie(prim);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
-                creareListaSimpluInlantuita(prim,ultim);
-                stergereToateAparitiile(prim, 2);
+                stergereToateAparitiile(prim);
                 goto jump;  // RESET LA BUTON
             }
             else

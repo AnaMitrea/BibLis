@@ -33,7 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Meniu stergere.cpp" />
-		<Unit filename="citire liste.in" />
 		<Extensions>
 			<code_completion />
 			<envvars />

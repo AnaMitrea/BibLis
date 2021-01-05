@@ -1,10 +1,10 @@
-#include <iostream>
+#include<iostream>
+#include<windows.h>
+#include<MMsystem.h>
 #include <graphics.h>
-#include <winbgim.h>
-#include <fstream>
+#include <queue>
 using namespace std;
 
-ifstream fin("citire stive.in");
 
 struct nod
 {
@@ -22,6 +22,7 @@ stiva S;
 // ------- DECLARARI FUNCTII ---------
 void meniuStive();
 void fereastra();
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere);
 void dimensiuneText(int element);
 void descriereStiva();
 void deseneazaOutline(int y);
@@ -35,11 +36,86 @@ void push(stiva &S, int element);
 void adaugareStiva();
 void afisareStiva(stiva S);
 
-
 // ---------- INITIALIZARE FEREASTRA ----------
 void fereastra()
 {
     initwindow(1530, 795, " Meniu Stive ");
+}
+
+// ---------- FUNCTIE CITIRE  ----------
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere)
+{
+    strcpy(afisare, "");
+    char aux[100];
+    char key[2];  // sirul in care se pastreaza tasta pe care o apasam la citire
+    char tasta;   // tasta pe care se apasa
+    char text2[100];
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    setcolor(WHITE);
+    strcpy(text2, text);
+    strcat(text2, aux);
+    outtextxy(x, y, text2);
+    do
+    {
+        tasta = getch();
+        if (tasta == 8) // backspace
+            if (strlen(afisare) > 0)
+            {
+                setcolor(BLACK);
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                afisare[strlen(afisare) - 1] = '\0';
+                strcpy(aux, afisare);
+                strcat(aux, "_");
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+                setcolor(WHITE);
+                strcpy(text2, text);
+                strcat(text2, aux);
+                outtextxy(x, y, text2);
+            }
+            else
+                Beep(1000,100);
+        else
+        {
+            key[0] = tasta;
+            key[1] = '\0';
+            strcat(afisare, key);
+            strcpy(aux, afisare);
+            strcat(aux, "_");
+            setcolor(WHITE);
+            strcpy(text2, text);
+            strcat(text2, aux);
+            outtextxy(x, y, text2);
+        }
+    } while (tasta!=13);
+
+    key[0] = tasta;
+    key[1] = '\0';
+    strcat(afisare, key);
+    strcpy(aux, afisare);
+    strcat(aux, "_");
+    strcpy(text2, text);
+    strcat(text2, aux);
+
+    setcolor(BLACK);
+    outtextxy(x,y,text2);
+
+    if (!stergere)
+    {
+        strcpy(text2,text);
+        strcat(text2,afisare);
+        setcolor(WHITE);
+        outtextxy(x,y,text2);
+    }
 }
 
 void dimensiuneText(int element)
@@ -110,7 +186,7 @@ void deseneazaElemente(stiva S)
     }
 }
 
-// ---------- INITIALIZARE STIVA ----------
+// ---------- INITIALIZARE SI CREARE STIVA ----------
 void initializareStiva(stiva& S)
 {
     settextstyle(4, HORIZ_DIR, 4);
@@ -307,7 +383,6 @@ void push(stiva &S, int el)
     }
 }
 
-// CONDITIE DE DEPASIRE A Y-ULUI!!!
 // ------- Functie de inserare in grafica -------
 void adaugareStiva()
 {
@@ -316,15 +391,23 @@ void adaugareStiva()
     setcolor(LIGHTCYAN);
     outtextxy(600, 20, "Adaugare element in stiva");
     rectangle(370,100,1470,200);
+    rectangle(1150,500,1470,700);  // partea de citire
     setcolor(WHITE);
     delay(1000);
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(1160,510," Ce element doriti");
+    outtextxy(1160,540,"    sa adaugati? " );
+    citesteSir(" Elementul: ", afisare, 1155, 600, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int val = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    push(S,val);
     // ALGORITMUL
     if (!esteVida(S))
     {
         // DESENARE STIVA
         deseneazaElemente(S);
         delay(500);
-        push(S,5);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
@@ -370,7 +453,6 @@ void adaugareStiva()
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(390, 110);
         delay(800);
-        push(S,7);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
@@ -394,7 +476,7 @@ void adaugareStiva()
 
     }
     // STERGERE CE AM SCRIS
-    delay(10000);
+    delay(5000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -541,11 +623,9 @@ void meniuStive()
     readimagefile("push.jpg",30, 330, 270, 380);
     // BUTON 6
     readimagefile("afis stiva.jpg",30, 400, 270, 450);
-
     // LINII DE DELIMTARE
     line(300,795,300,0);
     line(0,460,300,460);
-
     // LABEL PENTRU A RESETA BUTONUL
     jump:
     bool gata = false;
@@ -648,14 +728,8 @@ void meniuStive()
 int main()
 {
     fereastra();
-
     S.nrElemente = 0;
     S.varf = NULL;
-    push(S,5);
-    push(S,100);
-    push(S,20);
-    push(S,50);
-    push(S,4);
 
     meniuStive();
 
