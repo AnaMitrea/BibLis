@@ -2,14 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="citire.in" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="31" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="interfata.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="49976" topLine="267" />
+			<Cursor1 position="49976" topLine="1768" />
 		</Cursor>
 		<Folding>
 			<Collapse line="75" />
@@ -17,30 +12,11 @@
 			<Collapse line="107" />
 			<Collapse line="169" />
 			<Collapse line="260" />
-			<Collapse line="393" />
-			<Collapse line="513" />
-			<Collapse line="653" />
-			<Collapse line="732" />
-			<Collapse line="841" />
-			<Collapse line="960" />
-			<Collapse line="1081" />
-			<Collapse line="1165" />
-			<Collapse line="1212" />
-			<Collapse line="1271" />
-			<Collapse line="1396" />
-			<Collapse line="1410" />
-			<Collapse line="1452" />
-			<Collapse line="1492" />
-			<Collapse line="1536" />
-			<Collapse line="1542" />
-			<Collapse line="1559" />
-			<Collapse line="1627" />
-			<Collapse line="1742" />
-			<Collapse line="1812" />
-			<Collapse line="1831" />
-			<Collapse line="1885" />
-			<Collapse line="2074" />
-			<Collapse line="2080" />
 		</Folding>
+	</File>
+	<File name="citire.in" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="31" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
