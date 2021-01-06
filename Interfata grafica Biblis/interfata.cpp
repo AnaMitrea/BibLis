@@ -1,16 +1,13 @@
-#include<iostream>
-#include<windows.h>
-#include<MMsystem.h>
+#include <iostream>
+#include <windows.h>
+#include <MMsystem.h>
 #include <graphics.h>
 #include <queue>
-#include <fstream>
+#include <mmsystem.h>
 using namespace std;
-
-ifstream fin("citire.in");
 
 /// CE MAI TREBUIE FACUT
 /*
-- implementare citire din fereastra grafica la meniu stergere
 - adaugare sunete PlaySound(TEXT("yourMusicFile.wav"), NULL, SND_SYNC);
 */
 
@@ -48,11 +45,11 @@ void lungimeLista(nod* prim);
 void inserareInceput(nod*& prim);
 void adaugareSfarsit(nod*& prim, int val);
 void inserareSfarsit(nod*& prim);
-void inserareDupaNod(nod*& prim, int element_dat);
+void inserareDupaNod(nod*& prim);
 void meniuInserare();
 void stergerePrimul(nod*& prim);
-void stergerePrimaAparitie(nod*& prim, int element_dat);
-void stergereToateAparitiile(nod*& prim, int element_dat);
+void stergerePrimaAparitie(nod*& prim);
+void stergereToateAparitiile(nod*& prim);
 void meniuStergere();
 void afisareListaSimpluInlantuita(nod *prim);
 
@@ -266,6 +263,7 @@ void listaVida(nod* prim)
 
     if (buton == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         cleardevice();
         meniuListeSimpluInlantuite();
     }
@@ -357,6 +355,7 @@ void lungimeLista(nod *prim)
     } while (!gata);
     if (buton == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         cleardevice();
         meniuListeSimpluInlantuite();
     }
@@ -498,7 +497,7 @@ void inserareInceput(nod*& prim)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(2500);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -646,7 +645,7 @@ void inserareSfarsit(nod*& prim)
         outstreamxy(5,490);
         setcolor(WHITE);
     }
-    delay(2500);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -695,7 +694,7 @@ void inserareDupaNod(nod*& prim)
     unsigned int x = 320, y = 100;
     unsigned int xtext = 325, ytext = 115;
     bool inserat = false;
-    nod *q = prim;
+    nod *q = prim, *nodInserat, *nodInseratUrm;
 
     bgiout << "nod *q = prim;";
     outstreamxy(5,470);
@@ -745,6 +744,8 @@ void inserareDupaNod(nod*& prim)
             p->urm = q->urm;
             q->urm = p;
             inserat = true;
+            nodInserat = p;
+            nodInseratUrm = p->urm;
         }
         q = q->urm;
     }
@@ -781,7 +782,7 @@ void inserareDupaNod(nod*& prim)
                         readimagefile("nod lista cu null.jpg", x, y, x + 250, y + 50);
                     else
                         readimagefile("nod lista.jpg", x, y, x + 200, y + 50);
-                    if (q->valoare == val)
+                    if (nodInserat->valoare == val && nodInseratUrm == q->urm)
                         readimagefile("nod inserat lista.jpg", x, y - 10, x + 200, y + 50);
                     // DIMENSIUNEA TEXTULUI IN FIECARE NOD
                     dimensiuneText(q->valoare);
@@ -805,7 +806,7 @@ void inserareDupaNod(nod*& prim)
         outtextxy(545, 55, " Nu s-a inserat nodul in lista simplu-inlantuita!");
         setcolor(WHITE);
     }
-    delay(2500);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -871,24 +872,28 @@ void meniuInserare()
 
     if (buton1 == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         inserareInceput(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             inserareSfarsit(prim);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
+                mciSendString ("play sunet.mp3", NULL, 0, NULL);
                 inserareDupaNod(prim);
                 goto jump;  // RESET LA BUTON
             }
             else
                 if (buton4 == true)
                 {
+                    mciSendString ("play sunet.mp3", NULL, 0, NULL);
                     meniuListeSimpluInlantuite();
                 }
 }
@@ -899,9 +904,25 @@ void stergerePrimul(nod *&prim)
         // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(470, 20, " Stergerea primului nod din lista simplu-inlantuita");
+    outtextxy(530, 20, " Stergerea primului nod din lista simplu-inlantuita");
+    rectangle(370,70,1470,130);
     setcolor(WHITE);
     delay(800);
+    nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
         // AFISAREA INSTRUCTIUNILOR
     settextstyle(4, HORIZ_DIR, 1);
     setcolor(LIGHTMAGENTA);
@@ -917,9 +938,8 @@ void stergerePrimul(nod *&prim)
         setcolor(WHITE);
     }
         // COORDONATELE PRIMULUI NOD
-    unsigned int x = 320, y = 100;
+    unsigned int x = 320, y = 170;
     unsigned int xtext = 325, ytext = 115;
-    nod* p = prim;
     while (p != NULL)
     {
         if (x > 1400)
@@ -1003,18 +1023,41 @@ void stergerePrimul(nod *&prim)
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,795);
+    bar(0,403,308,589);
 }
 
-void stergerePrimaAparitie(nod *&prim, int element_dat)
+void stergerePrimaAparitie(nod *&prim)
 {
         // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(400, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
+    outtextxy(420, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
-    delay(300);
+    setcolor(WHITE);
+
     nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,630,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    delay(300);
     bool sters = false;
     while (p->urm != NULL)
     {
@@ -1038,8 +1081,8 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
     if (sters == true)
     {
         setcolor(LIGHTRED);
-        bgiout << "S-a sters prima valoare de " << element_dat << " din lista.";
-        outstreamxy(620, 90);
+        bgiout << "S-au sters valorile de " << element_dat << " din lista.";
+        outstreamxy(640, 90);
         setcolor(WHITE);
     }
     else
@@ -1117,24 +1160,47 @@ void stergerePrimaAparitie(nod *&prim, int element_dat)
         outstreamxy(5,430);
         setcolor(WHITE);
     }
-    // STERGERE PARTE DE ECRAN
+        // STERGERE PARTE DE ECRAN
     delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,795);
+    bar(0,403,308,589);
 }
 
-void stergereToateAparitiile(nod *&prim, int element_dat)
+void stergereToateAparitiile(nod *&prim)
 {
     // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(370, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
+    outtextxy(420, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
-    delay(300);
+    setcolor(WHITE);
 
     nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
+    // CITIREA ELEMENTELOR
+    char afisare[100];
+    settextstyle(4, HORIZ_DIR, 3);
+    outtextxy(5,600," Ce element doriti");
+    outtextxy(5,630,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
+    int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
+    delay(300);
+
     bool sters = false;
     while (p->urm != NULL)
     {
@@ -1237,18 +1303,17 @@ void stergereToateAparitiile(nod *&prim, int element_dat)
         outstreamxy(5,430);
         setcolor(WHITE);
     }
-    // STERGERE PARTE DE ECRAN
+        // STERGERE PARTE DE ECRAN
     delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,795);
+    bar(0,403,308,589);
 }
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
 void meniuStergere()
 {
-    readimagefile("undo.jpg",50,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
     outtextxy(10, 10, " Alege functia ");
     outtextxy(30, 50, " de stergere ");
@@ -1305,24 +1370,28 @@ void meniuStergere()
 
     if (buton1 == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         stergerePrimul(prim);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
-            stergerePrimaAparitie(prim, 1);
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
+            stergerePrimaAparitie(prim);
             goto jump;  // RESET LA BUTON
         }
         else
             if (buton3 == true)
             {
-                stergereToateAparitiile(prim, 2);
+                mciSendString ("play sunet.mp3", NULL, 0, NULL);
+                stergereToateAparitiile(prim);
                 goto jump;  // RESET LA BUTON
             }
             else
                 if (buton4 == true)
                 {
+                    mciSendString ("play sunet.mp3", NULL, 0, NULL);
                     meniuListeSimpluInlantuite();
                 }
 }
@@ -1390,6 +1459,7 @@ void afisareListaSimpluInlantuita(nod *prim)
     } while (!gata);
     if (buton == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         meniuListeSimpluInlantuite();
         goto jump;
     }
@@ -1443,12 +1513,14 @@ void descriereListaSimplu()
     } while (!gata);
     if (butonNext == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         cleardevice();
         return;
     }
     else
         if (butonUndo == true)
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             cleardevice();
             meniuPrincipal();
         }
@@ -1543,36 +1615,43 @@ void meniuListeSimpluInlantuite()
 
     if (buton1 == true)  // Creare lista
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         graficaCitireListeSimplu();
     }
     else
         if (buton2 == true)  // Verificare daca lista este vida
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             listaVida(prim);
         }
         else
             if (buton3 == true)  // Functie pt aflarea lungimii listei
             {
+                mciSendString ("play sunet.mp3", NULL, 0, NULL);
                 lungimeLista(prim);
             }
             else
                 if (buton4 == true)  // Functii la INSERARE element in liste
                 {
+                    mciSendString ("play sunet.mp3", NULL, 0, NULL);
                     meniuInserare();
                 }
                 else
                     if (buton5 == true)  // Functii la STERGERE element din liste
                     {
+                        mciSendString ("play sunet.mp3", NULL, 0, NULL);
                         meniuStergere();
                     }
                     else
                         if (buton6 == true)   // Afisarea unei liste
                         {
+                            mciSendString ("play sunet.mp3", NULL, 0, NULL);
                             afisareListaSimpluInlantuita(prim);
                         }
                         else
                             if (undo == true)
                             {
+                                mciSendString ("play sunet.mp3", NULL, 0, NULL);
                                 cleardevice();
                                 meniuPrincipal();
                             }
@@ -2061,12 +2140,14 @@ void descriereStiva()
     } while (!gata);
     if (butonNext == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         cleardevice();
         return;
     }
     else
         if (butonUndo == true)
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             cleardevice();
             meniuPrincipal();
         }
@@ -2148,42 +2229,49 @@ void meniuStive()
     } while (!gata);
     if (buton1 == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         initializareStiva(S);
         goto jump;  // RESET LA BUTON
     }
     else
         if (buton2 == true)
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             esteVidaStiva(S);
             goto jump;
         }
         else
             if (buton3 == true)
             {
+                mciSendString ("play sunet.mp3", NULL, 0, NULL);
                 golesteStiva(S);
                 goto jump;
             }
             else
                 if (buton4 == true)
                 {
+                    mciSendString ("play sunet.mp3", NULL, 0, NULL);
                     eliminareStiva();
                     goto jump;
                 }
                 else
                     if (buton5 == true)
                     {
+                        mciSendString ("play sunet.mp3", NULL, 0, NULL);
                         adaugareStiva();
                         goto jump;
                     }
                     else
                         if (buton6 == true)
                         {
+                            mciSendString ("play sunet.mp3", NULL, 0, NULL);
                             afisareStiva(S);
                             goto jump;
                         }
                         else
                             if (butonUndo == true)
                             {
+                                mciSendString ("play sunet.mp3", NULL, 0, NULL);
                                 cleardevice();
                                 meniuPrincipal();
                                 goto jump;
@@ -2243,21 +2331,25 @@ void meniuPrincipal()
     cleardevice();
     if (buton1 == true)
     {
+        mciSendString ("play sunet.mp3", NULL, 0, NULL);
         meniuListeSimpluInlantuite();
     }
     else
         if (buton2 == true)
         {
+            mciSendString ("play sunet.mp3", NULL, 0, NULL);
             // meniuListeDubluInlantuite();
         }
         else
             if(buton3 == true)
             {
-                 meniuStive();
+                mciSendString ("play sunet.mp3", NULL, 0, NULL);
+                meniuStive();
             }
             else
                 if(buton4 == true)
                 {
+                    mciSendString ("play sunet.mp3", NULL, 0, NULL);
                     // meniuCozi();
                 }
 }

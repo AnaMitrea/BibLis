@@ -172,9 +172,25 @@ void stergerePrimul(nod *&prim)
         // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(470, 20, " Stergerea primului nod din lista simplu-inlantuita");
+    outtextxy(530, 20, " Stergerea primului nod din lista simplu-inlantuita");
+    rectangle(370,70,1470,130);
     setcolor(WHITE);
     delay(800);
+    nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
         // AFISAREA INSTRUCTIUNILOR
     settextstyle(4, HORIZ_DIR, 1);
     setcolor(LIGHTMAGENTA);
@@ -192,7 +208,6 @@ void stergerePrimul(nod *&prim)
         // COORDONATELE PRIMULUI NOD
     unsigned int x = 320, y = 100;
     unsigned int xtext = 325, ytext = 115;
-    nod* p = prim;
     while (p != NULL)
     {
         if (x > 1400)
@@ -272,11 +287,11 @@ void stergerePrimul(nod *&prim)
     setcolor(WHITE);
 
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,795);
+    bar(0,403,308,589);
 }
 
 void stergerePrimaAparitie(nod *&prim)
@@ -284,19 +299,33 @@ void stergerePrimaAparitie(nod *&prim)
         // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(400, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
+    outtextxy(420, 20, " Stergerea primei aparitii a unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
+    setcolor(WHITE);
 
+    nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
     // CITIREA ELEMENTELOR
     char afisare[100];
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(5,600," Ce element doriti");
-    outtextxy(5,620,"    sa stergeti? " );
-    citesteSir(" Elementul: ", afisare, 5, 640, false); //Functia de citire a textului in mod grafic in sirul afisare
+    outtextxy(5,630,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
     int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
     delay(300);
-
-    nod *p = prim;
     bool sters = false;
     while (p->urm != NULL)
     {
@@ -400,7 +429,7 @@ void stergerePrimaAparitie(nod *&prim)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -412,19 +441,34 @@ void stergereToateAparitiile(nod *&prim)
     // ----------- AFISARE ------------
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
-    outtextxy(370, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
+    outtextxy(420, 20, " Stergerea tuturor aparitiilor unui nod din lista simplu-inlantuita");
     rectangle(370,70,1470,130);
+    setcolor(WHITE);
 
+    nod *p = prim;
+    if (p == NULL)
+    {
+        setcolor(LIGHTRED);
+        bgiout << "Lista este vida. Nu se poate sterge niciun nod.";
+        outstreamxy(580, 90);
+        setcolor(WHITE);
+            // STERGERE PARTE DE ECRAN
+        delay(2500);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(311,0,1520,795);
+        setfillstyle(SOLID_FILL,BLACK);
+        bar(0,403,308,589);
+        return;
+    }
     // CITIREA ELEMENTELOR
     char afisare[100];
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(5,600," Ce element doriti");
-    outtextxy(5,620,"    sa stergeti? " );
-    citesteSir(" Elementul: ", afisare, 5, 640, false); //Functia de citire a textului in mod grafic in sirul afisare
+    outtextxy(5,630,"    sa stergeti? " );
+    citesteSir(" Elementul: ", afisare, 5, 660, false); //Functia de citire a textului in mod grafic in sirul afisare
     int element_dat = atoi(afisare);  // conversie ascii -> int din sirul afisare
     delay(300);
 
-    nod *p = prim;
     bool sters = false;
     while (p->urm != NULL)
     {
@@ -528,11 +572,11 @@ void stergereToateAparitiile(nod *&prim)
         setcolor(WHITE);
     }
     // STERGERE PARTE DE ECRAN
-    delay(6000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(311,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
-    bar(0,403,308,795);
+    bar(0,403,308,589);
 }
 
 // ---------- MENIU FUNCTII STERGERE LA LISTE SIMPLU-INLANTUITE ----------
@@ -553,6 +597,7 @@ void meniuStergere()
     // LINII DE DELIMTARE
     line(310,795,310,0);
     line(0,400,310,400);
+    line(0,590,310,590);
 
     // LABEL PENTRU A RESETA BUTONUL
     jump:
@@ -618,7 +663,6 @@ void meniuStergere()
 
 int main()
 {
-
     initwindow(1530, 795, " Meniu Biblioteca cu Liste ");
     meniuStergere();
     getch();
