@@ -2370,6 +2370,10 @@ void interfataGrafica()
 
 int main()
 {
-    interfataGrafica();
+    //interfataGrafica();
+     int x, y;
+    x = getmaxx();
+    y = getmaxy();
+    cout << x << endl << y;
     return 0;
 }
