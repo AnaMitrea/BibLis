@@ -4,21 +4,10 @@
 	<ActiveTarget name="Debug" />
 	<File name="interfata.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="73376" topLine="72" />
+			<Cursor1 position="73252" topLine="2293" />
 		</Cursor>
 		<Folding>
-			<Collapse line="79" />
-			<Collapse line="92" />
-			<Collapse line="98" />
-			<Collapse line="173" />
-			<Collapse line="203" />
-			<Collapse line="210" />
-			<Collapse line="273" />
-			<Collapse line="509" />
-			<Collapse line="902" />
-			<Collapse line="1029" />
-			<Collapse line="1661" />
-			<Collapse line="1675" />
+			<Collapse line="80" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>

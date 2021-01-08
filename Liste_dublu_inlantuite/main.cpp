@@ -167,6 +167,7 @@ void meniuPrincipal()
 void fereastra()
 {
     initwindow(1400, 700, " Meniu Biblioteca cu Liste Dublu Inlantuite si Coada ");
+    //initwindow(1530, 795, " Meniu Biblioteca cu Liste ");
 }
 
 // ---------- INTERFATA ----------
@@ -545,7 +546,8 @@ void creareListaDubluInlantuita (nod_lista_dublu_inlantuita*& prim , int n , int
 
 //------------------MENIU INSERARE LD------------------
 void meniuInserareListeDubluInlantuite()
-{   jump:
+{
+    jump:
     cleardevice();
     afisareListaDubluInlantuitaInserare(prim);
     settextstyle(3, HORIZ_DIR, 4);

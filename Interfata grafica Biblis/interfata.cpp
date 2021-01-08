@@ -6,11 +6,6 @@
 #include <mmsystem.h>
 using namespace std;
 
-/// CE MAI TREBUIE FACUT
-/*
-- adaugare sunete PlaySound(TEXT("yourMusicFile.wav"), NULL, SND_SYNC);
-*/
-
 // ---------- INITIALIZARE STRUCTURI DE DATE ----------
 struct nod
 {
@@ -27,7 +22,8 @@ nod *prim;
 stiva S;
 
 // ------------- DECLARARE FUNCTII INTERFATA------------
-void fereastra();
+void fereastraAna();
+void fereastraAndrei();
 void dimensiuneText(int element);
 void meniuPrincipal();
 void cleanup();
@@ -71,9 +67,14 @@ void afisareStiva(stiva S);
 
 
 // ---------- INITIALIZARE FEREASTRA ----------
-void fereastra()
+void fereastraAna()
 {
     initwindow(1530, 795, " Meniu Biblioteca cu Liste ");
+}
+
+void fereastraAndrei()
+{
+    initwindow(1400, 700, " Meniu Biblioteca cu Liste Dublu Inlantuite si Coada ");
 }
 
 void dimensiuneText(int element)
@@ -2338,6 +2339,8 @@ void meniuPrincipal()
         if (buton2 == true)
         {
             mciSendString ("play sunet.mp3", NULL, 0, NULL);
+            closegraph();
+            fereastraAndrei();
             // meniuListeDubluInlantuite();
         }
         else
@@ -2350,6 +2353,8 @@ void meniuPrincipal()
                 if(buton4 == true)
                 {
                     mciSendString ("play sunet.mp3", NULL, 0, NULL);
+                    closegraph();
+                    fereastraAndrei();
                     // meniuCozi();
                 }
 }
@@ -2363,17 +2368,13 @@ void cleanup()
 // ---------- INTERFATA ----------
 void interfataGrafica()
 {
-    fereastra();
+    fereastraAna();
     meniuPrincipal();
     cleanup();
 }
 
 int main()
 {
-    //interfataGrafica();
-     int x, y;
-    x = getmaxx();
-    y = getmaxy();
-    cout << x << endl << y;
+    interfataGrafica();
     return 0;
 }
