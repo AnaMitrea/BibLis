@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="BibLis.h" />
+		<Unit filename="Libraries.h" />
 		<Unit filename="interfata.cpp" />
 		<Extensions>
 			<code_completion />
