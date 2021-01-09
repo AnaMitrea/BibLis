@@ -3535,7 +3535,7 @@ void initializareStiva(stiva& S)
     setcolor(WHITE);
 
     // STERGERE CE AM SCRIS
-    delay(6000);
+    delay(3000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3579,7 +3579,7 @@ void esteVidaStiva(stiva S)
     }
 
     // STERGERE CE AM SCRIS
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3670,7 +3670,7 @@ void eliminareStiva()
     }
 
     // STERGERE CE AM SCRIS
-    delay(10000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3791,7 +3791,7 @@ void adaugareStiva()
 
     }
     // STERGERE CE AM SCRIS
-    delay(5000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3861,7 +3861,7 @@ void golesteStiva(stiva &S)
         delay(2000);
     }
     // STERGERE CE AM SCRIS
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3880,7 +3880,7 @@ void afisareStiva(stiva S)
     deseneazaElemente(S);
 
     // STERGERE CE AM SCRIS
-    delay(6000);
+    delay(4000);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
