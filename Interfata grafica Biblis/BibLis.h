@@ -2,7 +2,7 @@
 
 #include "Libraries.h"
 
-/// ---------- MENIU PRINCIPAL SI ALTE ELEMENTE --------
+/// ---------- MENIU PRINCIPAL SI ALTE ELEMENTE ( realizat de ambii coechipieri) --------
 
 void BibLis();
 void sunet();
@@ -15,9 +15,9 @@ void descriereAutori();
 void gifDiCaprio();
 void dimensiuneTextAna(int element);
 void dimensiuneTextAndrei(int element);
-void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere);
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere);  //PRELUATA DIN MERGE SORT DATA DE DOMNUL PROF. PATRUT BOGDAN
 
-/// ------------- DECLARARE FUNCTII LA LISTE SIMPLU INLANTUITE ------------
+/// ------------- DECLARARE FUNCTII LA LISTE SIMPLU INLANTUITE ( realizat de Ana ) ------------
 
 void meniuListeSimpluInlantuite();
 void meniuInserare();
@@ -37,28 +37,12 @@ void stergerePrimaAparitie(nod*& prim);
 void stergereToateAparitiile(nod*& prim);
 void afisareListaSimpluInlantuita(nod *prim);
 
-/// ------------- DECLARARE FUNCTII LA STIVE ------------
-
-void meniuStive();
-void descriereStiva();
-void deseneazaOutline(int y);
-void deseneazaElemente(stiva S);
-void initializareStiva(stiva &S);
-void esteVidaStiva(stiva S);
-bool esteVida(stiva S); // functie de verificare, fara grafica
-void golesteStiva(stiva &S);
-void pop(stiva &S); // functie de eliminare fara grafica
-void eliminareStiva();
-void push(stiva &S, int element); // functie de inserare fara grafica
-void adaugareStiva();
-void afisareStiva(stiva S);
-
-/// ---------- DECLARARE ANTET PENTRU FUNCTIILE UTILIZARE LA LISTE DUBLU INLANTUITE ----------
+/// ---------- DECLARARE ANTET PENTRU FUNCTIILE UTILIZARE LA LISTE DUBLU INLANTUITE ( realizat de Andrei ) ----------
 
 void meniuListeDubluInlantuite1();
 void meniuListeDubluInlantuite2();
 void descriereListaDubluInlantuita();
-void citireElementeListaDubluInlantuita();
+void citireElementeListaDubluInlantuita(); //SCRISA DE ANDREI CU AJUTORUL PROBLEMEI MERGE SORT DATA DE DOMNUL PROF. PATRUT BOGDAN
 void creareListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim,int n,int Valoarea[20]);
 
 void meniuInserareListeDubluInlantuite();
@@ -78,7 +62,23 @@ void afisareListaDubluInlantuitaInserare(nod_lista_dublu_inlantuita* Prim);
 void afisareListaDubluInlantuita(nod_lista_dublu_inlantuita* Prim);
 void afisareListaDubluInlantuitaCautare(nod_lista_dublu_inlantuita* Prim,nod_lista_dublu_inlantuita* nodd);
 
-/// ---------- DECLARARE ANTET PENTRU FUNCTIILE UTILIZARE LA COADA ----------
+/// ------------- DECLARARE FUNCTII LA STIVE ( realizat de Ana ) ------------
+
+void meniuStive();
+void descriereStiva();
+void deseneazaOutline(int y);
+void deseneazaElemente(stiva S);
+void initializareStiva(stiva &S);
+void esteVidaStiva(stiva S);
+bool esteVida(stiva S); // functie de verificare, fara grafica
+void golesteStiva(stiva &S);
+void pop(stiva &S); // functie de eliminare fara grafica
+void eliminareStiva();
+void push(stiva &S, int element); // functie de inserare fara grafica
+void adaugareStiva();
+void afisareStiva(stiva S);
+
+/// ---------- DECLARARE ANTET PENTRU FUNCTIILE UTILIZARE LA COADA ( realizat de Andrei ) ----------
 
 nod_coada* creare_nod_nou_in_coada(int element_coada);
 void meniuCoada1();
@@ -102,14 +102,14 @@ void BibLis()
 
 // ---------- SUNET DE FUNDAL ----------
 
-void sunet() //REALIZATA DE ANDREI
+void sunet()
 {
     mciSendString ("play sunete/song.mp3", NULL, 0, NULL);
 }
 
 // ---------- MENIU DE DESCHIDERE ----------
 
-void deschidere() //REALIZATA DE ANDREI
+void deschidere()
 {
     cleardevice(); //FUNCTIE DE CURATAREA ECRANULUI
 
@@ -306,7 +306,7 @@ void meniuPrincipal()
 
 // ---------- DESCRIERE PROIECT PAGINA 1 ----------
 
-void descriereProiect1() //REALIZATA DE ANDREI
+void descriereProiect1()
 {
     cleardevice();
 
@@ -384,7 +384,7 @@ void descriereProiect1() //REALIZATA DE ANDREI
 
 // ---------- DESCRIERE PROIECT PAGINA 2 ----------
 
-void descriereProiect2() //REALIZATA DE ANDREI
+void descriereProiect2()
 {
     cleardevice();
 
@@ -461,7 +461,7 @@ void descriereProiect2() //REALIZATA DE ANDREI
 
 // ---------- DESCRIERE PROIECT PAGINA 3 ----------
 
-void descriereProiect3() //REALIZATA DE ANDREI
+void descriereProiect3()
 {
     cleardevice();
 
@@ -538,7 +538,7 @@ void descriereProiect3() //REALIZATA DE ANDREI
 
 // ---------- DESCRIERE AUTORI ----------
 
-void descriereAutori() //REALIZATA DE ANDREI
+void descriereAutori()
 {
      // POZA ANEI
     readimagefile("imagini/Ana Mitrea.jpg",30,100,325,500);
@@ -620,7 +620,7 @@ void descriereAutori() //REALIZATA DE ANDREI
 
 // ---------- CREARE GIF PENTRU IESIRE ----------
 
-void gifDiCaprio() // REALIZAT DE ANDREI
+void gifDiCaprio()
 {
     //UN GIF SE POATE REALIZA PRIN CITIREA MAI MULTOR IMAGINI LA UN TIMP RELATIV SCURT (IN CAZUL CELUI PREZENTAT 0.1s)
     //GIFUL CREAT ARE 14 IMAGINI SI DISTANTA DINRE CITIREA LOR ESTE DE 0.1 SECUNDE
@@ -687,7 +687,7 @@ void gifDiCaprio() // REALIZAT DE ANDREI
 
 // ---------- STABILIREA MARIMII TEXTULUI IN FUNCTIE DE NUMARUL DE CARACTERE ----------
 
-void dimensiuneTextAndrei(int element) //REALIZATA DE ANA
+void dimensiuneTextAndrei(int element)
 {
     if(element >= 0 && element < 100)
         settextstyle(3, HORIZ_DIR, 3);
@@ -712,7 +712,7 @@ void dimensiuneTextAna(int element)
 }
 
 // ---------- FUNCTIA DE CITIRE IN MOD GRAFIC ----------
-void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere) //PRELUATA DIN MERGE SORT DATA DE DOMNUL PROF. PATRUT
+void citesteSir(char text[100], char afisare[100], int x, int y, bool stergere)
 {
     strcpy(afisare, "");
     char aux[100];
@@ -877,42 +877,49 @@ void meniuListeSimpluInlantuite()
     if (buton1 == true)  // Creare lista
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         graficaCitireListeSimplu();
     }
     else
         if (buton2 == true)  // Verificare daca lista este vida
         {
             mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
             listaVida(prim);
         }
         else
             if (buton3 == true)  // Functie pt aflarea lungimii listei
             {
                 mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                sunet();
                 lungimeLista(prim);
             }
             else
                 if (buton4 == true)  // Functii la INSERARE element in liste
                 {
                     mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                    sunet();
                     meniuInserare();
                 }
                 else
                     if (buton5 == true)  // Functii la STERGERE element din liste
                     {
                         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                        sunet();
                         meniuStergere();
                     }
                     else
                         if (buton6 == true)   // Afisarea unei liste
                         {
                             mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                            sunet();
                             afisareListaSimpluInlantuita(prim);
                         }
                         else
                             if (undo == true)
                             {
                                 mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                                sunet();
                                 cleardevice();
                                 meniuPrincipal();
                             }
@@ -964,6 +971,7 @@ void descriereListaSimplu()
     if (butonNext == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         cleardevice();
         return;
     }
@@ -971,6 +979,7 @@ void descriereListaSimplu()
         if (butonUndo == true)
         {
             mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
             cleardevice();
             meniuPrincipal();
         }
@@ -1036,6 +1045,7 @@ void meniuInserare()
     if (buton1 == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         inserareInceput(prim);
         goto jump;  // RESET LA BUTON
     }
@@ -1043,6 +1053,7 @@ void meniuInserare()
         if (buton2 == true)
         {
             mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
             inserareSfarsit(prim);
             goto jump;  // RESET LA BUTON
         }
@@ -1050,6 +1061,7 @@ void meniuInserare()
             if (buton3 == true)
             {
                 mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                sunet();
                 inserareDupaNod(prim);
                 goto jump;  // RESET LA BUTON
             }
@@ -1057,6 +1069,7 @@ void meniuInserare()
                 if (buton4 == true)
                 {
                     mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                    sunet();
                     meniuListeSimpluInlantuite();
                 }
 }
@@ -1121,6 +1134,7 @@ void meniuStergere()
     if (buton1 == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         stergerePrimul(prim);
         goto jump;  // RESET LA BUTON
     }
@@ -1128,6 +1142,7 @@ void meniuStergere()
         if (buton2 == true)
         {
             mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
             stergerePrimaAparitie(prim);
             goto jump;  // RESET LA BUTON
         }
@@ -1135,6 +1150,7 @@ void meniuStergere()
             if (buton3 == true)
             {
                 mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                sunet();
                 stergereToateAparitiile(prim);
                 goto jump;  // RESET LA BUTON
             }
@@ -1142,6 +1158,7 @@ void meniuStergere()
                 if (buton4 == true)
                 {
                     mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                    sunet();
                     meniuListeSimpluInlantuite();
                 }
 }
@@ -1246,6 +1263,7 @@ void listaVida(nod* prim)
     if (buton == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         cleardevice();
         meniuListeSimpluInlantuite();
     }
@@ -1337,6 +1355,7 @@ void lungimeLista(nod *prim)
     if (buton == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         cleardevice();
         meniuListeSimpluInlantuite();
     }
@@ -2206,7 +2225,6 @@ void stergereToateAparitiile(nod *&prim)
     bar(0,592,308,729);
 }
 
-// ---------- AFISAREA UNEI LISTE SIMPLU-INLANTUITE ----------
 void afisareListaSimpluInlantuita(nod *prim)
 {
     readimagefile("imagini/undo.jpg",30,730,250,780);
@@ -2270,6 +2288,7 @@ void afisareListaSimpluInlantuita(nod *prim)
     if (buton == true)
     {
         mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
         meniuListeSimpluInlantuite();
         goto jump;
     }
@@ -2281,7 +2300,7 @@ void afisareListaSimpluInlantuita(nod *prim)
 
 //-----------------MENIU PENTRU LISTE DUBLU INLANTUITE NR.1 --------------------
 
-void meniuListeDubluInlantuite1() //REALIZATA DE ANDREI
+void meniuListeDubluInlantuite1()
 {
     descriereListaDubluInlantuita();    //APELEAZA FEREASTRA DE DESCRIERE A LISTELOR DUBLU INLANTUITE
     citireElementeListaDubluInlantuita();   //APELEAZA FEREASTRA DE CITIRE A ELEMENTELOR PENTRU LISTE DUBLU INLANTUITE
@@ -2289,7 +2308,7 @@ void meniuListeDubluInlantuite1() //REALIZATA DE ANDREI
 
 //-----------------MENIU PENTRU LISTE DUBLU INLANTUITE NR.2 --------------------
 
-void meniuListeDubluInlantuite2() //REALIZATA DE ANDREI CU AJUTORUL ANEI
+void meniuListeDubluInlantuite2()
 {
     cleardevice();
     settextstyle(3, HORIZ_DIR, 5);
@@ -2415,7 +2434,7 @@ void meniuListeDubluInlantuite2() //REALIZATA DE ANDREI CU AJUTORUL ANEI
 
 // ---------- DESCRIERE LISTA DUBLU INLANTUITA ----------
 
-void descriereListaDubluInlantuita() //REALIZATA DE ANDREI CU AJUTORUL ANEI
+void descriereListaDubluInlantuita()
 {
     cleardevice();
     settextstyle(4, HORIZ_DIR, 3);
@@ -2485,7 +2504,7 @@ void descriereListaDubluInlantuita() //REALIZATA DE ANDREI CU AJUTORUL ANEI
 
 // ---------- FUNCTIA DE CITIRE ----------
 
-void citireElementeListaDubluInlantuita() //SCRISA DE ANDREI CU AJUTORUL PROBLEMEI MERGE SORT DATA DE DOMNUL PROF. PATRUT
+void citireElementeListaDubluInlantuita()
 {
     int Valoarea[20], n, i;
     char afisare[100], vectText[100], numar[100];
@@ -2533,7 +2552,7 @@ void citireElementeListaDubluInlantuita() //SCRISA DE ANDREI CU AJUTORUL PROBLEM
 
 // ---------- CREARE LISTA DUBLU INLANTUITA ----------
 
-void creareListaDubluInlantuita (nod_lista_dublu_inlantuita*& Prim , int n , int Valoarea[20]) //REALIZATA DE ANDREI
+void creareListaDubluInlantuita (nod_lista_dublu_inlantuita*& Prim , int n , int Valoarea[20])
 {
     for(int i=0;i<n;i++)
         inserareFinalListaDubluInlantuita( Prim , Valoarea[i] );
@@ -2541,7 +2560,7 @@ void creareListaDubluInlantuita (nod_lista_dublu_inlantuita*& Prim , int n , int
 
 //------------------MENIU INSERARE LD------------------
 
-void meniuInserareListeDubluInlantuite() //REALIZATA DE ANDREI
+void meniuInserareListeDubluInlantuite()
 {
     //LABEL PENTRU RESETAREA BUTONULUI
     jump:
@@ -2756,7 +2775,7 @@ void meniuInserareListeDubluInlantuite() //REALIZATA DE ANDREI
 
 //-----------------MENIU PENTRU STERGEREA IN LISTE DUBLU INLANTUITE--------
 
-void meniuStergereListeDubluInlantuite() //REALIZATA DE ANDREI
+void meniuStergereListeDubluInlantuite()
 {
     jump:
 
@@ -2940,7 +2959,7 @@ void meniuStergereListeDubluInlantuite() //REALIZATA DE ANDREI
 
 //------------------MENIU PENTRU CAUTAREA IN LISTE DUBLU INLANTUITE-----
 
-void meniuCautareListeDubluInlantuite() //REALIZATA DE ANDREI
+void meniuCautareListeDubluInlantuite()
 {
     //LABEL PENTRU A RESETA BUTONUL
     jump:
@@ -3078,7 +3097,7 @@ void meniuCautareListeDubluInlantuite() //REALIZATA DE ANDREI
 // ---------- FUNCTII PENTRU INSERAREA IN LISTE DUBLU INLANTUITE ----------
 
 //INSERAREA LA INCEPUTUL UNEI LISTE DUBLU INLANTUITE
-void inserareInceputListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int valoare) //REALIZATA DE ANDREI
+void inserareInceputListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int valoare)
 {
     //CREAM NODUL NOU
     nod_lista_dublu_inlantuita *Element = new nod_lista_dublu_inlantuita;
@@ -3092,7 +3111,7 @@ void inserareInceputListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int 
 }
 
 //INSERAREA LA FINALUL LISTE DUBLU INLANTUITE
-void inserareFinalListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int valoare) //REALIZATA DE ANDREI
+void inserareFinalListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int valoare)
 {
     //CREAM NOUL NOD SI II ATRIBUIM VALOAREA PARAMETRULUI valoare DAT LA APELUL FUNCTIEI
     nod_lista_dublu_inlantuita *Element = new nod_lista_dublu_inlantuita;
@@ -3116,7 +3135,7 @@ void inserareFinalListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, int va
 }
 
 //INSERARE DUPA UN ELEMENT DAT
-void inserareElementListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, nod_lista_dublu_inlantuita* element_dat, int valoare) //REALIZATA DE ANDREI
+void inserareElementListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, nod_lista_dublu_inlantuita* element_dat, int valoare)
 {
     //CREAM NOUL NOD SI II ATRIBUIM VALOAREA DATA LA APELUL FUNCTIEI
     nod_lista_dublu_inlantuita *elem_creat = new nod_lista_dublu_inlantuita;
@@ -3154,7 +3173,7 @@ void inserareElementListaDubluInlantuita(nod_lista_dublu_inlantuita* &Prim, nod_
 
 //------------------FUNCTII PENTRU STERGEREA IN LISTE DUBLU INLANTUITE-------------------
 
-void stergereElementListaDubluInlantuita(nod_lista_dublu_inlantuita* Prim,nod_lista_dublu_inlantuita* nod_sters) //REALIZATA DE ANDREI
+void stergereElementListaDubluInlantuita(nod_lista_dublu_inlantuita* Prim,nod_lista_dublu_inlantuita* nod_sters)
 {
     if(Prim == NULL) return;  //DACA LISTA ESTE VIDA
     else
@@ -3176,7 +3195,7 @@ void stergereElementListaDubluInlantuita(nod_lista_dublu_inlantuita* Prim,nod_li
 //------------------FUNCTII PENTRU CAUTAREA IN LISTE DUBLU INLANTUITE---
 
 //CAUTAREA UNUI ELEMENT DUPA O VALOARE DATA INTR-O LISTA DUBLU INLANTUITA
-nod_lista_dublu_inlantuita* cautareValoareLD(nod_lista_dublu_inlantuita* Prim, int valoare) //REALIZATA DE ANDREI
+nod_lista_dublu_inlantuita* cautareValoareLD(nod_lista_dublu_inlantuita* Prim, int valoare)
 {
     nod_lista_dublu_inlantuita *p = Prim; //FACEM O COPIE A PrimULUI NOD DIN LISTA
 
@@ -3188,7 +3207,7 @@ nod_lista_dublu_inlantuita* cautareValoareLD(nod_lista_dublu_inlantuita* Prim, i
 }
 
 //CAUTAREA UNUI ELEMENT DUPA O POZITIE DATA INTR-O LISTA DUBLU INLANTUITA
-nod_lista_dublu_inlantuita* cautarePozitieLD(nod_lista_dublu_inlantuita* Prim, int pozitie) //REALIZATA DE ANDREI
+nod_lista_dublu_inlantuita* cautarePozitieLD(nod_lista_dublu_inlantuita* Prim, int pozitie)
 {
     nod_lista_dublu_inlantuita *p=Prim; //FACEM O COPIE A PrimULUI NOD DIN LISTA
     int i = 0;  //POZITIA DE INCEPUT A PrimULUI ELEMENT
@@ -3207,7 +3226,7 @@ nod_lista_dublu_inlantuita* cautarePozitieLD(nod_lista_dublu_inlantuita* Prim, i
 
 // ---------- AFISAREA UNEI LISTE DUBLU INLANTUITE PENTRU INSERARE ----------
 
-void afisareListaDubluInlantuitaInserare(nod_lista_dublu_inlantuita* Prim) //REALIZATA DE ANDREI
+void afisareListaDubluInlantuitaInserare(nod_lista_dublu_inlantuita* Prim)
 {
     settextstyle(3, HORIZ_DIR, 6);
     setbkcolor(BLUE);
@@ -3279,7 +3298,7 @@ void afisareListaDubluInlantuitaInserare(nod_lista_dublu_inlantuita* Prim) //REA
 
 // ---------- AFISAREA UNEI LISTE DUBLU-INLANTUITE PENTRU STERGERE ----------
 
-void afisareListaDubluInlantuita(nod_lista_dublu_inlantuita *Prim) //REALIZATA DE ANDREI CU AJUTORUL ANEI
+void afisareListaDubluInlantuita(nod_lista_dublu_inlantuita *Prim)
 {
     settextstyle(3, HORIZ_DIR, 6);
     setbkcolor(BLUE);
@@ -3350,7 +3369,7 @@ void afisareListaDubluInlantuita(nod_lista_dublu_inlantuita *Prim) //REALIZATA D
 
 //--------------------------AFISARE LISTA DUBLU INLANTUITA PENTRU CAUTARE-------
 
-void afisareListaDubluInlantuitaCautare(nod_lista_dublu_inlantuita* Prim,nod_lista_dublu_inlantuita* nodd) //REALIZATA DE ANDREI
+void afisareListaDubluInlantuitaCautare(nod_lista_dublu_inlantuita* Prim,nod_lista_dublu_inlantuita* nodd)
 {
     settextstyle(3, HORIZ_DIR, 6); //SELECTAM FONTUL, DIRECTIA SI MARIMEA TEXTULUI
     setbkcolor(BLUE); //SELECTAM FUNDALUL SCRISULUI
@@ -3447,6 +3466,195 @@ void afisareListaDubluInlantuitaCautare(nod_lista_dublu_inlantuita* Prim,nod_lis
 }
 
 /// ----------------  STIVE  -------------
+
+void meniuStive()
+{
+    descriereStiva();
+    readimagefile("imagini/undo.jpg",30,730,250,780);
+    settextstyle(4, HORIZ_DIR, 4);
+    outtextxy(0, 10, " Alege functia ");
+    readimagefile("imagini/init stiva.jpg",30, 50, 270, 100); // BUTON 1
+    readimagefile("imagini/stiva vida.jpg",30, 120, 270, 170); // BUTON 2
+    readimagefile("imagini/golire.jpg",30, 190, 270, 240); // BUTON 3
+    readimagefile("imagini/pop.jpg",30, 260, 270, 310); // BUTON 4
+    readimagefile("imagini/push.jpg",30, 330, 270, 380); // BUTON 5
+    readimagefile("imagini/afis stiva.jpg",30, 400, 270, 450); // BUTON 6
+
+    // LINII DE DELIMTARE
+    line(300,795,300,0);
+    line(0,460,300,460);
+
+    // LABEL PENTRU A RESETA BUTONUL
+    jump:
+    bool gata = false;
+    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false, buton5 = false, buton6 = false, butonUndo = false;
+    int x,y;
+    do
+    {
+        if(ismouseclick(WM_LBUTTONDOWN))
+        {
+            clearmouseclick(WM_LBUTTONDOWN);
+            x = mousex();
+            y = mousey();
+            if(x >= 30 && x <= 270 && y >= 50 && y <= 100) // initilizare
+            {
+                gata = true;
+                buton1 = true;
+            }
+            else
+                if(x >= 30 && x <= 270 && y >= 120 && y <= 170)  // stiva vida
+                {
+                    gata = true;
+                    buton2 = true;
+                }
+                else
+                    if(x >= 30 && x <= 270 && y >= 199 && y <= 240) // golire stiva
+                    {
+                        gata = true;
+                        buton3 = true;
+                    }
+                    else
+                        if(x >= 30 && x <= 270 && y >= 260 && y <= 310) // pop
+                        {
+                            gata = true;
+                            buton4 = true;
+                        }
+                        else
+                            if(x >= 30 && x <= 270 && y >= 330 && y <= 380) // push
+                            {
+                                gata = true;
+                                buton5 = true;
+                            }
+                            else
+                                if(x >= 30 && x <= 270 && y >= 400 && y <= 450) // afisare
+                                {
+                                    gata = true;
+                                    buton6 = true;
+                                }
+                                else
+                                    if (x >=30 && x <= 730 && y >= 250 && y <= 780) // revenire la meniul principal
+                                    {
+                                        gata = true;
+                                        butonUndo = true;
+                                    }
+        }
+    } while (!gata);
+    if (buton1 == true)
+    {
+        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
+        initializareStiva(S);
+        goto jump;  // RESET LA BUTON
+    }
+    else
+        if (buton2 == true)
+        {
+            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
+            esteVidaStiva(S);
+            goto jump;
+        }
+        else
+            if (buton3 == true)
+            {
+                mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                sunet();
+                golesteStiva(S);
+                goto jump;
+            }
+            else
+                if (buton4 == true)
+                {
+                    mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                    sunet();
+                    eliminareStiva();
+                    goto jump;
+                }
+                else
+                    if (buton5 == true)
+                    {
+                        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                        sunet();
+                        adaugareStiva();
+                        goto jump;
+                    }
+                    else
+                        if (buton6 == true)
+                        {
+                            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                            sunet();
+                            afisareStiva(S);
+                            goto jump;
+                        }
+                        else
+                            if (butonUndo == true)
+                            {
+                                mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+                                sunet();
+                                cleardevice();
+                                meniuPrincipal();
+                                goto jump;
+                            }
+}
+
+void descriereStiva()
+{
+    cleardevice();
+    readimagefile("imagini/next.jpg",640,710,850,790);
+    readimagefile("imagini/undo.jpg",30,730,250,780);
+    settextstyle(4, HORIZ_DIR, 3);
+    setcolor(LIGHTCYAN);
+    outtextxy(570,50, "Informatii despre Stive");
+    setcolor(WHITE);
+    settextstyle(4, HORIZ_DIR, 1);
+    outtextxy(250, 100, "       Stiva (stack)  este o  structura de date liniara abstracta,  pentru care sunt");
+    outtextxy(250, 130, "definite operatiile  de  adaugare a unui  element si eliminare a unui element si");
+    outtextxy(250, 160, "aceste operatii se realizeaza la un singur capat al structurii, numit varful stivei.");
+    outtextxy(250, 190, "       In  timpul  operatiilor cu  stiva avem  acces numai  la  elementul din varful");
+    outtextxy(250, 220, "stivei. Deoarece operatiile cu elementele stivei se fac la acelasi capat, spunem");
+    outtextxy(250, 250, "ca stiva este o structura de date de tip LIFO - Last In First Out.");
+    readimagefile("imagini/stiva descriere.jpg",480,300,890,650);
+    bool gata = false, butonNext = false, butonUndo = false;
+    int x,y;
+    do
+    {
+        if (ismouseclick(WM_LBUTTONDOWN))
+        {
+            clearmouseclick(WM_LBUTTONDOWN);
+            x = mousex();
+            y = mousey();
+            if (x >= 640 && x <= 850 && y >= 710 && y <= 790)
+            {
+                gata = true;
+                butonNext = true;
+            }
+            else
+                if (x >= 30 && x <= 250 && y >= 730 && y <= 780)
+                {
+                    gata = true;
+                    butonUndo = true;
+                }
+        }
+    } while (!gata);
+    if (butonNext == true)
+    {
+        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+        sunet();
+        cleardevice();
+        return;
+    }
+    else
+        if (butonUndo == true)
+        {
+            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
+            sunet();
+            cleardevice();
+            meniuPrincipal();
+        }
+    delay(40000);   // 1 sec =  1000 ms
+    cleardevice();
+}
+
 void deseneazaOutline(int y)
 {
     setcolor(YELLOW);
@@ -3542,7 +3750,7 @@ void initializareStiva(stiva& S)
     bar(0,465,295,725);
 }
 
-// ---------- STIVA VIDA ? ----------
+// ---------- STIVA VIDA ----------
 void esteVidaStiva(stiva S)
 {
     settextstyle(4, HORIZ_DIR, 4);
@@ -3887,191 +4095,11 @@ void afisareStiva(stiva S)
     bar(0,465,295,725);
 }
 
-// ---------- POZA CU LISTA SI DESCRIEREA EI (inainte de functii) ----------
-void descriereStiva()
-{
-    cleardevice();
-    readimagefile("imagini/next.jpg",640,710,850,790);
-    readimagefile("imagini/undo.jpg",30,730,250,780);
-    settextstyle(4, HORIZ_DIR, 3);
-    setcolor(LIGHTCYAN);
-    outtextxy(570,50, "Informatii despre Stive");
-    setcolor(WHITE);
-    settextstyle(4, HORIZ_DIR, 1);
-    outtextxy(250, 100, "       Stiva (stack)  este o  structura de date liniara abstracta,  pentru care sunt");
-    outtextxy(250, 130, "definite operatiile  de  adaugare a unui  element si eliminare a unui element si");
-    outtextxy(250, 160, "aceste operatii se realizeaza la un singur capat al structurii, numit varful stivei.");
-    outtextxy(250, 190, "       In  timpul  operatiilor cu  stiva avem  acces numai  la  elementul din varful");
-    outtextxy(250, 220, "stivei. Deoarece operatiile cu elementele stivei se fac la acelasi capat, spunem");
-    outtextxy(250, 250, "ca stiva este o structura de date de tip LIFO - Last In First Out.");
-    readimagefile("imagini/stiva descriere.jpg",480,300,890,650);
-    bool gata = false, butonNext = false, butonUndo = false;
-    int x,y;
-    do
-    {
-        if (ismouseclick(WM_LBUTTONDOWN))
-        {
-            clearmouseclick(WM_LBUTTONDOWN);
-            x = mousex();
-            y = mousey();
-            if (x >= 640 && x <= 850 && y >= 710 && y <= 790)
-            {
-                gata = true;
-                butonNext = true;
-            }
-            else
-                if (x >= 30 && x <= 250 && y >= 730 && y <= 780)
-                {
-                    gata = true;
-                    butonUndo = true;
-                }
-        }
-    } while (!gata);
-    if (butonNext == true)
-    {
-        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-        cleardevice();
-        return;
-    }
-    else
-        if (butonUndo == true)
-        {
-            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-            cleardevice();
-            meniuPrincipal();
-        }
-    delay(40000);   // 1 sec =  1000 ms
-    cleardevice();
-}
-
-void meniuStive()
-{
-    descriereStiva();
-    readimagefile("imagini/undo.jpg",30,730,250,780);
-    settextstyle(4, HORIZ_DIR, 4);
-    outtextxy(0, 10, " Alege functia ");
-    readimagefile("imagini/init stiva.jpg",30, 50, 270, 100); // BUTON 1
-    readimagefile("imagini/stiva vida.jpg",30, 120, 270, 170); // BUTON 2
-    readimagefile("imagini/golire.jpg",30, 190, 270, 240); // BUTON 3
-    readimagefile("imagini/pop.jpg",30, 260, 270, 310); // BUTON 4
-    readimagefile("imagini/push.jpg",30, 330, 270, 380); // BUTON 5
-    readimagefile("imagini/afis stiva.jpg",30, 400, 270, 450); // BUTON 6
-
-    // LINII DE DELIMTARE
-    line(300,795,300,0);
-    line(0,460,300,460);
-
-    // LABEL PENTRU A RESETA BUTONUL
-    jump:
-    bool gata = false;
-    bool buton1 = false, buton2 = false, buton3 = false, buton4 = false, buton5 = false, buton6 = false, butonUndo = false;
-    int x,y;
-    do
-    {
-        if(ismouseclick(WM_LBUTTONDOWN))
-        {
-            clearmouseclick(WM_LBUTTONDOWN);
-            x = mousex();
-            y = mousey();
-            if(x >= 30 && x <= 270 && y >= 50 && y <= 100) // initilizare
-            {
-                gata = true;
-                buton1 = true;
-            }
-            else
-                if(x >= 30 && x <= 270 && y >= 120 && y <= 170)  // stiva vida
-                {
-                    gata = true;
-                    buton2 = true;
-                }
-                else
-                    if(x >= 30 && x <= 270 && y >= 199 && y <= 240) // golire stiva
-                    {
-                        gata = true;
-                        buton3 = true;
-                    }
-                    else
-                        if(x >= 30 && x <= 270 && y >= 260 && y <= 310) // pop
-                        {
-                            gata = true;
-                            buton4 = true;
-                        }
-                        else
-                            if(x >= 30 && x <= 270 && y >= 330 && y <= 380) // push
-                            {
-                                gata = true;
-                                buton5 = true;
-                            }
-                            else
-                                if(x >= 30 && x <= 270 && y >= 400 && y <= 450) // afisare
-                                {
-                                    gata = true;
-                                    buton6 = true;
-                                }
-                                else
-                                    if (x >=30 && x <= 730 && y >= 250 && y <= 780) // revenire la meniul principal
-                                    {
-                                        gata = true;
-                                        butonUndo = true;
-                                    }
-        }
-    } while (!gata);
-    if (buton1 == true)
-    {
-        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-        initializareStiva(S);
-        goto jump;  // RESET LA BUTON
-    }
-    else
-        if (buton2 == true)
-        {
-            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-            esteVidaStiva(S);
-            goto jump;
-        }
-        else
-            if (buton3 == true)
-            {
-                mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-                golesteStiva(S);
-                goto jump;
-            }
-            else
-                if (buton4 == true)
-                {
-                    mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-                    eliminareStiva();
-                    goto jump;
-                }
-                else
-                    if (buton5 == true)
-                    {
-                        mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-                        adaugareStiva();
-                        goto jump;
-                    }
-                    else
-                        if (buton6 == true)
-                        {
-                            mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-                            afisareStiva(S);
-                            goto jump;
-                        }
-                        else
-                            if (butonUndo == true)
-                            {
-                                mciSendString ("play sunete/sunet.mp3", NULL, 0, NULL);
-                                cleardevice();
-                                meniuPrincipal();
-                                goto jump;
-                            }
-}
-
 /// ---------- FUNCTII PENTRU COADA ----------
 
 // ---------- MENIU COADA 1 ----------
 
-void meniuCoada1() //REALIZATA DE ANDREI
+void meniuCoada1()
 {
     descriereCoada();   // APELAM FUNCTIA DE EDESCRIERE A COZII
     meniuCoada2();      // APELAM FUNCTIA UNDE SUNT GASITE
@@ -4079,7 +4107,7 @@ void meniuCoada1() //REALIZATA DE ANDREI
 
 // ---------- MENIU COADA 2 ----------
 
-void meniuCoada2() //REALIZATA DE ANDREI
+void meniuCoada2()
 {
     //DECLARAM PRIMUL SI ULTIMUL NOD DIN COADA
     nod_coada* fata_cozii = NULL;
@@ -4208,7 +4236,7 @@ void meniuCoada2() //REALIZATA DE ANDREI
 
 // ---------- NOTIUNI TEORETICE DESPRE COADA ----------
 
-void descriereCoada() //REALIZATA DE ANDREI
+void descriereCoada()
 {
     cleardevice();
 
@@ -4286,14 +4314,14 @@ void descriereCoada() //REALIZATA DE ANDREI
 
 // ---------- FUNCTIE PENTRU STABILIREA DACA ESTE SAU NU COADA GOALA ----------
 
-bool isEmpty(nod_coada* fata_cozii)//REALIZATA DE ANDREI
+bool isEmpty(nod_coada* fata_cozii)
 {
     return fata_cozii == NULL;
 }
 
 // ---------- INTRODUCEREA UNUI ELEMENT IN COADA ----------
 
-void push(nod_coada* &fata_cozii, nod_coada* &spatele_cozii, int element_coada) //REALIZATA DE ANDREI
+void push(nod_coada* &fata_cozii, nod_coada* &spatele_cozii, int element_coada)
 {
     nod_coada* nod_nou_coada = creare_nod_nou_in_coada(element_coada); //CREEM UN NOD NOU IN COADA SI II ATRIBUIM ELEMENTUL DAT
 
@@ -4307,7 +4335,7 @@ void push(nod_coada* &fata_cozii, nod_coada* &spatele_cozii, int element_coada) 
 
 // ---------- ELIMINAREA UNUI ELEMENT DIN COADA ----------
 
-int pop(nod_coada* &fata_cozii) //REALIZATA DE ANDREI
+int pop(nod_coada* &fata_cozii)
 {
     if(isEmpty(fata_cozii)) //DACA COADA ESTE GOALA RETURNAM 0
         return 0;
@@ -4323,7 +4351,7 @@ int pop(nod_coada* &fata_cozii) //REALIZATA DE ANDREI
 
 // ---------- GENERAREA ELEMENTULUI DIN FATA COZII ----------
 
-int element_fata_coada(nod_coada* fata_cozii) //REALIZATA DE ANDREI
+int element_fata_coada(nod_coada* fata_cozii)
 {
     if(isEmpty(fata_cozii)) //DACA COADA ESTE GOALA RETURNAM 0
         return 0;
@@ -4331,9 +4359,9 @@ int element_fata_coada(nod_coada* fata_cozii) //REALIZATA DE ANDREI
     return fata_cozii -> element_coada; // RETURNAM ELEMENTUL DIN FATA COZII
 }
 
-// ---------- COREAREA UNUI NOD NOU IN COADA ----------
+// ---------- CREAREA UNUI NOD NOU IN COADA ----------
 
-nod_coada* creare_nod_nou_in_coada(int element_coada) //REALIZATA DE ANDREI
+nod_coada* creare_nod_nou_in_coada(int element_coada)
 {
     nod_coada* nod_nou_coada = new nod_coada(); //CREAM UN NOD NOW DE TIP nod_coada
     nod_nou_coada -> element_coada = element_coada; //ATRIBUIM ELEMENTULUI NOULUI NOD CREAT ELEMENTUL DAT
@@ -4343,7 +4371,7 @@ nod_coada* creare_nod_nou_in_coada(int element_coada) //REALIZATA DE ANDREI
 
 // ---------- AFISAREA COZII ----------
 
-void afisareCoada(nod_coada* fata_cozii) //REALIZATA DE ANDREI
+void afisareCoada(nod_coada* fata_cozii)
 {
     if(isEmpty(fata_cozii))     //VERIFICAM DACA COADA ESTE GOALA
     {

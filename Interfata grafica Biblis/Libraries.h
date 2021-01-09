@@ -10,12 +10,15 @@
 
 using namespace std;
 
+
+// ---------- MEMORAREA UNEI LISTE SIMPLU INLANTUITE ----------
 struct nod
 {
     int valoare;
     struct nod* urm;
 };
 
+// ---------- MEMORAREA UNEI STIVE ----------
 struct stiva
 {
     struct nod* varf;
