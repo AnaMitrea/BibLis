@@ -10,7 +10,7 @@
 	<graphics.h>
 	<winbgim.h>
 
-1610194063 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\interfata.cpp
+1610201350 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\interfata.cpp
 	"BibLis.h"
 
 1608823397 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\functii la liste simplu inlantuite\functii liste.cpp
@@ -19,13 +19,14 @@
 	<graphics.h>
 	<winbgim.h>
 
-1610193711 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\libraries.h
+1610199860 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\libraries.h
 	<iostream>
+	<fstream>
 	<windows.h>
 	<MMsystem.h>
+	<mmsystem.h>
 	<graphics.h>
 	<queue>
-	<mmsystem.h>
 
 1610130143 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\listesi.h
 	"libraries.h"
@@ -47,6 +48,6 @@
 	<queue>
 	<mmsystem.h>
 
-1610194264 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\biblis.h
+1610201350 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\biblis.h
 	"Libraries.h"
 
