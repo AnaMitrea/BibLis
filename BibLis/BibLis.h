@@ -2506,6 +2506,7 @@ void descriereListaDubluInlantuita()
 
 void citireElementeListaDubluInlantuita()
 {
+    Prim = NULL;
     int Valoarea[20], n, i;
     char afisare[100], vectText[100], numar[100];
 
