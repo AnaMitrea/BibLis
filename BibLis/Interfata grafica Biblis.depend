@@ -51,3 +51,18 @@
 1610203341 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\interfata grafica biblis\biblis.h
 	"Libraries.h"
 
+1610203369 source:c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\biblis\interfata.cpp
+	"BibLis.h"
+
+1610274769 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\biblis\biblis.h
+	"Libraries.h"
+
+1610202877 c:\users\ana maria mitrea\documents\github\proiect-ip-biblis\biblis\libraries.h
+	<iostream>
+	<fstream>
+	<windows.h>
+	<MMsystem.h>
+	<mmsystem.h>
+	<graphics.h>
+	<queue>
+

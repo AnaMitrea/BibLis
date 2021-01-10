@@ -1228,14 +1228,14 @@ void listaVida(nod* prim)
         bgiout << "Primul nod este ";
         outstreamxy(60,350);
         setcolor(WHITE);
-        delay(500);
+        delay(300);
         readimagefile("imagini/nod lista cu null.jpg",390, 330, 660, 400);
 
         dimensiuneTextAna(prim->valoare);
         bgiout << prim->valoare;
         outstreamxy(400,350);
 
-        delay(500);
+        delay(300);
         setcolor(LIGHTCYAN);
         settextstyle(4, HORIZ_DIR, 4);
         bgiout << "deci lista introdusa nu este vida. ";
@@ -1325,7 +1325,7 @@ void lungimeLista(nod *prim)
                     x += 200;
                     xtext += 200;
                     p = p->urm;
-                    delay(500);
+                    delay(300);
                 }
     }
     // AFISARE IN FEREASTRA GRAFICA
@@ -1387,13 +1387,13 @@ void inserareInceput(nod*& prim)
     settextstyle(4, HORIZ_DIR, 1);
     bgiout << "nod *p = new nod";
     outstreamxy(5,410);
-    delay(500);
+    delay(300);
     bgiout << "p->info = val. dorita";
     outstreamxy(5,430);
-    delay(500);
+    delay(300);
     bgiout << "p->urm = prim;";
     outstreamxy(5,450);
-    delay(1000);
+    delay(500);
     setcolor(WHITE);
 
     // COORDONATELE PRIMULUI NOD
@@ -1419,10 +1419,10 @@ void inserareInceput(nod*& prim)
     // AFISAREA INSTRUCTIUNILOR
     setcolor(LIGHTMAGENTA);
     settextstyle(4, HORIZ_DIR, 1);
-    delay(500);
+    delay(300);
     bgiout << "prim = p;";
     outstreamxy(5,470);
-    delay(500);
+    delay(300);
     bgiout << "p = prim;";
     outstreamxy(145,470);
     setcolor(WHITE);
@@ -1483,7 +1483,7 @@ void inserareInceput(nod*& prim)
                     xtext += 200;
 
                     p = p->urm;
-                    delay(500);
+                    delay(300);
                 }
         // STERGERE CE AM SCRIS INAINTE
         setfillstyle(SOLID_FILL,BLACK);
@@ -1548,13 +1548,13 @@ void inserareSfarsit(nod*& prim)
     settextstyle(4, HORIZ_DIR, 1);
     bgiout << "nod *p = new nod;";
     outstreamxy(5,410);
-    delay(500);
+    delay(300);
     bgiout << "p->info = val. dorita;";
     outstreamxy(5,430);
-    delay(500);
+    delay(300);
     bgiout << "p->urm = NULL;";
     outstreamxy(5,450);
-    delay(1000);
+    delay(400);
     setcolor(WHITE);
     // INSERAREA LA SFARSIT
     if (prim == NULL)  // caz particular
@@ -1578,7 +1578,7 @@ void inserareSfarsit(nod*& prim)
     bgiout << "p = prim;";
     outstreamxy(5,470);
     setcolor(WHITE);
-    delay(500);
+    delay(300);
 
     setcolor(LIGHTMAGENTA);
     bgiout << "*prim";
@@ -1630,12 +1630,12 @@ void inserareSfarsit(nod*& prim)
                 xtext += 200;
 
                 p = p->urm;
-                delay(500);
+                delay(300);
             }
         // STERGERE CE AM SCRIS INAINTE
         setfillstyle(SOLID_FILL,BLACK);
         bar(5,490,250,510);
-        delay(500);
+        delay(300);
         // RESCRIERE
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
@@ -1680,13 +1680,13 @@ void inserareDupaNod(nod*& prim)
     settextstyle(4, HORIZ_DIR, 1);
     bgiout << "nod *p = new nod;";
     outstreamxy(5,410);
-    delay(500);
+    delay(300);
     bgiout << "p->info = val. dorita;";
     outstreamxy(5,430);
-    delay(500);
+    delay(300);
     bgiout << "p->urm = NULL;";
     outstreamxy(5,450);
-    delay(500);
+    delay(300);
 
     // COORDONATELE PRIMULUI NOD
     unsigned int x = 320, y = 100;
@@ -1697,7 +1697,7 @@ void inserareDupaNod(nod*& prim)
     bgiout << "nod *q = prim;";
     outstreamxy(5,470);
     setcolor(WHITE);
-    delay(500);
+    delay(300);
 
     if (prim == NULL) // daca e vida, primul element = elementul inserat
     {
@@ -1728,7 +1728,7 @@ void inserareDupaNod(nod*& prim)
         outstreamxy(xtext, ytext + 60);
 
         // STERGERE ECRAN
-        delay(6000);
+        delay(4000);
         setfillstyle(SOLID_FILL,BLACK);
         bar(311,0,1520,795);
         setfillstyle(SOLID_FILL,BLACK);
@@ -1794,7 +1794,7 @@ void inserareDupaNod(nod*& prim)
                     xtext += 200;
 
                     q = q->urm;
-                    delay(500);
+                    delay(300);
                 }
     }
     if (inserat == false)
@@ -1828,7 +1828,7 @@ void stergerePrimul(nod *&prim)
         outstreamxy(580, 90);
         setcolor(WHITE);
             // STERGERE PARTE DE ECRAN
-        delay(2500);
+        delay(2000);
         setfillstyle(SOLID_FILL,BLACK);
         bar(311,0,1520,795);
         setfillstyle(SOLID_FILL,BLACK);
@@ -1894,12 +1894,12 @@ void stergerePrimul(nod *&prim)
                     x += 200;
                     xtext += 200;
                     p = p->urm;
-                    delay(500);
+                    delay(300);
                 }
         // STERGERE CE AM SCRIS INAINTE
         setfillstyle(SOLID_FILL,BLACK);
         bar(5,430,250,450);
-        delay(500);
+        delay(300);
         // RESCRIERE
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
@@ -1912,18 +1912,18 @@ void stergerePrimul(nod *&prim)
     p = prim->urm;
     delete prim;
     prim = p;
-    delay(500);
+    delay(300);
     setcolor(LIGHTMAGENTA);
     settextstyle(4, HORIZ_DIR, 1);
     bgiout << "p = prim->urm;";
     outstreamxy(5,450);
     bgiout << "*p";
     outstreamxy(530,60);
-    delay(500);
+    delay(300);
     bgiout << "delete prim;";
     outstreamxy(5,470);
     readimagefile("imagini/black.jpg",320, 59, 518, 150);
-    delay(500);
+    delay(300);
     bgiout << "prim = p;";
     outstreamxy(5,490);
     bgiout << "*prim";
@@ -1955,7 +1955,7 @@ void stergerePrimaAparitie(nod *&prim)
         outstreamxy(580, 90);
         setcolor(WHITE);
             // STERGERE PARTE DE ECRAN
-        delay(2500);
+        delay(2000);
         setfillstyle(SOLID_FILL,BLACK);
         bar(311,0,1520,795);
         setfillstyle(SOLID_FILL,BLACK);
@@ -1993,8 +1993,8 @@ void stergerePrimaAparitie(nod *&prim)
     if (sters == true)
     {
         setcolor(LIGHTRED);
-        bgiout << "S-au sters valorile de " << element_dat << " din lista.";
-        outstreamxy(640, 90);
+        bgiout << "S-a sters prima valoare de " << element_dat << " din lista.";
+        outstreamxy(620, 90);
         setcolor(WHITE);
     }
     else
@@ -2004,7 +2004,7 @@ void stergerePrimaAparitie(nod *&prim)
             outstreamxy(620, 90);
             setcolor(WHITE);
         }
-    delay(800);
+    delay(500);
         // COORDONATELE PRIMULUI NOD
     unsigned int x = 320, y = 170;
     unsigned int xtext = 325, ytext = 185;
@@ -2033,7 +2033,7 @@ void stergerePrimaAparitie(nod *&prim)
                 delay(2000);
                 setfillstyle(SOLID_FILL,BLACK);
                 bar(315,45,1520,795);
-                delay(500);
+                delay(300);
                 settextstyle(4, HORIZ_DIR, 4);
                 setcolor(LIGHTRED);
                 bgiout << "Eroare: Imposibil de afisat!";
@@ -2059,12 +2059,12 @@ void stergerePrimaAparitie(nod *&prim)
                     x += 200;
                     xtext += 200;
                     p = p->urm;
-                    delay(500);
+                    delay(300);
                 }
         // STERGERE CE AM SCRIS INAINTE
         setfillstyle(SOLID_FILL,BLACK);
         bar(5,430,250,450);
-        delay(500);
+        delay(300);
         // RESCRIERE
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
@@ -2229,7 +2229,7 @@ void afisareListaSimpluInlantuita(nod *prim)
 {
     readimagefile("imagini/undo.jpg",30,730,250,780);
     settextstyle(4, HORIZ_DIR, 4);
-    outtextxy(350, 100, " Afisarea unei liste simplu-inlantuite");
+    outtextxy(370, 100, " Afisarea unei liste simplu-inlantuite");
 
     nod* p = prim;
     unsigned int x = 20, y = 250;
@@ -2257,7 +2257,7 @@ void afisareListaSimpluInlantuita(nod *prim)
             xtext += 200;
 
             p = p->urm;
-            delay(500);
+            delay(300);
         }
         else
         {
@@ -2268,6 +2268,7 @@ void afisareListaSimpluInlantuita(nod *prim)
             ytext += 100;
         }
     }
+
     jump:
     bool gata = false, buton = false;
     int xx,yy;
@@ -3705,7 +3706,7 @@ void deseneazaElemente(stiva S)
     {
         deseneazaOutline(500);
         settextstyle(4, HORIZ_DIR, 3);
-        delay(500);
+        delay(300);
         setcolor(WHITE);
         outtextxy(377,130,"Eroare! S-a depasit numarul maxim de elemente. Imposibil de afisat.");
     }
@@ -3717,34 +3718,34 @@ void initializareStiva(stiva& S)
     settextstyle(4, HORIZ_DIR, 4);
     setcolor(LIGHTCYAN);
     outtextxy(630, 20, " Initializare Stiva");
-    delay(400);
+    delay(200);
     outtextxy(980, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(1000, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(1020, 20, ".");
     setcolor(WHITE);
 
-    delay(1000);
+    delay(500);
     deseneazaOutline(200);
 
     S.varf = NULL;
     S.nrElemente = 0;
 
-    delay(1000);
+    delay(300);
     setcolor(LIGHTMAGENTA);
     settextstyle(4, HORIZ_DIR, 2);
     bgiout << "stiva S;";
     outstreamxy(10, 470);
     bgiout << "S.varf = NULL;";
     outstreamxy(10, 490);
-    delay(500);
+    delay(300);
     bgiout << "S.nrElemente = 0;";
     outstreamxy(10, 510);
     setcolor(WHITE);
 
     // STERGERE CE AM SCRIS
-    delay(3000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3757,38 +3758,38 @@ void esteVidaStiva(stiva S)
     settextstyle(4, HORIZ_DIR, 4);
     setcolor(LIGHTCYAN);
     outtextxy(600, 20, " Verificare stiva vida");
-    delay(400);
+    delay(200);
     outtextxy(1020, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(1040, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(1060, 20, ".");
     rectangle(370,100,1470,200);
     setcolor(WHITE);
     if (S.nrElemente == 0)
     {
-        delay(500);
+        delay(200);
         deseneazaOutline(400);
-        delay(500);
+        delay(300);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(680, 110);
-        delay(800);
+        delay(500);
         setcolor(LIGHTRED);
         outtextxy(635, 150, " Stiva introdusa este vida! ");
         setcolor(WHITE);
     }
     else
     {
-        delay(500);
+        delay(200);
         deseneazaElemente(S);
-        delay(500);
+        delay(300);
         settextstyle(4, HORIZ_DIR, 3);
         outtextxy(680, 140, " Stiva nu este vida! ");
     }
 
     // STERGERE CE AM SCRIS
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3827,38 +3828,38 @@ void eliminareStiva()
     outtextxy(600, 20, "Eliminare element din stiva");
     rectangle(370,100,1470,200);
     setcolor(WHITE);
-    delay(1000);
+    delay(500);
     // ALGORITMUL DE ELIMINARE
     if (!esteVida(S))
     {
         int top = S.varf->valoare;
         // DESENARE STIVA
         deseneazaElemente(S);
-        delay(500);
+        delay(300);
         pop(S);
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
         bgiout << "nod* vf_nou;";
         outstreamxy(10, 470);
-        delay(500);
+        delay(300);
         bgiout << "el = S.varf->valoare;";
         outstreamxy(10, 500);
-        delay(500);
+        delay(300);
         bgiout << "vf_nou = S.varf->urm;";
         outstreamxy(10, 530);
-        delay(500);
+        delay(300);
         bgiout << "delete S.varf;";
         outstreamxy(10, 560);
-        delay(500);
+        delay(300);
         readimagefile("imagini/black.jpg", 730, 700 - (S.nrElemente * 45), 970, 740 - (S.nrElemente * 45));
-        delay(500);
+        delay(300);
         bgiout << "S.varf = vf_nou;";
         outstreamxy(10, 590);
-        delay(500);
+        delay(300);
         bgiout << "S.nrElemente--;";
         outstreamxy(10, 620);
-        delay(500);
+        delay(300);
         setcolor(WHITE);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "S-a eliminat " << top << " din varful stivei.";
@@ -3866,20 +3867,20 @@ void eliminareStiva()
     }
     else
     {
-        delay(500);
+        delay(300);
         deseneazaOutline(400);
-        delay(1000);
+        delay(300);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(390, 110);
-        delay(800);
+        delay(400);
         setcolor(LIGHTRED);
         outtextxy(390, 140, "Eroare! Nu se poate elimina niciun element. Stiva este goala.");
         setcolor(WHITE);
     }
 
     // STERGERE CE AM SCRIS
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -3917,7 +3918,7 @@ void adaugareStiva()
     rectangle(370,100,1470,200);
     rectangle(1150,500,1470,700);  // partea de citire
     setcolor(WHITE);
-    delay(1000);
+    delay(500);
     // CITIREA ELEMENTELOR
     char afisare[100];
     settextstyle(4, HORIZ_DIR, 3);
@@ -3931,38 +3932,38 @@ void adaugareStiva()
     {
         // DESENARE STIVA
         deseneazaElemente(S);
-        delay(500);
+        delay(300);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
         bgiout << "S.nrElemente++;";
         outstreamxy(10, 470);
-        delay(500);
+        delay(300);
         bgiout << "vf_nou = new nod;";
         outstreamxy(10, 500);
-        delay(500);
+        delay(300);
         deseneazaOutline(700 - S.nrElemente * 45);
-        delay(500);
+        delay(300);
         readimagefile("imagini/stiva.jpg",730,700 - (S.nrElemente - 1) * 45,970,740 - (S.nrElemente - 1) * 45);
-        delay(500);
+        delay(300);
         setcolor(LIGHTMAGENTA);
         bgiout << "vf_nou->valoare = el;";
         outstreamxy(10, 530);
-        delay(500);
+        delay(300);
         setcolor(WHITE);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << top;
         outstreamxy(800, 710 - (S.nrElemente - 1) * 45);
-        delay(500);
+        delay(300);
         settextstyle(4, HORIZ_DIR, 1);
         setcolor(LIGHTMAGENTA);
         bgiout << "vf_nou->urm = S.varf;";
         outstreamxy(10, 560);
-        delay(500);
+        delay(300);
         bgiout << "S.varf = vf_nou;";
         outstreamxy(10, 590);
-        delay(500);
+        delay(300);
         setcolor(WHITE);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "S-a adaugat " << top << " in varful stivei.";
@@ -3970,29 +3971,29 @@ void adaugareStiva()
     }
     else
     {
-        delay(500);
+        delay(300);
         deseneazaOutline(400);
-        delay(500);
+        delay(300);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(390, 110);
-        delay(800);
+        delay(300);
         int top = S.varf->valoare;
         // AFISAREA GRAFICA
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
         bgiout << "S.nrElemente = 1;";
         outstreamxy(10, 470);
-        delay(500);
+        delay(300);
         bgiout << "S.varf = new nod;";
         outstreamxy(10, 500);
-        delay(500);
+        delay(300);
         bgiout << "S.varf->valoare = el;";
         outstreamxy(10, 530);
-        delay(500);
+        delay(300);
         bgiout << "S.varf->urm = NULL;";
         outstreamxy(10, 560);
-        delay(500);
+        delay(300);
         setcolor(WHITE);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "S-a adaugat " << top << " in varful stivei.";
@@ -4000,7 +4001,7 @@ void adaugareStiva()
 
     }
     // STERGERE CE AM SCRIS
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -4015,30 +4016,30 @@ void golesteStiva(stiva &S)
     setcolor(LIGHTCYAN);
     rectangle(370,100,1470,200);
     outtextxy(720, 20, "Golire stiva");
-    delay(400);
+    delay(200);
     outtextxy(960, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(980, 20, ".");
-    delay(400);
+    delay(200);
     outtextxy(1000, 20, ".");
     setcolor(WHITE);
-    delay(1000);
+    delay(500);
     // ALGORITMUL DE GOLIRE
     if(esteVida(S))
     {
-        delay(500);
+        delay(300);
         deseneazaOutline(400);
-        delay(1000);
+        delay(400);
         settextstyle(4, HORIZ_DIR, 3);
         bgiout << "Stiva are 0 elemente.";
         outstreamxy(390, 110);
-        delay(800);
+        delay(500);
         setcolor(LIGHTRED);
         outtextxy(390, 140, "Eroare! Nu se poate goli stiva.");
         setcolor(WHITE);
 
         // STERGERE CE AM SCRIS
-        delay(4000);
+        delay(2500);
         setfillstyle(SOLID_FILL,BLACK);
         bar(305,0,1520,795);
         setfillstyle(SOLID_FILL,BLACK);
@@ -4050,27 +4051,27 @@ void golesteStiva(stiva &S)
     {
         int top = S.varf->valoare;
         // DESENARE STIVA
-        delay(500);
+        delay(300);
         pop(S);
-        delay(500);
+        delay(300);
         // AFISARE GRAFICA
         setcolor(LIGHTMAGENTA);
         settextstyle(4, HORIZ_DIR, 1);
         bgiout << "pop(S);";
         outstreamxy(10, 470);
-        delay(500);
+        delay(300);
         readimagefile("imagini/black.jpg", 730, 700 - (S.nrElemente * 45), 970, 740 - (S.nrElemente * 45));
-        delay(500);
+        delay(300);
         readimagefile("imagini/black.jpg", 10,470,110,495); // stergere "pop(s)"
         setcolor(WHITE);
         settextstyle(4, HORIZ_DIR, 3);
         readimagefile("imagini/black.jpg", 371,101,1469,199); // stergere din chenar
         bgiout << "S-a eliminat " << top << " din varful stivei.";
         outstreamxy(640, 130);
-        delay(2000);
+        delay(500);
     }
     // STERGERE CE AM SCRIS
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
@@ -4084,12 +4085,12 @@ void afisareStiva(stiva S)
     setcolor(LIGHTCYAN);
     outtextxy(580, 20, "Afisarea elementelor din stiva");
     setcolor(WHITE);
-    delay(500);
+    delay(300);
 
     deseneazaElemente(S);
 
     // STERGERE CE AM SCRIS
-    delay(4000);
+    delay(2500);
     setfillstyle(SOLID_FILL,BLACK);
     bar(305,0,1520,795);
     setfillstyle(SOLID_FILL,BLACK);
