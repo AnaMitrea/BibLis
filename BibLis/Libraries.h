@@ -11,20 +11,20 @@
 using namespace std;
 
 
-// ---------- MEMORAREA UNEI LISTE SIMPLU INLANTUITE ----------
+// ---------- MEMORAREA UNEI LISTE SIMPLU INLANTUITE ( realizat de Ana )----------
 struct nod
 {
     int valoare;
     struct nod* urm;
 };
+nod *prim;
 
-// ---------- MEMORAREA UNEI STIVE ----------
+// ---------- MEMORAREA UNEI STIVE ( realizat de Ana )----------
 struct stiva
 {
     struct nod* varf;
     unsigned int nrElemente;
 };
-nod *prim;
 stiva S;
 
 

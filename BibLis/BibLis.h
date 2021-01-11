@@ -111,22 +111,17 @@ void sunet()
 
 void deschidere()
 {
-    cleardevice(); //FUNCTIE DE CURATAREA ECRANULUI
-
+    cleardevice();
     sunet(); //APELAREA FUNCTIEI PENTRU MUZICA DE FUNDAL
-
     settextstyle(3, HORIZ_DIR, 5); //SELECTAREA TIPULUI DE SCRIS, DIRECTIEI SI A MARIMII ACESTUIA
-    outtextxy(600, 100, " Bine ai venit! "); //SCRIEREA IN FEREASTRA GRAFICA A UNUI MESAJ DE INTAMPINARE
+    outtextxy(600, 100, " Bine ai venit! "); //MESAJ DE INTAMPINARE
 
     // BUTON 1 - START
     readimagefile("imagini/start.jpg",600,210,910,280);
-
     // BUTON 2 -  DESPRE PROIECT
     readimagefile("imagini/despre proiect.jpg",600,310,910, 380);
-
     // BUTON 3 - DESPRE AUTORI
     readimagefile("imagini/despre autori.jpg",600,410,910, 480);
-
     // BUTON 4 - IESIRE DIN PROGRAM
     readimagefile("imagini/iesire.jpg",600,510,910, 580);
 
@@ -210,6 +205,7 @@ void meniuPrincipal()
     // ---------- TITLU MENIU ----------
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(560, 100, " Alege structura de date ");
+
     // ---------- MENIU PRINCIPAL CU STRUCTURI DE DATE ----------
     // BUTON 1 - Liste simplu inlantuite
     readimagefile("imagini/liste s i.jpg",600,210,910,280);
@@ -309,13 +305,10 @@ void meniuPrincipal()
 void descriereProiect1()
 {
     cleardevice();
-
      // BUTON PENTRU PAGINA URMATOARE
     readimagefile("imagini/inainte.jpg",720,650,920,690);
-
     // BUTON PENTRU PAGINA PRECEDENTA ADICA MENIUL PRINCIPAL
     readimagefile("imagini/pagina de deschidere.jpg",480,650,680,690);
-
     // INSERAREA UNEI POZE IN FEREASTRA GRAFICA
     readimagefile("imagini/biblia2.jpg",1000,100,1300,400);
 
@@ -390,13 +383,10 @@ void descriereProiect2()
 
      // BUTON PENTRU PAGINA URMATOARE
     readimagefile("imagini/inainte.jpg",720,650,920,690);
-
     // BUTON PENTRU PAGINA PRECEDENTA ADICA MENIUL PRINCIPAL
     readimagefile("imagini/inapoi alb.jpg",480,650,680,690);
-
     // INSERAREA UNEI IMAGINI
     readimagefile("imagini/Catedrala.jpg",100,100,350,450);
-
     readimagefile("imagini/atom.jpg",850,350,1300,640);
 
     // TITLUL PAGINII
@@ -464,10 +454,8 @@ void descriereProiect2()
 void descriereProiect3()
 {
     cleardevice();
-
      // BUTON PENTRU PAGINA DE DESCHIDERE
     readimagefile("imagini/pagina de deschidere.jpg",720,650,920,690);
-
     // BUTON PENTRU PAGINA PRECEDENTA
     readimagefile("imagini/inapoi alb.jpg",480,650,680,690);
 
@@ -542,7 +530,6 @@ void descriereAutori()
 {
      // POZA ANEI
     readimagefile("imagini/Ana Mitrea.jpg",30,100,325,500);
-
     // POZA LUI ANDREI
     readimagefile("imagini/Andrei Tablan.jpeg",1075,300,1350,600);
 
@@ -800,22 +787,16 @@ void meniuListeSimpluInlantuite()
 
     // BUTON 1 - CREARE LISTA
     readimagefile("imagini/creare lista.jpg",600,100,910,150);
-
     // BUTON 2 - VERIF LISTA VIDA
     readimagefile("imagini/vida.jpg",600,200,910,250);
-
     // BUTON 3 - LUNGIME LISTA
     readimagefile("imagini/lungime lista.jpg", 600, 300, 910, 350);
-
     // BUTON 4 - FUNCTII INSERARE
     readimagefile("imagini/inserare.jpg",600,400,910,450);
-
     // BUTON 5 - FUNCTII STERGERE
     readimagefile("imagini/stergere.jpg",600,500,910, 550);
-
     // BUTON 6 - AFISAREA LISTEI
     readimagefile("imagini/afisare.jpg",600, 600,910, 650);
-
     // BUTON 7 - UNDO
     readimagefile("imagini/undo.jpg",30,730,250,780);
 
@@ -933,6 +914,7 @@ void descriereListaSimplu()
     settextstyle(4, HORIZ_DIR, 3);
     outtextxy(430,50, "Informatii despre liste simplu-inlantuite");
     settextstyle(4, HORIZ_DIR, 1);
+    // INFORMATII PRELUATE DE PE PBINFO.RO.
     outtextxy(250, 150, "       Lista liniara este o structura de date logica, cu  date  omogene,  in care");
     outtextxy(250, 180, "fiecare  element  are  exact  un  element  predecesor si  exact  un  element");
     outtextxy(250, 210, "succesor, cu exceptia primului si al ultimului element.");
@@ -1004,8 +986,7 @@ void meniuInserare()
     line(0,400,310,400);
     line(0,590,310,590);
 
-    // LABEL PENTRU A RESETA BUTONUL
-    jump:
+    jump: // LABEL PENTRU A RESETA BUTONUL
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false, buton4 = false;
     int x,y;
@@ -1093,8 +1074,7 @@ void meniuStergere()
     line(0,400,310,400);
     line(0,590,310,590);
 
-    // LABEL PENTRU A RESETA BUTONUL
-    jump:
+    jump: // LABEL PENTRU A RESETA BUTONUL
     bool gata = false;
     bool buton1 = false, buton2 = false, buton3 = false, buton4 = false;
     int x,y;
@@ -1180,7 +1160,7 @@ void citireListeSimpluInlantuite()
     settextstyle(3, HORIZ_DIR, 3);
     outtextxy(20,10,"Va rugam introduceti numerele din lista");
     //Functia de citire a textului in mod grafic in sirul afisare
-    citesteSir("Cate numere doriti sa contina lista? ", afisare, 20, 40, false);
+    citesteSir("Cate numere doriti sa contina lista? ( maxim 20 )", afisare, 20, 40, false);
     int nrElemente = atoi(afisare);  // conversie ascii -> int din sirul afisare
     n = nrElemente;
     for (i = 0; i < n; i++)
@@ -1193,8 +1173,6 @@ void citireListeSimpluInlantuite()
         citesteSir(vectText,afisare, 30, 70 + 30 * i, false); // citire valoare corespunzatoare in vector pe poz i.
 
         Valoarea[i] = atoi(afisare); // valoarea lui Valoarea[i] in vector
-
-       // evidentiaza(Valoarea[i], i, 1, LIGHTGREEN);
     }
     creareListaSimpluInlantuita(prim,n,Valoarea);
     cleardevice();
@@ -1280,7 +1258,7 @@ void lungimeLista(nod *prim)
     unsigned int lungime = 0;
     while (p != NULL)
     {
-        if (x > 1400) // daca ies din ecran
+        if (x > 1400) // daca ies din ecran pe orizontala
         {
             // COORDONATELE URMATORULUI RAND DACA SE AJUNGE LA CAPAT DE ECRAN
             x = 20;
@@ -1289,7 +1267,7 @@ void lungimeLista(nod *prim)
             ytext += 100;
         }
         else
-            if (y > 725) // daca ies din ecran
+            if (y > 725) // daca ies din ecran pe verticala
             {
                 delay(2000);
                 setfillstyle(SOLID_FILL,BLACK);
@@ -1333,7 +1311,7 @@ void lungimeLista(nod *prim)
     setcolor(LIGHTCYAN);
     outtextxy(500, 150, "Lungimea listei este: ");
     settextstyle(4, HORIZ_DIR, 4);
-    bgiout << lungime << endl;
+    bgiout << lungime;
     outstreamxy(850, 145);
     setcolor(WHITE);
     bool gata = false, buton = false;
@@ -3607,6 +3585,7 @@ void descriereStiva()
     settextstyle(4, HORIZ_DIR, 3);
     setcolor(LIGHTCYAN);
     outtextxy(570,50, "Informatii despre Stive");
+    // INFORMATII PRELUATE DE PE PBINFO.RO.
     setcolor(WHITE);
     settextstyle(4, HORIZ_DIR, 1);
     outtextxy(250, 100, "       Stiva (stack)  este o  structura de date liniara abstracta,  pentru care sunt");
@@ -4244,7 +4223,7 @@ void descriereCoada()
 
     settextstyle(3, HORIZ_DIR, 4); //SELECTAM FONTUL, DIRECTIA SI MARIMEA TEXTULUI
     outtextxy(430,50, "Informatii despre coada"); //TITLUL PAGINIII
-
+    // INFORMATII PRELUATE DE PE PBINFO.RO.
     settextstyle(3, HORIZ_DIR, 3); //SELECTAM FONTUL, DIRECTIA SI MARIMEA TEXTULUI CE URMEAZA SA FIE SCRIS
     outtextxy(120, 100, "    Coada (queue) este o structura de date abstracta in care operatia");
     outtextxy(120, 130, " de adaugare se realizeaza la un capat, iar cea de eliminare se");
