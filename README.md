@@ -3,12 +3,9 @@
 Proiectul consta intr-o biblioteca grafica cu operatii cu liste simplu-inlantuite, dublu-inlantuite, stive si cozi.
 Toate operatiile vor fi vizualizate grafic în timp ce se desfășoară.
 
-Mod de punctare a proiectului:
-* Din oficiu: 1p
-* Structurile de date folosite și păstrarea lor în fișiere: 1p
-* Implementarea functiilor de operare cu liste: 3p
-* Animatia: 3p
-* Elemente suplimentare (alte functii, meniu, setari, culori, sunete, etc): 1p
-* Elemente de creativitate și competitivitate: 1p
+The project consists of a graphic library with operations with single-linked lists, double-linked lists, stacks and queues.
+All operations will be displayed graphically while running the project.
 
 Proiect realizat de Mitrea Ana Maria si Tablan Andrei
+
+
