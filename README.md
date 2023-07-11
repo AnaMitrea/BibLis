@@ -1,11 +1,11 @@
-# Proiect pentru Introducere in Programare, Anul 1, Semestrul 1
-
-Proiectul consta intr-o biblioteca grafica cu operatii cu liste simplu-inlantuite, dublu-inlantuite, stive si cozi.
-Toate operatiile vor fi vizualizate grafic în timp ce se desfășoară.
-
-The project consists of a graphic library with operations with single-linked lists, double-linked lists, stacks and queues.
+# BibLis
+- The project consists of a graphic library with operations with single-linked lists, double-linked lists, stacks and queues.
 All operations will be displayed graphically while running the project.
-
-Proiect realizat de Mitrea Ana Maria si Tablan Andrei
-
+- It was realised for the Introduction to Programming course at the Faculty of Computer Science Iasi. 
+#### Relevant links:
+- [Demo](https://youtu.be/SpTg1abmiHo)
+- [Introduction to Programming - course page](https://profs.info.uaic.ro/~introp/curs2022-2023/)
+## Authors
+###### [Ana Mitrea](https://github.com/AnaMitrea)
+###### [Andrei Tablan](https://github.com/andreitablan)
 
